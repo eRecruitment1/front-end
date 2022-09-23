@@ -8,57 +8,57 @@ const NewestPosts = () => {
 
                 <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    Java Software Architect
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
                             </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    Senior Engineering Manager
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
                             </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    Engineering Manager
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
                             </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    Senior .NET Software Engineer
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 21, 2022</span>
                             </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    .NET Software Engineer Intern
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 21, 2022</span>
                             </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80" alt=""/>
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-64" src="https://bom.so/dfwGRY" alt=""/>
                             <div className="flex flex-col justify-between py-6 lg:mx-6">
                                 <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
-                                    How to use sticky note for problem solving
+                                    Senior Java Software Engineer
                                 </a>
-                                <span className="text-sm text-gray-500 dark:text-gray-300">On: 20 October 2019</span>
+                                <span className="text-sm text-gray-500 dark:text-gray-300">September 20, 2022</span>
                             </div>
                     </div>
                     
