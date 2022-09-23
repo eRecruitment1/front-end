@@ -3,14 +3,19 @@ import React from 'react'
 const Footer = () => {
     return (
         <>
-            <div className='bg-gray-700 text-white bottom-0 relative z-10 flex justify-center items-center w-full h-[100px] gap-44 '>
-                <h1 className='text-2xl justify-start'><span className='text-purple-400'>WeHr</span>Company</h1>
-                <h1 className='text-xl'>About </h1>
-                <h1 className='text-xl'>Careers</h1>
-                <h1 className='text-xl'>Contact</h1>
-                <h1 className='text-xl'>Terms</h1>
-                <h1 className='text-xl'>Privacy Policy</h1>
-            </div>
+            <footer className="bg-black pb-5">
+                <div className="max-w-screen-xl px-4 pt-5 mx-auto sm:px-6 lg:px-8">
+                    <div className="sm:flex sm:items-center sm:justify-between">
+                        <div className="flex justify-center text-white sm:justify-start">
+                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span className='text-purple-500'>WeHr</span>Company</span>
+                        </div>
+
+                        <p className="mt-4 text-sm text-center text-gray-400 lg:text-right lg:mt-0">
+                            T&C &nbsp; Career &nbsp; Privacy & Policy &nbsp; Developers
+                        </p>
+                    </div>
+                </div>
+            </footer>
         </>
     );
 }
