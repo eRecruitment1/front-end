@@ -11,7 +11,7 @@ const Footer = () => {
                         </div>
 
                         <p className="mt-4 text-sm text-center text-gray-400 lg:text-right lg:mt-0">
-                            T&C &nbsp; Career &nbsp; Privacy & Policy &nbsp; Developers
+                            About &nbsp; Careers &nbsp; Contact &nbsp; Privacy & Policy
                         </p>
                     </div>
                 </div>
