@@ -1,9 +1,8 @@
 import LocalStorageKey from "../constant_keys/LocalStorageKey";
 import AxiosClient from "./AxiosClient";
 
-const accessToken = "Bearer " + LocalStorageKey.getItem(StorageKey.TOKEN);
+const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
 const UserApi = {
-
   login(data) {
     const url = "api/login";
     const promise = AxiosClient.post(url, data, {
