@@ -6,13 +6,12 @@ import LoginForm from "./LoginForm";
 import LoginWithGoogle from "./LoginWithGoogle";
 
 const Login = () => {
-  // const dispatch = useDispatch();
-
+  const dispatch = useDispatch();
   const handleFormSubmit = async (values) => {
     try {
       const action = login(values);
-      // const resultAction = await dispatch(action);
-      // unwrapResult(resultAction);
+      const resultAction = await dispatch(action);
+      unwrapResult(resultAction);
       window.alert("Login successfully");
       window.location.reload();
     } catch (error) {
