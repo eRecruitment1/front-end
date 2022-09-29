@@ -5,7 +5,20 @@ import LocalStorageKey from "../../constant_keys/LocalStorageKey";
 export const login = createAsyncThunk(
   "user/login",
   async (payload) => {
+    console.log(payload)
     const responeData = await UserApi.login(payload);
+    const jwt = responeData.headers.authorization;
+    const newJwt = jwt.replace("Bearer ", "");
+    localStorage.setItem(LocalStorageKey.TOKEN, newJwt);
+    localStorage.setItem(LocalStorageKey.USER, JSON.stringify(responeData.data));
+    return responeData;
+  }
+);
+export const loginGoogle = createAsyncThunk(
+  "user/loginGoogle",
+  async (payload) => {
+    console.log(payload)
+    const responeData = await UserApi.loginGoogle(payload);
     const jwt = responeData.headers.authorization;
     const newJwt = jwt.replace("Bearer ", "");
     localStorage.setItem(LocalStorageKey.TOKEN, newJwt);
