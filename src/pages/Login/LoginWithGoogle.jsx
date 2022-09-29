@@ -2,14 +2,21 @@ import React, { useEffect } from 'react';
 import { GoogleButton } from 'react-google-button';
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from "react-redux";
+import { loginGoogle } from "../../services/slice/UserSlice";
+import { unwrapResult } from "@reduxjs/toolkit";
 
 const LoginWithGoogle = () => {
   const { googleSignIn, user } = UserAuth();
   const navigate = useNavigate();
-
-  const handleGoogleSignIn = async () => {
+  const dispatch = useDispatch();
+  const handleGoogleSignIn = async (user) => {
     try {
       await googleSignIn();
+      console.log(user);
+      const action = loginGoogle(user.accessToken);
+      const resultAction = await dispatch(action);
+      unwrapResult(resultAction);
     } catch (error) {
       console.log(error);
     }
