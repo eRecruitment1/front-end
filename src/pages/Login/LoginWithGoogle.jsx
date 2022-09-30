@@ -3,7 +3,7 @@ import { GoogleButton } from 'react-google-button';
 import { UserAuth } from '../../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from "react-redux";
-import { loginGoogle } from "../../services/slice/UserSlice";
+import { login } from "../../services/slice/UserSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
 
 const LoginWithGoogle = () => {
@@ -11,22 +11,18 @@ const LoginWithGoogle = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleGoogleSignIn = async (user) => {
+    let id_token;
     try {
       await googleSignIn();
-      console.log(user);
-      const action = loginGoogle(user.accessToken);
+      id_token = "id_token" + user.accessToken
+      console.log(user.accessToken);
+      const action = login(id_token);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
     } catch (error) {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    if (user != null) {
-      navigate('/account');
-    }
-  }, [user]);
 
   return (
     <div>
