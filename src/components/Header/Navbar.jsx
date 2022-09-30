@@ -5,16 +5,27 @@ import UserDropDownMenu from './UserDropDownMenu'
 import { motion } from "framer-motion";
 import Login from '../../pages/Login/Login'
 import { AiOutlineClose } from 'react-icons/ai';
+import { IoMdNotificationsOutline } from 'react-icons/io'
+import { BiUser } from 'react-icons/bi'
 
 const Navbar = () => {
-  let isLogined = false;
+  const [isLogined, setIsLogined] = useState(true);
   const [loginPopup, setloginPopup] = useState(false);
+  const [accountDialog, setaccountDialog] = useState(false);
   let handleLoginClick = () => {
     setloginPopup(!loginPopup)
   }
   let handleClosePopup = () => {
-    setloginPopup(!loginPopup)
+    setloginPopup(!loginPopup);
   }
+  let handleUserDropDown = () => {
+    setaccountDialog(!accountDialog);
+  }
+  const [isOnClickDropDown, setIsOnClickDropDown] = useState(false);
+  const handleOnClickDropDown = () => {
+    setIsOnClickDropDown(!isOnClickDropDown);
+  };
+
   return (
     <nav className="bg-slate-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
 
@@ -22,7 +33,7 @@ const Navbar = () => {
         <a href="/" className="flex items-center">
           <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span className='text-blue-500'>WeHr</span>Company</span>
         </a>
-        
+
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
           <ul className="flex flex-col p-4 mt-4 bg-gray-50 rounded-lg border b  order-gray-100 md:flex-row md:space-x-8 md:mt-0 md:text-xl md:font-medium md:border-0 md:bg-inherit dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
             <li>
@@ -58,11 +69,20 @@ const Navbar = () => {
           </div>
         )}
         {(isLogined) && (
-          <div className="flex md:order-2">
-            
+          <div className="flex gap-3 md:order-2 text-3xl">
+            <IoMdNotificationsOutline />
+            <BiUser onClick={handleUserDropDown} className="cursor-pointer" />
+
+
+            {accountDialog ? (
+              <>
+                <UserDropDownMenu />
+              </>
+            ) : null}
           </div>
         )}
       </div>
+
       {loginPopup ? (
         <>
           <motion.div
@@ -76,7 +96,7 @@ const Navbar = () => {
                 {/*header*/}
                 <div className="flex items-start justify-center p-5 border-b border-solid border-blueGray-200 rounded-t">
                   <h3 className="text-2xl font-semibold uppercase">Login</h3>
-                  <AiOutlineClose className='absolute right-5 top-6 cursor-pointer' onClick={handleClosePopup}/>
+                  <AiOutlineClose className='absolute right-5 top-6 cursor-pointer' onClick={handleClosePopup} />
                 </div>
                 {/*body*/}
                 <div className="relative p-6 px-16 flex-auto">
