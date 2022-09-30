@@ -29,7 +29,7 @@ function InputField(props) {
                         placeholder={placeholder}
                         type={type}
                         disabled={disabled}
-                        className="border-2 w-80 h-10 rounded-xl p-2"
+                        className="border-2 w-80 h-14 rounded-md p-2"
                     />
                 </div>
             )}

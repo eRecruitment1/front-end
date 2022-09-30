@@ -22,11 +22,9 @@ const Login = () => {
 
   return (
     <>
-      <h1 className="text-4xl text-center m-4 mt-10">LOGIN</h1>
       <div className="flex justify-center items-center">
         <LoginForm onSubmit={handleFormSubmit} />
       </div>
-      <LoginWithGoogle />
     </>
   )
 }

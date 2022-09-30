@@ -13,16 +13,7 @@ const UserApi = {
     var dataPromise = promise.then((respone) => respone);
     return dataPromise;
   },
-  loginGoogle(data) {
-    const url = "api/loginGoogle";
-    const promise = AxiosClient.post(url, data, {
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-    });
-    var dataPromise = promise.then((respone) => respone);
-    return dataPromise;
-  },
+  
 };
 
 export default UserApi;
