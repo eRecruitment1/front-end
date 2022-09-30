@@ -24,14 +24,14 @@ function UserDropDownMenu(props) {
 
     return (
         <motion.div
-            animate={{ x: 170,y: 40, opacity: 1 }}
+            animate={{ x: 160,y: 50, opacity: 1 }}
             initial={{ x: -10, opacity: 0 }}
             exit={{ x: -10, opacity: 0 }}
             transition={{ duration: 0.12 }}
         >
             <div className="absolute inline-block text-left z-50">
                 <div
-                    className="origin-top-right absolute -right-5 w-56 rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+                    className="origin-top-right absolute right-5 w-56 rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
                     role="menu"
                     aria-orientation="vertical"
                     aria-labelledby="menu-button"

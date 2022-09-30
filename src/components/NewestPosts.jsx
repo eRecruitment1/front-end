@@ -7,7 +7,7 @@ const NewestPosts = () => {
             <div className="container px-6 py-10 mx-auto">
                 <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">New Posts</h1>
                 <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
-                    <div className="lg:flex">
+                    <div className="lg:flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
                         <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
@@ -15,7 +15,7 @@ const NewestPosts = () => {
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
                             <Link to="/post">
-                                <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                                <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                     Apply now
                                 </button>
                             </Link>
@@ -29,7 +29,7 @@ const NewestPosts = () => {
                                 Senior Engineering Manager
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
-                            <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                            <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                 Apply now
                             </button>
                         </div>
@@ -41,7 +41,7 @@ const NewestPosts = () => {
                                 Engineering Manager
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 22, 2022</span>
-                            <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                            <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                 Apply now
                             </button>
                         </div>
@@ -53,7 +53,7 @@ const NewestPosts = () => {
                                 Senior .NET Software Engineer
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 21, 2022</span>
-                            <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                            <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                 Apply now
                             </button>
                         </div>
@@ -65,7 +65,7 @@ const NewestPosts = () => {
                                 .NET Software Engineer Intern
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 21, 2022</span>
-                            <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                            <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                 Apply now
                             </button>
                         </div>
@@ -77,7 +77,7 @@ const NewestPosts = () => {
                                 Senior Java Software Engineer
                             </a>
                             <span className="text-sm text-gray-500 dark:text-gray-300">September 20, 2022</span>
-                            <button class="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                            <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
                                 Apply now
                             </button>
                         </div>

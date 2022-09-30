@@ -27,7 +27,7 @@ const Post = () => {
                                 Upload CV
                             </button>
                             <button className="w-[150px] block text-black bg-white-700 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-black-800" type="button">
-                                Back to Home
+                                <a href='/'>Back to Home</a>
                             </button>
                         </div>
                     </div>
