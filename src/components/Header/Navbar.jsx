@@ -9,7 +9,7 @@ import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BiUser } from 'react-icons/bi'
 
 const Navbar = () => {
-  const [isLogined, setIsLogined] = useState(true);
+  const [isLogined, setIsLogined] = useState(false);
   const [loginPopup, setloginPopup] = useState(false);
   const [accountDialog, setaccountDialog] = useState(false);
   let handleLoginClick = () => {

@@ -1,9 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 
 const SideNav = () => {
   return (
     <>
-      <div class="w-60 h-full shadow-md bg-white absolute" id="sidenav">
+      <div class="w-60 h-full shadow-md bg-white float-left" id="sidenav">
         <div class="pt-4 pb-2 px-6">
           <a href="/">
             <div class="flex items-center">
@@ -64,12 +64,11 @@ const SideNav = () => {
             </ul>
           </li>
         </ul>
-        <hr class="my-2" />
-          
-          <div class="text-center bottom-0 absolute w-full">
-            <hr class="m-0" />
-              <p class="py-2 text-sm text-gray-700"><span className='text-xs'>Powered By</span> WehrCompany</p>
-          </div>
+
+        <div class="text-center bottom-0 absolute w-full">
+          <hr class="m-0" />
+          <p class="py-2 text-sm text-gray-700"><span className='text-xs'>Powered By</span> WehrCompany</p>
+        </div>
       </div>
     </>
   )

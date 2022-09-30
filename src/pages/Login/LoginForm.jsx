@@ -10,7 +10,7 @@ LoginForm.propTypes = {
   onCancelClick: PropTypes.func,
 };
 
-function LoginForm({onSubmit, onCancelClick}) {
+function LoginForm({ onSubmit, onCancelClick }) {
   const schema = yup
     .object({
       username: yup.string().required("Please enter title"),
@@ -53,16 +53,31 @@ function LoginForm({onSubmit, onCancelClick}) {
         placeholder="Password here"
         form={form}
       />
-
+      <div className="flex justify-between items-center mb-6 mt-2">
+        <div className="form-group form-check">
+          <input type="checkbox"
+            className="form-check-input appearance-none h-4 w-4 border border-gray-300 rounded-sm bg-white checked:bg-blue-600 checked:border-blue-600 focus:outline-none transition duration-200 mt-1 align-top bg-no-repeat bg-center bg-contain float-left mr-2 cursor-pointer"
+            id="exampleCheck2" />
+            <label className="form-check-label inline-block text-gray-800" for="exampleCheck2">Remember me</label>
+        </div>
+        <a href="/"
+          className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Forgot
+          password?</a>
+      </div>
       <div className="flex items-center justify-center p-6 border-t border-solid border-blueGray-200 rounded-b">
         <button
-          className="bg-blue-600 text-white active:bg-blue-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+          className="bg-blue-600 text-white active:bg-blue-400 font-bold uppercase text-sm px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
           type="submit"
         >
           Login
         </button>
       </div>
+      <p className="text-gray-800 text-center">
+        Not a member? <a href="/"
+        className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
+      </p>
     </form>
+    
   );
 }
 

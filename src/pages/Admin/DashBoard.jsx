@@ -1,10 +1,13 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import SideNav from './components/SideNav'
+import MainSide from './components/MainSide'
 const DashBoard = () => {
   return (
-    <SideNav />
-    
+    <>
+      <SideNav />
+      <MainSide />
+    </>
   )
 }
-      
+  
 export default DashBoard
