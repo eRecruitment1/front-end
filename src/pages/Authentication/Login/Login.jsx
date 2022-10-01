@@ -1,9 +1,8 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../../services/slice/UserSlice";
+import { login } from "../../../redux/slice/UserSlice";
 import LoginForm from "./LoginForm";
-import LoginWithGoogle from "./LoginWithGoogle";
 
 const Login = () => {
   const dispatch = useDispatch();
