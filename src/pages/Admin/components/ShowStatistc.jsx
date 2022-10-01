@@ -4,9 +4,10 @@ import {RiUserUnfollowLine} from 'react-icons/ri'
 import {FaUserCheck} from 'react-icons/fa'
 const MainSide = () => {
   return (
-    <div className="grid gap-6 mb-8 mt-8 md:grid-cols-2 xl:grid-cols-4">
+    <div className="w-full flex justify-center items-center gap-44 ">
+      {/* section */}
       <div
-        className="w-full rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
+        className=" rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
       >
         <div className="p-4 flex items-center">
           <div
@@ -24,12 +25,13 @@ const MainSide = () => {
           </div>
         </div>
       </div>
+
       <div
         className="min-w-0 rounded-lg shadow-xs overflow-hidden bg-white dark:bg-gray-800"
       >
         <div className="p-4 flex items-center">
           <div
-            className="p-3 rounded-full text-green-500 dark:text-green-100 bg-green-100 dark:bg-green-500 mr-4"
+            className="p-3 rounded-full text-red-600 dark:text-green-100 bg-red-300 dark:bg-red-500 mr-4"
           >
             <RiUserUnfollowLine />
           </div>
@@ -48,7 +50,7 @@ const MainSide = () => {
       >
         <div className="p-4 flex items-center">
           <div
-            className="p-3 rounded-full text-blue-500 dark:text-blue-100 bg-blue-100 dark:bg-blue-500 mr-4"
+            className="p-3 rounded-full text-green-500 dark:text-blue-100 bg-green-100 dark:bg-blue-500 mr-4"
           >
             <FaUserCheck />
           </div>

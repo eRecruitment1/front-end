@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 const SideNav = () => {
   return (
     <>
-      <div class="w-60 h-full shadow-md bg-white float-left" id="sidenav">
+      <div class="w-60 h-full shadow-md bg-white" id="sidenav">
         <div class="pt-4 pb-2 px-6">
           <a href="/">
             <div class="flex items-center">
