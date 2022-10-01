@@ -1,7 +1,5 @@
-import LocalStorageKey from "../constant/LocalStorageKey";
 import AxiosClient from "./AxiosClient";
 
-const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
 const UserApi = {
   login(data) {
     console.log(data)
@@ -12,7 +10,6 @@ const UserApi = {
       },
     });
     var dataPromise = promise.then((respone) => respone);
-    console.log(dataPromise)
     return dataPromise;
   },
 };

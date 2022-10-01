@@ -3,7 +3,6 @@ const LocalStorageKey = {
     USER: "user",
     TOKEN: "access_token",
     ExTime: "expire_time",
-    rejectblog: "rejectBlog",
     //Noti keys
     
     //Noti Status
@@ -11,7 +10,7 @@ const LocalStorageKey = {
     //User Role
     adminRole: "ADMIN",
     hrEmployeeRole: "HR",
-    studentRole: "STUDENT",
+    candidateRole: "CANDIDATE",
   };
   
   export default LocalStorageKey;

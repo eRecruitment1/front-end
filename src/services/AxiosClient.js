@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosClient = axios.create({
-  baseURL: "https://16de-118-69-233-167.ap.ngrok.io",
+  baseURL: process.env.REACT_APP_BASE_API_URL,
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
