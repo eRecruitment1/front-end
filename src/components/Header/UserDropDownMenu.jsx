@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { logout } from "../../redux/slice/UserSlice";
 import { useDispatch } from "react-redux";
 import { motion } from "framer-motion";
+import { UserAuth } from "../../context/AuthContext"
 
 UserDropDownMenu.propTypes = {
     userInfo: PropTypes.object.isRequired,
@@ -13,17 +14,21 @@ UserDropDownMenu.defaultProps = {
 };
 
 function UserDropDownMenu(props) {
+    const { logOut } = UserAuth();
     const loggedInUser = props.userInfo;
     const userRole = loggedInUser.role;
     const dispatch = useDispatch();
     const handleLogOutClick = () => {
         const action = logout();
         dispatch(action);
+        logOut();
+        window.location.reload();
+
     };
 
     return (
         <motion.div
-            animate={{ x: 160,y: 50, opacity: 1 }}
+            animate={{ x: 160, y: 50, opacity: 1 }}
             initial={{ x: -10, opacity: 0 }}
             exit={{ x: -10, opacity: 0 }}
             transition={{ duration: 0.12 }}
