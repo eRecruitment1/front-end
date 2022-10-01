@@ -1,19 +1,20 @@
-import LocalStorageKey from "../constant_keys/LocalStorageKey";
+import LocalStorageKey from "../constant/LocalStorageKey";
 import AxiosClient from "./AxiosClient";
 
 const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
 const UserApi = {
   login(data) {
-    const url = "api/login";
+    console.log(data)
+    const url = "api/users/login";
     const promise = AxiosClient.post(url, data, {
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
     });
     var dataPromise = promise.then((respone) => respone);
+    console.log(dataPromise)
     return dataPromise;
   },
-  
 };
 
 export default UserApi;

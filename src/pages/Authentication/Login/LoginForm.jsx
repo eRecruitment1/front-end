@@ -1,13 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
-import InputField from "../../components/InputField";
+import InputField from "../../../components/InputField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 LoginForm.propTypes = {
   onSubmit: PropTypes.func,
-  onCancelClick: PropTypes.func,
 };
 
 function LoginForm({ onSubmit, onCancelClick }) {
@@ -33,24 +32,20 @@ function LoginForm({ onSubmit, onCancelClick }) {
     form.reset();
   };
 
-  const handleCancleClick = (values) => {
-    onCancelClick(values);
-  }
-
   return (
     <form onSubmit={form.handleSubmit(handleFormSubmit)}>
       <InputField
         name="username"
         type="text"
         label="Username"
-        placeholder="eg: Username here"
+        placeholder="abcxyz"
         form={form}
       />
       <InputField
         name="password"
         type="password"
         label="Password"
-        placeholder="Password here"
+        placeholder="Enter Password"
         form={form}
       />
       <div className="flex justify-between items-center mb-6 mt-2">

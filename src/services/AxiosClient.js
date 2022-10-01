@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const AxiosClient = axios.create({
-  baseURL: "http://localhost:8080",
+  baseURL: "https://16de-118-69-233-167.ap.ngrok.io",
   headers: {
     "Content-Type": "application/x-www-form-urlencoded",
   },
@@ -25,11 +25,11 @@ AxiosClient.interceptors.response.use(
     if (error.response !== undefined) {
       const { config, status, data } = error.response;
       if (
-        config.url === "api/login" &&
+        config.url === "api/users/login" &&
         (status === 406 || status === 404)
       ) {
         throw new Error(data);
-      } else if (config.url.includes("api/login") && status === 401) {
+      } else if (config.url.includes("api/users/login") && status === 401) {
         throw new Error(error + " " + error.response.data.id);
       }
 

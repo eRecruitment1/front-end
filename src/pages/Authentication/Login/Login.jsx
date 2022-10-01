@@ -1,7 +1,7 @@
 import { unwrapResult } from "@reduxjs/toolkit";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { login } from "../../services/slice/UserSlice";
+import { login } from "../../../services/slice/UserSlice";
 import LoginForm from "./LoginForm";
 import LoginWithGoogle from "./LoginWithGoogle";
 
@@ -10,6 +10,7 @@ const Login = () => {
   const handleFormSubmit = async (values) => {
     try {
       const action = login(values);
+      console.log(action);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
       window.alert("Login successfully");

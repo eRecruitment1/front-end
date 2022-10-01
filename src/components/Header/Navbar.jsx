@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import LoginWithGoogle from '../../pages/Login/LoginWithGoogle';
-import UserDropDownMenu from './UserDropDownMenu'
 import { motion } from "framer-motion";
-import Login from '../../pages/Login/Login'
+import LoginWithGoogle from '../../pages/Authentication/Login/LoginWithGoogle';
+import Login from '../../pages/Authentication/Login/Login'
+import UserDropDownMenu from './UserDropDownMenu'
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BiUser } from 'react-icons/bi'
