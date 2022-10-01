@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
 import { motion } from "framer-motion";
 import LoginWithGoogle from '../../pages/Authentication/Login/LoginWithGoogle';
 import Login from '../../pages/Authentication/Login/Login'
@@ -7,9 +6,12 @@ import UserDropDownMenu from './UserDropDownMenu'
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { BiUser } from 'react-icons/bi'
+import { useSelector } from 'react-redux';
 
-const Navbar = () => {
-  const [isLogined, setIsLogined] = useState(false);
+const Navbar = () => {  
+  const loggedUser = useSelector((state)=>state.user.current)
+  let isLoggedIn = !!loggedUser.id;
+  console.log(isLoggedIn)
   const [loginPopup, setloginPopup] = useState(false);
   const [accountDialog, setaccountDialog] = useState(false);
   let handleLoginClick = () => {
@@ -58,7 +60,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        {(!isLogined) && (
+        {(!isLoggedIn) && (
           <div className="flex md:order-2">
             <button
               type="button" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
@@ -68,7 +70,7 @@ const Navbar = () => {
             </button>
           </div>
         )}
-        {(isLogined) && (
+        {(isLoggedIn) && (
           <div className="flex gap-3 md:order-2 text-3xl">
             <IoMdNotificationsOutline />
             <BiUser onClick={handleUserDropDown} className="cursor-pointer" />
