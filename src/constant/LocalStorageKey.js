@@ -3,9 +3,6 @@ const LocalStorageKey = {
     USER: "user",
     TOKEN: "access_token",
     ExTime: "expire_time",
-    //Noti keys
-    
-    //Noti Status
     
     //User Role
     adminRole: "ADMIN",
