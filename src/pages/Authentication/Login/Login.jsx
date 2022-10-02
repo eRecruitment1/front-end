@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { login } from "../../../redux/slice/UserSlice";
 import LoginForm from "./LoginForm";
-import localStorageConfig from "../../../test/localStorageConfig";
+import {localStorageConfig} from "../../../test/localStorageConfig";
 const Login = () => {
   const dispatch = useDispatch();
   const handleFormSubmit = async (values) => {

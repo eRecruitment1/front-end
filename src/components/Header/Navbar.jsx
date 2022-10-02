@@ -10,7 +10,6 @@ import { useSelector } from 'react-redux';
 const Navbar = () => {  
   const loggedUser = useSelector((state)=>state.user.current)
   let isLoggedIn = !!loggedUser.id;
-  console.log(isLoggedIn)
   const [loginPopup, setloginPopup] = useState(false);
   const [accountDialog, setaccountDialog] = useState(false);
   let handleLoginClick = () => {

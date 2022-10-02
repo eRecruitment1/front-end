@@ -9,7 +9,7 @@ function classNames(...classes) {
 }
 
 export default function UserDropDownMenu() {
-    const { logOut } = UserAuth
+    const { logOut } = UserAuth()
     const dispatch = useDispatch();
     const handleLogOutClick = () => {
         const action = logout();
