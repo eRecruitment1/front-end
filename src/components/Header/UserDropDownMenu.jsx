@@ -1,6 +1,5 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { BiUser } from 'react-icons/bi'
 
 function classNames(...classes) {
@@ -66,7 +65,7 @@ export default function UserDropDownMenu() {
                 </a>
               )}
             </Menu.Item>
-            <form method="POST" action="#">
+            <form method="POST" action="/">
               <Menu.Item>
                 {({ active }) => (
                   <button
