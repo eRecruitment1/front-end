@@ -31,7 +31,6 @@ const userSlice = createSlice({
   },
   extraReducers: {
     [login.fulfilled]: (state, action) => {
-      console.log(action)
       const jwt = action.payload.data.token;
       state.current = action.payload.data;
       state.accessToken = jwt;
