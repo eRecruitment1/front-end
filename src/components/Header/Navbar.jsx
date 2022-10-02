@@ -5,7 +5,6 @@ import Login from '../../pages/Authentication/Login/Login'
 import UserDropDownMenu from './UserDropDownMenu'
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdNotificationsOutline } from 'react-icons/io'
-import { BiUser } from 'react-icons/bi'
 import { useSelector } from 'react-redux';
 
 const Navbar = () => {  
@@ -73,14 +72,8 @@ const Navbar = () => {
         {(isLoggedIn) && (
           <div className="flex gap-3 md:order-2 text-3xl">
             <IoMdNotificationsOutline />
-            <BiUser onClick={handleUserDropDown} className="cursor-pointer" />
-
-
-            {accountDialog ? (
-              <>
-                <UserDropDownMenu />
-              </>
-            ) : null}
+            
+            <UserDropDownMenu />
           </div>
         )}
       </div>

@@ -1,62 +1,89 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { logout } from "../../redux/slice/UserSlice";
-import { useDispatch } from "react-redux";
-import { motion } from "framer-motion";
-import { UserAuth } from "../../context/AuthContext"
+import { Fragment } from 'react'
+import { Menu, Transition } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { BiUser } from 'react-icons/bi'
 
-UserDropDownMenu.propTypes = {
-    userInfo: PropTypes.object.isRequired,
-};
-
-UserDropDownMenu.defaultProps = {
-    userInfo: {},
-};
-
-function UserDropDownMenu(props) {
-    const { logOut } = UserAuth();
-    const loggedInUser = props.userInfo;
-    const userRole = loggedInUser.role;
-    const dispatch = useDispatch();
-    const handleLogOutClick = () => {
-        const action = logout();
-        dispatch(action);
-        logOut();
-        window.location.reload();
-
-    };
-
-    return (
-        <motion.div
-            animate={{ x: 160, y: 50, opacity: 1 }}
-            initial={{ x: -10, opacity: 0 }}
-            exit={{ x: -10, opacity: 0 }}
-            transition={{ duration: 0.12 }}
-        >
-            <div className="absolute inline-block text-left z-50">
-                <div
-                    className="origin-top-right absolute right-5 w-56 rounded-md shadow-lg  bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
-                    role="menu"
-                    aria-orientation="vertical"
-                    aria-labelledby="menu-button"
-                    tabIndex="-1"
-                >
-
-                    <div className="py-1" role="none">
-                        <div
-                            className="text-red-400 block px-4 py-2 text-sm hover:bg-gray-100"
-                            role="menuitem"
-                            tabIndex="-1"
-                            id="menu-item-6"
-                            onClick={handleLogOutClick}
-                        >
-                            Logout
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </motion.div>
-    );
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ')
 }
 
-export default UserDropDownMenu;
+export default function UserDropDownMenu() {
+  return (
+    <Menu as="div" className="relative inline-block text-left">
+      <div>
+        <Menu.Button>
+          <BiUser className="cursor-pointer" />
+        </Menu.Button>
+      </div>
+
+      <Transition
+        as={Fragment}
+        enter="transition ease-out duration-100"
+        enterFrom="transform opacity-0 scale-95"
+        enterTo="transform opacity-100 scale-100"
+        leave="transition ease-in duration-75"
+        leaveFrom="transform opacity-100 scale-100"
+        leaveTo="transform opacity-0 scale-95"
+      >
+        <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1">
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Account settings
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  Support
+                </a>
+              )}
+            </Menu.Item>
+            <Menu.Item>
+              {({ active }) => (
+                <a
+                  href="#"
+                  className={classNames(
+                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                    'block px-4 py-2 text-sm'
+                  )}
+                >
+                  License
+                </a>
+              )}
+            </Menu.Item>
+            <form method="POST" action="#">
+              <Menu.Item>
+                {({ active }) => (
+                  <button
+                    type="submit"
+                    className={classNames(
+                      active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                      'block w-full px-4 py-2 text-left text-sm'
+                    )}
+                  >
+                    Sign out
+                  </button>
+                )}
+              </Menu.Item>
+            </form>
+          </div>
+        </Menu.Items>
+      </Transition>
+    </Menu>
+  )
+}
