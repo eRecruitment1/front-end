@@ -8,7 +8,7 @@ const NewestPosts = () => {
                 <h1 className="text-3xl font-semibold text-gray-800 capitalize lg:text-4xl dark:text-white">New Posts</h1>
                 <div className="grid grid-cols-1 gap-8 mt-8 md:mt-16 md:grid-cols-2">
                     <div className="lg:flex transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-fit: contain" src="https://bom.so/RzuVpd" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 Java Software Architect
@@ -23,7 +23,7 @@ const NewestPosts = () => {
                         </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/x0Ptma" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 Senior Engineering Manager
@@ -35,7 +35,7 @@ const NewestPosts = () => {
                         </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/g6mbTA" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 Engineering Manager
@@ -47,7 +47,7 @@ const NewestPosts = () => {
                         </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/ZKP3Fr" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 Senior .NET Software Engineer
@@ -59,7 +59,7 @@ const NewestPosts = () => {
                         </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/XPqztb" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 .NET Software Engineer Intern
@@ -71,7 +71,7 @@ const NewestPosts = () => {
                         </div>
                     </div>
                     <div className="lg:flex">
-                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/dfwGRY" alt="" />
+                        <img className="object-cover w-full h-56 rounded-lg lg:w-56" src="https://bom.so/WZ6n5k" alt="" />
                         <div className="flex flex-col justify-between py-6 lg:mx-6">
                             <a href="/" className="text-xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 Senior Java Software Engineer
