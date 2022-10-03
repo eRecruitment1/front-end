@@ -31,6 +31,7 @@ const Profile = () => {
         let gender = (document.getElementById('gender').value == 'Male') ? true : false
         CandidateProfileAPI.updateProfile(
             {
+                id: account.id,
                 firstName: firstname,
                 lastName: lastname,
                 email: emailaddress,

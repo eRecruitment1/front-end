@@ -2,7 +2,7 @@ import axios from "axios";
 
 const AxiosClient = axios.create({
   //process.env.REACT_APP_BASE_API_URL
-  baseURL: 'https://bbdb-42-119-103-161.ap.ngrok.io',
+  baseURL: 'https://71d9-171-246-146-194.ap.ngrok.io',
   headers: {
     'Content-Type': 'application/json'
   },
