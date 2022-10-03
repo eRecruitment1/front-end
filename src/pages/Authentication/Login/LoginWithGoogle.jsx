@@ -12,7 +12,7 @@ const LoginWithGoogle = () => {
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
-      localStorageConfig_LoginGoogle();
+      // localStorageConfig_LoginGoogle();
       const action = login(user?.accessToken);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);

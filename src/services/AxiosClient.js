@@ -1,9 +1,10 @@
 import axios from "axios";
 
 const AxiosClient = axios.create({
-  baseURL: process.env.REACT_APP_BASE_API_URL,
+  //process.env.REACT_APP_BASE_API_URL
+  baseURL: 'https://1f31-27-71-108-181.ap.ngrok.io',
   headers: {
-    "Content-Type": "application/x-www-form-urlencoded",
+    'Content-Type': 'application/json'
   },
 });
 
