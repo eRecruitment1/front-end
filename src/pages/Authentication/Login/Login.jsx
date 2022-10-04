@@ -9,7 +9,7 @@ const Login = () => {
   const handleFormSubmit = async (values) => {
     try {
       
-      localStorageConfig();
+      // localStorageConfig();
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);

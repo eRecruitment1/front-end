@@ -8,9 +8,9 @@ const CandidateProfileAPI = {
         // const url = 'api/profile/get'
         return AxiosClient.get(url, {
             headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-                Authorization: accessToken,
+                // 'Access-Control-Allow-Origin': '*',
+                // 'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+                // Authorization: accessToken,
             },
         })
     },
