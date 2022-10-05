@@ -29,15 +29,17 @@ const Profile = () => {
         let lastname = document.getElementById('last-name').value
         let emailaddress = document.getElementById('email-address').value
         let gender = (document.getElementById('gender').value == 'Male') ? true : false
-        CandidateProfileAPI.updateProfile(
-            {
-                id: account.id,
-                firstName: firstname,
-                lastName: lastname,
-                email: emailaddress,
-                gender: gender
-            }
-        );
+        (async () => {
+            await CandidateProfileAPI.updateProfile(
+                {
+                    id: account.id,
+                    firstName: firstname,
+                    lastName: lastname,
+                    email: emailaddress,
+                    gender: gender
+                }
+            );
+        })()
         setUpdateModal(false)
         window.location.reload();
     }

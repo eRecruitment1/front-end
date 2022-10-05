@@ -38,3 +38,4 @@ sketch
 
 # Ignore code-workspaces
 *.code-workspace
+test/

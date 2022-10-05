@@ -1,7 +1,8 @@
 import React from 'react'
 import Navbar from '../components/Header/Navbar'
 import Footer from '../components/Footer'
-const Post = () => {
+const Post = ({post}) => {
+    console.log(post)
     return (
         <>
             <Navbar />
