@@ -4,7 +4,6 @@ import { UserAuth } from '../../../context/AuthContext';
 import { useDispatch } from "react-redux";
 import { login } from "../../../redux/slice/UserSlice";
 import { unwrapResult } from "@reduxjs/toolkit";
-import { localStorageConfig_LoginGoogle } from '../../../test/localStorageConfig';
 
 const LoginWithGoogle = () => {
   const { googleSignIn, user } = UserAuth();
@@ -12,7 +11,6 @@ const LoginWithGoogle = () => {
   const handleGoogleSignIn = async () => {
     try {
       await googleSignIn();
-      // localStorageConfig_LoginGoogle();
       const action = login(user?.accessToken);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);

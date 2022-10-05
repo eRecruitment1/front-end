@@ -1,6 +1,5 @@
 // import LocalStorageKey from '../constant/LocalStorageKey'
 // Logined User Config
-import React from 'react'
 
 export const localStorageConfig = () => {
     localStorage.setItem('access_token',

@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const AxiosClient = axios.create({
-  //process.env.REACT_APP_BASE_API_URL
-  baseURL: 'https://we-hr-system.herokuapp.com',
+  baseURL: process.env.REACT_APP_BASE_API_URL,
   headers: {
     'Content-Type': 'application/json'
   },

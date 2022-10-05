@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import Post from '../pages/Post';
 import PostAPI from '../services/PostAPI';
 
 const NewestPosts = () => {
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState({});
-    const [postMocal, setPostModal] = useState(false)
     useEffect(() => {
         (async () => {
             const temp = await PostAPI.getPosts()
