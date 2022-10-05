@@ -6,10 +6,12 @@ import Main from './Main'
 const Home = () => {
   return (
     <>
+      <div className='h-screen'>
         <Navbar />
         <Main />
         <NewestPosts />
         <Footer />
+      </div>
     </>
   )
 }
