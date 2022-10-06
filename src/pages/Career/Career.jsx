@@ -52,15 +52,15 @@ const Career = () => {
                                     </p>
                                     <div>
                                         <span
-                                            class="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
+                                            className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
                                             {post?.tag}
                                         </span>
                                         <span
-                                            class="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
+                                            className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
                                             {post?.tag}
                                         </span>
                                         <span
-                                            class="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
+                                            className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
                                             {post?.tag}
                                         </span>
                                     </div>
