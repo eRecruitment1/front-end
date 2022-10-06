@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from '../../components/Header/Navbar'
 import PostAPI from '../../services/PostAPI';
-import Post from '../Post';
+import Post from '../Post/PostDetail';
 const Career = () => {
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState({});

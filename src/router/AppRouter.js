@@ -1,8 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/Home/Home';
-import About from '../pages/About'
-import Post from '../pages/Post'
+import About from '../pages/About/About'
+import Post from '../pages/Post/PostDetail'
 import DashBoard from '../pages/Admin/DashBoard'
 import Profile from '../pages/Profile/Profile';
 import Career from '../pages/Career/Career';

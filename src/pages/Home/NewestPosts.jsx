@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import Post from '../Post';
+import Post from '../Post/PostDetail';
 import PostAPI from '../../services/PostAPI';
 
 const NewestPosts = () => {
