@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import Post from '../pages/Post';
-import PostAPI from '../services/PostAPI';
+import Post from '../Post';
+import PostAPI from '../../services/PostAPI';
 
 const NewestPosts = () => {
     const [posts, setPosts] = useState([]);
     const [post, setPost] = useState({});
     useEffect(() => {
         (async () => {
-            const temp = await PostAPI.getPosts()
-            setPosts(temp.data)
+            const postsGetFromAPI = await PostAPI.getPosts()
+            setPosts(postsGetFromAPI.data)
         })()
     }, []);
     let handleOnClickApplyButton = (id) => {
@@ -28,7 +28,7 @@ const NewestPosts = () => {
                             <div key={post.id} className="lg:flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                                 <img className="object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnail} alt="" />
                                 <div className="flex flex-col justify-between py-6 lg:mx-6">
-                                    <p className="text-xl font-semibold text-gray-800 hover:underline ">
+                                    <p className="text-xl font-semibold text-gray-800 cursor-default">
                                         {post?.title}
                                     </p>
                                     <div className=''>
