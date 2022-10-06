@@ -1,8 +1,17 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import Navbar from '../../components/Header/Navbar'
 import Footer from '../../components/Footer'
-const Post = ({post}) => {
-    console.log(post)
+import PostAPI from '../../services/PostAPI'
+const PostDetail = ({id}) => {
+    console.log("asc")
+    const [post, setPost] = useState({});
+    useEffect(() => {
+        (async () => {
+            const postGetFromAPI = await PostAPI.getPostById(id)
+            console.log(postGetFromAPI);
+            setPost(postGetFromAPI)
+        })()
+    }, []);
     return (
         <>
             <Navbar />
@@ -43,4 +52,4 @@ const Post = ({post}) => {
     )
 }
 
-export default Post
+export default PostDetail

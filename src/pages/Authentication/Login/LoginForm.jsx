@@ -38,7 +38,7 @@ function LoginForm({ onSubmit, onCancelClick }) {
         name="username"
         type="text"
         label="Username"
-        placeholder="abcxyz"
+        placeholder="Enter Username"
         form={form}
       />
       <InputField
