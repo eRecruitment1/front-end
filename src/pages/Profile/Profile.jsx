@@ -11,8 +11,8 @@ const Profile = () => {
     useEffect(() => {
         (async () => {
             try {
-                const temp = await CandidateProfileAPI.getProfile();
-                setAccount(temp.data)
+                const accountGetFromAPI = await CandidateProfileAPI.getProfile();
+                setAccount(accountGetFromAPI.data)
             } catch (e) {
                 console.log(e)
             }
@@ -27,15 +27,15 @@ const Profile = () => {
     let handleOnSubmit = () => {
         let firstname = document.getElementById('first-name').value
         let lastname = document.getElementById('last-name').value
-        let emailaddress = document.getElementById('email-address').value
-        let gender = (document.getElementById('gender').value == 'Male') ? true : false
+        let emailAddress = document.getElementById('email-address').value
+        let gender = (document.getElementById('gender').value === 'Male') ? true : false
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
                     id: account.id,
                     firstName: firstname,
                     lastName: lastname,
-                    email: emailaddress,
+                    email: emailAddress,
                     gender: gender
                 }
             );
@@ -81,7 +81,7 @@ const Profile = () => {
                         <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Attachments</dt>
                             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                <ul role="list" className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
                                     <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                         <div className="flex w-0 flex-1 items-center">
                                             <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
@@ -108,7 +108,7 @@ const Profile = () => {
                         initial={{ y: 20, opacity: 0 }}
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >
-                        <div className="relative w-auto my-6 mx-auto max-w-md bg-white">
+                        <div className="relative w-auto my-6 mx-auto max-w-md bg-white rounded-lg">
                             {/*content*/}
                             <div className="border-0 rounded-md shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
                                 {/*header*/}

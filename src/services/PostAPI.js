@@ -1,4 +1,3 @@
-import React from 'react'
 import AxiosClient from './AxiosClient'
 
 const PostAPI = {

@@ -11,20 +11,12 @@ const Navbar = () => {
   const loggedUser = useSelector((state)=>state.user.current)
   let isLoggedIn = !!loggedUser.id;
   const [loginPopup, setloginPopup] = useState(false);
-  const [accountDialog, setaccountDialog] = useState(false);
   let handleLoginClick = () => {
     setloginPopup(!loginPopup)
   }
   let handleClosePopup = () => {
     setloginPopup(!loginPopup);
   }
-  let handleUserDropDown = () => {
-    setaccountDialog(!accountDialog);
-  }
-  const [isOnClickDropDown, setIsOnClickDropDown] = useState(false);
-  const handleOnClickDropDown = () => {
-    setIsOnClickDropDown(!isOnClickDropDown);
-  };
 
   return (
     <nav className="bg-slate-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
