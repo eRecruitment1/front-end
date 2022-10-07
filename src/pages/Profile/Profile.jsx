@@ -28,7 +28,8 @@ const Profile = () => {
         let firstname = document.getElementById('first-name').value
         let lastname = document.getElementById('last-name').value
         let emailAddress = document.getElementById('email-address').value
-        let gender = (document.getElementById('gender').value === 'Male') ? true : false
+        let gender = (document.getElementById('gender').value == 'Male') ? true : false
+        console.log(gender);
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
