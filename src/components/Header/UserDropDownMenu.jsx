@@ -1,9 +1,9 @@
 import { Fragment } from 'react'
 import { Menu, Transition } from '@headlessui/react'
-import { BiUser } from 'react-icons/bi'
 import { useDispatch } from "react-redux";
 import { logout } from '../../redux/slice/UserSlice'
 import { UserAuth } from '../../context/AuthContext'
+import LocalStorageKey from '../../constant/LocalStorageKey';
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -16,13 +16,12 @@ export default function UserDropDownMenu() {
         dispatch(action);
         logOut();
         window.location.reload();
-
     };
     return (
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button>
-                    <BiUser className="cursor-pointer" />
+                    <img className='w-[30px]' src={JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg} alt="" />
                 </Menu.Button>
             </div>
 

@@ -63,7 +63,6 @@ const Navbar = () => {
         {(isLoggedIn) && (
           <div className="flex gap-3 md:order-2 text-3xl">
             <IoMdNotificationsOutline />
-            
             <UserDropDownMenu />
           </div>
         )}
