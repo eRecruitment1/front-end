@@ -12,7 +12,6 @@ const Login = () => {
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-      window.alert("Login successfully");
       window.location.reload();
     } catch (error) {
       window.alert("Login Failed! Please check username, password again!");
