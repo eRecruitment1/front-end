@@ -25,19 +25,19 @@ const Profile = () => {
         setUpdateModal(false)
     }
     let handleOnSubmit = () => {
-        let firstname = document.getElementById('first-name').value
-        let lastname = document.getElementById('last-name').value
-        let emailAddress = document.getElementById('email-address').value
-        let gender = (document.getElementById('gender').value == 'Male') ? true : false
-        console.log(gender);
+        let firstname = document.getElementById('first-name').value;
+        let lastname = document.getElementById('last-name').value;
+        let phone = document.getElementById('phone-number').value;
+        // let gender = (document.getElementById('gender').value == 'Male') ? true : false
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
                     id: account.id,
+                    urlImg:"https://robohash.org/77faf0e392db217da70055efb49ed5b7?set=set4&bgset=&size=400x400",
                     firstName: firstname,
                     lastName: lastname,
-                    email: emailAddress,
-                    gender: gender
+                    phone: phone,
+                    // gender: gender
                 }
             );
         })()
@@ -47,13 +47,13 @@ const Profile = () => {
     return (
         <>
             <Navbar />
-            <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+            <div className="overflow-hidden bg-white shadow sm:rounded-lg ">
                 <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
-                    <img className='w-[150px] rounded-lg' src={account?.avatar} alt="" />
+                    <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
                     <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
                     <BsFillPencilFill className='cursor-pointer' onClick={handleShowModal} />
                 </div>
-                <div className="border-t border-gray-200">
+                <div className=" flex justify-center">
                     <dl>
                         <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                             <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
@@ -130,7 +130,7 @@ const Profile = () => {
                                                         name="first-name"
                                                         id="first-name"
                                                         autoComplete="given-name"
-                                                        className="border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
                                                 </div>
 
@@ -143,24 +143,24 @@ const Profile = () => {
                                                         name="last-name"
                                                         id="last-name"
                                                         autoComplete="family-name"
-                                                        className="border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
                                                 </div>
 
                                                 <div className="col-span-6">
                                                     <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                                        Email address
+                                                        Phone Number
                                                     </label>
                                                     <input
                                                         type="text"
-                                                        name="email-address"
-                                                        id="email-address"
-                                                        autoComplete="email"
-                                                        className="border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                        name="phone-number"
+                                                        id="phone-number"
+                                                        autoComplete="phone-number"
+                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                     />
                                                 </div>
 
-                                                <div className="col-span-6">
+                                                {/* <div className="col-span-6">
                                                     <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                                                         Gender
                                                     </label>
@@ -173,7 +173,7 @@ const Profile = () => {
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </select>
-                                                </div>
+                                                </div> */}
 
                                             </div>
                                     </div>

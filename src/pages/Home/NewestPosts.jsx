@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import PostDetail from '../Post/PostDetail';
 import PostAPI from '../../services/PostAPI';
+import { Link } from 'react-router-dom';
 
 const NewestPosts = () => {
     const [posts, setPosts] = useState([]);
-    const [post, setPost] = useState({});
     useEffect(() => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getPosts()
             setPosts(postsGetFromAPI.data)
         })()
     }, []);
-    let handleOnClickApplyButton = (id) => {
-        <PostDetail postId={id} />
-    }
     return (
         <section className="bg-white">
             <div className="container px-6 py-10 mx-auto">
@@ -36,7 +32,7 @@ const NewestPosts = () => {
                                     </div>
                                     <span className="text-sm text-gray-500 dark:text-gray-300">{post?.createdAt}</span>
                                     <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
-                                        <a href="/post">Apply now</a>
+                                        <Link to={'/post/'+post?.id}>Apply now</Link>
                                     </button>
                                 </div>
                             </div>)
