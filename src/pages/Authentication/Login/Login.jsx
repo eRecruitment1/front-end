@@ -1,6 +1,7 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import React from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
+import PageLoading from "../../../components/ProgressLoading/PageLoading";
 import { login } from "../../../redux/slice/UserSlice";
 import LoginForm from "./LoginForm";
 
@@ -8,7 +9,6 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleFormSubmit = async (values) => {
     try {
-      
       const action = login(values);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
