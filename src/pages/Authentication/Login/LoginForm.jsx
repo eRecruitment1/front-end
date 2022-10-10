@@ -9,11 +9,11 @@ LoginForm.propTypes = {
   onSubmit: PropTypes.func,
 };
 
-function LoginForm({ onSubmit, onCancelClick }) {
+function LoginForm({ onSubmit }) {
   const schema = yup
     .object({
-      username: yup.string().required("Please enter title"),
-      password: yup.string().required("Please enter title"),
+      username: yup.string().required("Please enter username"),
+      password: yup.string().required("Please enter password"),
     })
     .required();
 

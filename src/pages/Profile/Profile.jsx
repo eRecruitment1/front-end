@@ -5,14 +5,17 @@ import Navbar from '../../components/Header/Navbar';
 import { motion } from "framer-motion";
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
+import { HashLoader } from 'react-spinners'
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
+    const [loading, setLoading] = useState(true);
     useEffect(() => {
         (async () => {
             try {
                 const accountGetFromAPI = await CandidateProfileAPI.getProfile();
                 setAccount(accountGetFromAPI.data)
+                setLoading(false)
             } catch (e) {
                 console.log(e)
             }
@@ -28,16 +31,17 @@ const Profile = () => {
         let firstname = document.getElementById('first-name').value;
         let lastname = document.getElementById('last-name').value;
         let phone = document.getElementById('phone-number').value;
-        // let gender = (document.getElementById('gender').value == 'Male') ? true : false
+        let gender = (document.getElementById('gender').value == 'Male') ? true : false
+        console.log(document.getElementById('gender').value);
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
                     id: account.id,
-                    urlImg:"https://robohash.org/77faf0e392db217da70055efb49ed5b7?set=set4&bgset=&size=400x400",
+                    urlImg: "https://robohash.org/77faf0e392db217da70055efb49ed5b7?set=set4&bgset=&size=400x400",
                     firstName: firstname,
                     lastName: lastname,
                     phone: phone,
-                    // gender: gender
+                    gender: gender
                 }
             );
         })()
@@ -47,59 +51,66 @@ const Profile = () => {
     return (
         <>
             <Navbar />
-            <div className="overflow-hidden bg-white shadow sm:rounded-lg ">
-                <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
-                    <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
-                    <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
-                    <BsFillPencilFill className='cursor-pointer' onClick={handleShowModal} />
+            {loading ?
+                <div className='flex justify-center items-center m-60'>
+                    <HashLoader
+                        color={"#3300ff"}
+                        size={100}
+                    />
                 </div>
-                <div className=" flex justify-center">
-                    <dl>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
-                        </div>
-                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">Application for</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">Email address</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
-                        </div>
-                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.phone}</dd>
-                        </div>
-                        <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">About</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                Fugiat ipsum ipsum deserunt culpa aute sint do nostrud anim incididunt cillum culpa consequat. Excepteur
-                                qui ipsum aliquip consequat sint. Sit id mollit nulla mollit nostrud in ea officia proident. Irure nostrud
-                                pariatur mollit ad adipisicing reprehenderit deserunt qui eu.
-                            </dd>
-                        </div>
-                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                                    <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                        <div className="flex w-0 flex-1 items-center">
-                                            <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                            <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
-                                        </div>
-                                        <div className="ml-4 flex-shrink-0">
-                                            <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                Download
-                                            </a>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </div>
-                    </dl>
+                :
+                <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                    <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
+                        <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
+                        <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
+                        <BsFillPencilFill className='cursor-pointer' onClick={handleShowModal} />
+                    </div>
+                    <div className=" flex justify-center">
+                        <dl className='w-screen'>
+                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
+                            </div>
+                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">Application for</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
+                            </div>
+                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">Email address</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
+                            </div>
+                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.phone}</dd>
+                            </div>
+                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">About</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    {account?.gender ? "Male" : "Female"}
+                                </dd>
+                            </div>
+                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                <dt className="text-sm font-medium text-gray-500">Attachments</dt>
+                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                    <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                                        <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                            <div className="flex w-0 flex-1 items-center">
+                                                <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                                                <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
+                                            </div>
+                                            <div className="ml-4 flex-shrink-0">
+                                                <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                    Download
+                                                </a>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </dd>
+                            </div>
+                        </dl>
+                    </div>
                 </div>
-            </div>
+            }
 
             {/* Update Modal */}
             {updateModal ? (
@@ -120,47 +131,47 @@ const Profile = () => {
                                 {/*body*/}
                                 <div className="overflow-hidden shadow sm:rounded-md">
                                     <div className=" px-4 py-5 sm:p-6">
-                                            <div className="grid grid-cols-6 gap-6 w-[400px]">
-                                                <div className="col-span-6">
-                                                    <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
-                                                        First name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        name="first-name"
-                                                        id="first-name"
-                                                        autoComplete="given-name"
-                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                    />
-                                                </div>
+                                        <div className="grid grid-cols-6 gap-6 w-[400px]">
+                                            <div className="col-span-6">
+                                                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                                    First name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="first-name"
+                                                    id="first-name"
+                                                    autoComplete="given-name"
+                                                    className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
 
-                                                <div className="col-span-6">
-                                                    <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
-                                                        Last name
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        name="last-name"
-                                                        id="last-name"
-                                                        autoComplete="family-name"
-                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                    />
-                                                </div>
+                                            <div className="col-span-6">
+                                                <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
+                                                    Last name
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="last-name"
+                                                    id="last-name"
+                                                    autoComplete="family-name"
+                                                    className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
 
-                                                <div className="col-span-6">
-                                                    <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
-                                                        Phone Number
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        name="phone-number"
-                                                        id="phone-number"
-                                                        autoComplete="phone-number"
-                                                        className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
-                                                    />
-                                                </div>
+                                            <div className="col-span-6">
+                                                <label htmlFor="email-address" className="block text-sm font-medium text-gray-700">
+                                                    Phone Number
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="phone-number"
+                                                    id="phone-number"
+                                                    autoComplete="phone-number"
+                                                    className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
 
-                                                {/* <div className="col-span-6">
+                                            <div className="col-span-6">
                                                     <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
                                                         Gender
                                                     </label>
@@ -173,9 +184,9 @@ const Profile = () => {
                                                         <option>Male</option>
                                                         <option>Female</option>
                                                     </select>
-                                                </div> */}
+                                                </div>
 
-                                            </div>
+                                        </div>
                                     </div>
                                     <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
                                         <button
