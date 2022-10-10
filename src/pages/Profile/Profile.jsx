@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
 import { HashLoader } from 'react-spinners'
+import LocalStorageKey from '../../constant/LocalStorageKey';
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
@@ -31,13 +32,14 @@ const Profile = () => {
         let firstname = document.getElementById('first-name').value;
         let lastname = document.getElementById('last-name').value;
         let phone = document.getElementById('phone-number').value;
-        let gender = (document.getElementById('gender').value == 'Male') ? true : false
-        console.log(document.getElementById('gender').value);
+        let gender = (document.getElementById('gender').value === 'Male') ? true : false
+        let avatarUrl = document.getElementById('avatar-url').value;
+        console.log(avatarUrl);
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
                     id: account.id,
-                    urlImg: "https://robohash.org/77faf0e392db217da70055efb49ed5b7?set=set4&bgset=&size=400x400",
+                    urlImg: avatarUrl,
                     firstName: firstname,
                     lastName: lastname,
                     phone: phone,
@@ -45,6 +47,15 @@ const Profile = () => {
                 }
             );
         })()
+        const localAccount = {
+            ...JSON.parse(localStorage.getItem(LocalStorageKey.USER)),
+            urlImg: avatarUrl,
+            firstName: firstname,
+            lastName: lastname,
+            phone: phone,
+            gender: gender
+        }
+        localStorage.setItem(LocalStorageKey.USER, JSON.stringify(localAccount))
         setUpdateModal(false)
         window.location.reload();
     }
@@ -52,64 +63,67 @@ const Profile = () => {
         <>
             <Navbar />
             {loading ?
-                <div className='flex justify-center items-center m-60'>
+                <div className='flex justify-center items-center w-screen h-screen'>
                     <HashLoader
                         color={"#3300ff"}
                         size={100}
                     />
                 </div>
-                :
-                <div className="overflow-hidden bg-white shadow sm:rounded-lg">
-                    <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
-                        <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
-                        <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
-                        <BsFillPencilFill className='cursor-pointer' onClick={handleShowModal} />
-                    </div>
-                    <div className=" flex justify-center">
-                        <dl className='w-screen'>
-                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
+                : (
+                    <>
+                        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                            <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
+                                <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
+                                <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
+                                <BsFillPencilFill className='cursor-pointer' onClick={handleShowModal} />
                             </div>
-                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Application for</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
+                            <div className=" flex justify-center">
+                                <dl className='w-screen'>
+
+                                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
+                                    </div>
+                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Application for</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
+                                    </div>
+                                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Email address</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
+                                    </div>
+                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.phone}</dd>
+                                    </div>
+                                    <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Gender</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            {account?.gender ? "Male" : "Female"}
+                                        </dd>
+                                    </div>
+                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                        <dt className="text-sm font-medium text-gray-500">Attachments</dt>
+                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                            <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                                                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                                    <div className="flex w-0 flex-1 items-center">
+                                                        <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                                                        <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
+                                                    </div>
+                                                    <div className="ml-4 flex-shrink-0">
+                                                        <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                            Download
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </dd>
+                                    </div>
+                                </dl>
                             </div>
-                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Email address</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
-                            </div>
-                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Phone Number</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.phone}</dd>
-                            </div>
-                            <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">About</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    {account?.gender ? "Male" : "Female"}
-                                </dd>
-                            </div>
-                            <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                                <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                    <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                                        <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                            <div className="flex w-0 flex-1 items-center">
-                                                <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
-                                            </div>
-                                            <div className="ml-4 flex-shrink-0">
-                                                <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                    Download
-                                                </a>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </dd>
-                            </div>
-                        </dl>
-                    </div>
-                </div>
+                        </div>
+                    </>)
             }
 
             {/* Update Modal */}
@@ -134,6 +148,18 @@ const Profile = () => {
                                         <div className="grid grid-cols-6 gap-6 w-[400px]">
                                             <div className="col-span-6">
                                                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                                    Avatar URL
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="avatar-url"
+                                                    id="avatar-url"
+                                                    defaultValue="https://robohash.org/182395facb45ee3c83dd6350e9a629fb?set=set4&bgset=&size=400x400"
+                                                    className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
+                                            <div className="col-span-6">
+                                                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                                                     First name
                                                 </label>
                                                 <input
@@ -144,7 +170,6 @@ const Profile = () => {
                                                     className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
                                             </div>
-
                                             <div className="col-span-6">
                                                 <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                                                     Last name
@@ -172,19 +197,19 @@ const Profile = () => {
                                             </div>
 
                                             <div className="col-span-6">
-                                                    <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
-                                                        Gender
-                                                    </label>
-                                                    <select
-                                                        id="gender"
-                                                        name="gender"
-                                                        autoComplete="gender-name"
-                                                        className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
-                                                    >
-                                                        <option>Male</option>
-                                                        <option>Female</option>
-                                                    </select>
-                                                </div>
+                                                <label htmlFor="gender" className="block text-sm font-medium text-gray-700">
+                                                    Gender
+                                                </label>
+                                                <select
+                                                    id="gender"
+                                                    name="gender"
+                                                    autoComplete="gender-name"
+                                                    className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-indigo-500"
+                                                >
+                                                    <option>Male</option>
+                                                    <option>Female</option>
+                                                </select>
+                                            </div>
 
                                         </div>
                                     </div>
