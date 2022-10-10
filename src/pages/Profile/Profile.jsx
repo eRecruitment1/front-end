@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
 import { HashLoader } from 'react-spinners'
+import LocalStorageKey from '../../constant/LocalStorageKey';
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
@@ -31,13 +32,13 @@ const Profile = () => {
         let firstname = document.getElementById('first-name').value;
         let lastname = document.getElementById('last-name').value;
         let phone = document.getElementById('phone-number').value;
-        let gender = (document.getElementById('gender').value == 'Male') ? true : false
-        console.log(document.getElementById('gender').value);
+        let gender = (document.getElementById('gender').value === 'Male') ? true : false
+        let avatarUrl = document.getElementById('avatar-url').value;
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
                     id: account.id,
-                    urlImg: "https://robohash.org/77faf0e392db217da70055efb49ed5b7?set=set4&bgset=&size=400x400",
+                    urlImg: avatarUrl,
                     firstName: firstname,
                     lastName: lastname,
                     phone: phone,
@@ -45,6 +46,15 @@ const Profile = () => {
                 }
             );
         })()
+        const localAccount = {
+            ...JSON.parse(localStorage.getItem(LocalStorageKey.USER)),
+            urlImg: avatarUrl,
+            firstName: firstname,
+            lastName: lastname,
+            phone: phone,
+            gender: gender
+        }
+        localStorage.setItem(LocalStorageKey.USER, JSON.stringify(localAccount))
         setUpdateModal(false)
         window.location.reload();
     }
@@ -67,6 +77,7 @@ const Profile = () => {
                     </div>
                     <div className=" flex justify-center">
                         <dl className='w-screen'>
+                            
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                 <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
@@ -84,7 +95,7 @@ const Profile = () => {
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.phone}</dd>
                             </div>
                             <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                <dt className="text-sm font-medium text-gray-500">About</dt>
+                                <dt className="text-sm font-medium text-gray-500">Gender</dt>
                                 <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
                                     {account?.gender ? "Male" : "Female"}
                                 </dd>
@@ -134,6 +145,19 @@ const Profile = () => {
                                         <div className="grid grid-cols-6 gap-6 w-[400px]">
                                             <div className="col-span-6">
                                                 <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
+                                                    Avatar URL
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    name="avatar-url"
+                                                    id="avatar-url"
+                                                    autoComplete="given-name"
+                                                    value="https://robohash.org/182395facb45ee3c83dd6350e9a629fb?set=set4&bgset=&size=400x400"
+                                                    className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                                                />
+                                            </div>
+                                            <div className="col-span-6">
+                                                <label htmlFor="first-name" className="block text-sm font-medium text-gray-700">
                                                     First name
                                                 </label>
                                                 <input
@@ -144,7 +168,6 @@ const Profile = () => {
                                                     className="p-2 border mt-1 block w-full h-9 rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                                                 />
                                             </div>
-
                                             <div className="col-span-6">
                                                 <label htmlFor="last-name" className="block text-sm font-medium text-gray-700">
                                                     Last name
