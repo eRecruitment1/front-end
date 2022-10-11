@@ -15,10 +15,11 @@ const AppRouter = () => {
             <Route path='/post/:id' element={<Post />} />
             <Route path='/career' element={<Career />} />
             <Route path='/upload' />
-            <Route path='/hr/createPost' element={<CreatePost />} />
+            <Route path='/post/create' element={<CreatePost />} />
+            <Route path='/post/update'/>
             <Route path='/user/profile' element={<Profile />} />
             <Route path='/admin/dashboard' element={<DashBoard />} />
-            
+            <Route path='*' />
         </Routes>
     )
 }
