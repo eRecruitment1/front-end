@@ -1,4 +1,5 @@
 import axios from "axios";
+import LocalStorageKey from "../constant/LocalStorageKey";
 
 const AxiosClient = axios.create({
   baseURL: process.env.REACT_APP_BASE_API_URL,
@@ -32,7 +33,11 @@ AxiosClient.interceptors.response.use(
       } else if (config.url.includes("api/users/login") && status === 401) {
         throw new Error(error + " " + error.response.data.id);
       }
-
+      if (status === 403 || status === 401){
+        localStorage.removeItem(LocalStorageKey.USER)
+        localStorage.removeItem(LocalStorageKey.TOKEN)
+        window.alert("Your Account is expired!!!");
+      }
       
     }
 

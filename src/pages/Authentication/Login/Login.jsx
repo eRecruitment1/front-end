@@ -1,7 +1,5 @@
 import { unwrapResult } from "@reduxjs/toolkit";
-import { useState } from "react";
 import { useDispatch } from "react-redux";
-import PageLoading from "../../../components/ProgressLoading/PageLoading";
 import { login } from "../../../redux/slice/UserSlice";
 import LoginForm from "./LoginForm";
 
