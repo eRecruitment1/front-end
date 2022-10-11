@@ -3,10 +3,12 @@ import Navbar from '../../components/Header/Navbar'
 import PostAPI from '../../services/PostAPI';
 import { HashLoader } from 'react-spinners'
 import { Link } from 'react-router-dom';
+import LocalStorageKey from '../../constant/LocalStorageKey';
+import { BsFillPencilFill } from 'react-icons/bs';
 const Career = () => {
     const [posts, setPosts] = useState([]);
-    const [post, setPost] = useState({});
     const [loading, setLoading] = useState(true)
+    const roleName = JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName;
     useEffect(() => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getPosts()
@@ -14,7 +16,7 @@ const Career = () => {
             setLoading(false)
         })()
     }, []);
-    
+
     return (
         <>
             <Navbar />
@@ -52,9 +54,17 @@ const Career = () => {
                                 <div key={post.id} className="mb-4 lg:flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
                                     <img className="object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnail} alt="" />
                                     <div className="flex flex-col justify-between py-6 lg:mx-6">
-                                        <p className="text-xl font-semibold text-gray-800 cursor-default">
-                                            {post?.title}
-                                        </p>
+                                        <div className='flex justify-between items-center gap-7'>
+                                            <p className="text-xl font-semibold text-gray-800 cursor-default">
+                                                {post?.title}
+                                            </p>
+                                            {roleName === "HREMPLOYEE" ?
+                                                <>
+                                                    <BsFillPencilFill className='cursor-pointer' />
+                                                </>
+                                                : null
+                                            }
+                                        </div>
                                         <div>
                                             <span
                                                 className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-default">

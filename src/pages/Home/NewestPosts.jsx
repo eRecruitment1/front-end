@@ -9,7 +9,7 @@ const NewestPosts = () => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getPosts()
             setPosts(postsGetFromAPI.data)
-            setLoading(!loading)
+            setLoading(false)
         })()
     }, []);
     return (

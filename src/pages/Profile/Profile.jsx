@@ -84,10 +84,7 @@ const Profile = () => {
                                         <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
                                     </div>
-                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt className="text-sm font-medium text-gray-500">Application for</dt>
-                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">Backend Developer</dd>
-                                    </div>
+                                    
                                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Email address</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
@@ -135,14 +132,11 @@ const Profile = () => {
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
                     >
                         <div className="relative w-auto my-6 mx-auto max-w-md bg-white rounded-lg">
-                            {/*content*/}
                             <div className="border-0 rounded-md shadow-lg relative flex flex-col w-full outline-none focus:outline-none">
-                                {/*header*/}
                                 <div className="flex items-start justify-center p-5 border-b border-solid border-blueGray-200 rounded-t">
                                     <h3 className="text-2xl font-semibold uppercase">Update</h3>
                                     <AiOutlineClose className='absolute right-5 top-6 cursor-pointer' onClick={handleCloseModal} />
                                 </div>
-                                {/*body*/}
                                 <div className="overflow-hidden shadow sm:rounded-md">
                                     <div className=" px-4 py-5 sm:p-6">
                                         <div className="grid grid-cols-6 gap-6 w-[400px]">
@@ -210,7 +204,6 @@ const Profile = () => {
                                                     <option>Female</option>
                                                 </select>
                                             </div>
-
                                         </div>
                                     </div>
                                     <div className="bg-gray-50 px-4 py-3 text-right sm:px-6">
