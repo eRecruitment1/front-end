@@ -9,6 +9,7 @@ import Career from '../pages/Career/Career';
 import CreatePost from '../pages/Post/HR_Section/CreatePost'
 import HR_PostDetail from '../pages/Post/HR_Section/HRPostDetail';
 import ViewPosts from '../pages/Post/HR_Section/ViewPosts';
+import UploadCV from '../pages/UploadCV/UploadCV';
 const AppRouter = () => {
     return (
         <div>
@@ -17,7 +18,7 @@ const AppRouter = () => {
                 <Route path="/about" element={<About />} />
                 <Route path='/post/:id' element={<Post />} />
                 <Route path='/career' element={<Career />} />
-                <Route path='/upload' />
+                <Route path='/upload' element={<UploadCV />}/>
                 <Route path='/hr/post/view' element={<ViewPosts />} />
                 <Route path='/hr/post/create' element={<CreatePost />} />
                 <Route path='/hr/post/:id' element={<HR_PostDetail />} />
