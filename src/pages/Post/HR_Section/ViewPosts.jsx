@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react'
-import Navbar from '../../components/Header/Navbar'
-import PostAPI from '../../services/PostAPI';
-import { HashLoader } from 'react-spinners'
+import {useState, useEffect} from 'react'
 import { Link } from 'react-router-dom';
-const Career = () => {
+import { HashLoader } from 'react-spinners';
+import Navbar from '../../../components/Header/Navbar';
+import PostAPI from '../../../services/PostAPI';
+
+const ViewPosts = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
@@ -13,7 +14,6 @@ const Career = () => {
             setLoading(false)
         })()
     }, []);
-
     return (
         <>
             <Navbar />
@@ -61,11 +61,10 @@ const Career = () => {
                                                 className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-default">
                                                 {post?.tag}
                                             </span>
-
                                         </div>
                                         <span className="text-sm text-gray-500 dark:text-gray-300">{post?.createdAt}</span>
                                         <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
-                                            <Link to={'/post/' + post?.id}>Apply now</Link>
+                                            <Link to={'/hr/post/' + post?.id}>Detail</Link>
                                         </button>
                                     </div>
                                 </div>)
@@ -73,10 +72,8 @@ const Career = () => {
                     </div>
                 </div>
             }
-
-
         </>
     )
 }
 
-export default Career
+export default ViewPosts

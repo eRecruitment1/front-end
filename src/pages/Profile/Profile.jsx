@@ -34,7 +34,6 @@ const Profile = () => {
         let phone = document.getElementById('phone-number').value;
         let gender = (document.getElementById('gender').value === 'Male') ? true : false
         let avatarUrl = document.getElementById('avatar-url').value;
-        console.log(avatarUrl);
         (async () => {
             await CandidateProfileAPI.updateProfile(
                 {
