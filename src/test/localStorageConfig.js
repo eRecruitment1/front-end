@@ -7,10 +7,10 @@ export const localStorageConfig = () => {
     localStorage.setItem('user', JSON.stringify({
         "id": "SE160605",
         "username": "thuongngo",
-        "roleName": "Candidate",
+        "roleName": "HREMPLOYEE",
         "firstName": "ngo",
         "lastName": "thuong",
-        "urlImg": "abcdefgh",
+        "urlImg": "https://robohash.org/0ce3e22567d90feafbe6e33731f2252e?set=set4&bgset=&size=400x400",
         "email": "thuongmc2k2@gmail.com",
         "phone": "0963245204",
         "gender": true,

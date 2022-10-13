@@ -51,28 +51,30 @@ export default function UserDropDownMenu() {
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="/"
+                                (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") &&
+                                (<a
+                                    href="/hr/post/view"
                                     className={classNames(
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
-                                    Support
-                                </a>
+                                    View Post
+                                </a>)
                             )}
                         </Menu.Item>
                         <Menu.Item>
                             {({ active }) => (
-                                <a
-                                    href="/"
+                                (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") &&
+                                (<a
+                                    href="/hr/post/create"
                                     className={classNames(
                                         active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
                                         'block px-4 py-2 text-sm'
                                     )}
                                 >
-                                    License
-                                </a>
+                                    Create Post
+                                </a>)
                             )}
                         </Menu.Item>
                         <Menu.Item>
