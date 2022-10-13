@@ -13,7 +13,7 @@ const HRPostDetail = () => {
         (async () => {
             const postGetFromAPI = await PostAPI.getPostById(id)
             setPost(postGetFromAPI.data)
-            setLoading(!loading)
+            setLoading(false)
         })()
     }, [id]);
     const handleEditButton = () => {
