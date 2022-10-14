@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import PostAPI from '../../services/PostAPI';
 import { Link } from 'react-router-dom';
 import { HashLoader } from 'react-spinners'
@@ -8,7 +8,8 @@ const NewestPosts = () => {
     useEffect(() => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getPosts()
-            setPosts(postsGetFromAPI.data)
+            const arr = postsGetFromAPI.data.sort((prev, cur) => cur.id - prev.id).filter(post => post.status == "DISPLAYING")
+            setPosts(arr)
             setLoading(false)
         })()
     }, []);
@@ -47,7 +48,8 @@ const NewestPosts = () => {
                                                     <Link to={'/post/' + post?.id}>Apply now</Link>
                                                 </button>
                                             </div>
-                                        </div>)
+                                        </div>
+                                    )
                                 })}
                             </div>
                         </div>

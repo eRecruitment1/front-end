@@ -19,6 +19,9 @@ const HRPostDetail = () => {
     const handleEditButton = () => {
         setIsUpdate(true)
     }
+    const handleCancleButton = () => {
+        setIsUpdate(false)
+    }
     const handleUpdateButton = () => {
         const title = document.getElementById('title').value;
         const tag = document.getElementById('tag').value;
@@ -103,10 +106,18 @@ const HRPostDetail = () => {
                                             Edit
                                         </button>
                                 }
+                                {
+                                    isUpdate ?
+                                        <button type="button" onClick={handleCancleButton} className="w-[150px] block text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                            Cancel
+                                        </button>
+                                        :
+                                        <button className="w-[150px] block text-black bg-white-700 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-black-800" type="button">
+                                            <a href='/'>Back to Home</a>
+                                        </button>
+                                }
 
-                                <button className="w-[150px] block text-black bg-white-700 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-black-800" type="button">
-                                    <a href='/'>Back to Home</a>
-                                </button>
+
                             </div>
                         </div>
                         <p className="text-sm text-slate-700">
