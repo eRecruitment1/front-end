@@ -71,7 +71,6 @@ const Profile = () => {
     }
     return (
         <>
-            <Navbar />
             {loading ?
                 <div className='flex justify-center items-center w-screen h-screen'>
                     <HashLoader
@@ -81,7 +80,7 @@ const Profile = () => {
                 </div>
                 : (
                     <>
-                        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                        <div className="overflow-hidden bg-white shadow sm:rounded-lg mb-96">
                             <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
                                 <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
                                 <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>

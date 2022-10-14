@@ -3,20 +3,21 @@ import Navbar from '../../components/Header/Navbar'
 import PostAPI from '../../services/PostAPI';
 import { HashLoader } from 'react-spinners'
 import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
 const Career = () => {
     const [posts, setPosts] = useState([]);
+    const [pageNumber, setPageNumber] = useState(0);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         (async () => {
-            const postsGetFromAPI = await PostAPI.getPosts()
-            setPosts(postsGetFromAPI.data)
+            const postsGetFromAPI = await PostAPI.getPosts(pageNumber)
+            setPosts(postsGetFromAPI.data.content)
             setLoading(false)
         })()
     }, []);
 
     return (
         <>
-            <Navbar />
             <div className="flex justify-center">
                 <div className="mt-8 mb-3 xl:w-1/2">
                     <div className="input-group relative flex items-center w-full mb-4">
@@ -39,7 +40,7 @@ const Career = () => {
                     />
                 </div>
                 :
-                <div className='w-full flex justify-center gap-7'>
+                <div className='w-full flex justify-center gap-7 mb-60'>
                     <div className='w-1/6 flex justify-center items-start'>
                         <button type="button" className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                             Filter
@@ -48,8 +49,8 @@ const Career = () => {
                     <div className=''>
                         {posts.map((post) => {
                             return (
-                                <div key={post.id} className="mb-4 lg:flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
-                                    <img className="object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnail} alt="" />
+                                <div key={post?.postId} className="mb-4 lg:flex transition ease-in-out delay-150 hover:-translate-y-1 hover:scale-110 duration-300">
+                                    <img className="object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
                                     <div className="flex flex-col justify-between py-6 lg:mx-6">
                                         <div className='flex justify-between items-center gap-7'>
                                             <p className="text-xl font-semibold text-gray-800 cursor-default">
@@ -59,13 +60,13 @@ const Career = () => {
                                         <div>
                                             <span
                                                 className="m-1 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-default">
-                                                {post?.tag}
+                                                {post?.status ? "Available" : "Unvailable"}
                                             </span>
 
                                         </div>
-                                        <span className="text-sm text-gray-500 dark:text-gray-300">{post?.createdAt.split('T')[0]}</span>
+                                        <span className="text-sm text-gray-500 dark:text-gray-300">{post?.startTime.split('T')[0]}</span>
                                         <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
-                                            <Link to={'/post/' + post?.id}>Apply now</Link>
+                                            <Link to={'/post/' + post?.postId}>Apply now</Link>
                                         </button>
                                     </div>
                                 </div>)
@@ -73,8 +74,6 @@ const Career = () => {
                     </div>
                 </div>
             }
-
-
         </>
     )
 }

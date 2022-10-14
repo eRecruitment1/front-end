@@ -12,7 +12,7 @@ const UserApi = {
     var dataPromise = promise.then((respone) => respone);
     return dataPromise;
   },
-  
+
 };
 
 export default UserApi;

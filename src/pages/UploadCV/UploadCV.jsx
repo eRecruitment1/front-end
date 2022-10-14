@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import Navbar from '../../components/Header/Navbar'
 import {
     ref,
     uploadBytesResumable,
@@ -10,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 const UploadCV = () => {
     const navigate = useNavigate()
     const [fileUpload, setFileUpload] = useState(null);
-    const [fileUrls, setFileUrls] = useState([]);
 
     const uploadFile = () => {
         if (fileUpload == null) return;
@@ -29,7 +27,7 @@ const UploadCV = () => {
                         break;
                 }
             },
-            (error) => {
+            () => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -40,8 +38,7 @@ const UploadCV = () => {
     };
     return (
         <>
-            <Navbar />
-            <div className="flex justify-center items-center h-full mt-24">
+            <div className="flex justify-center items-center h-full mt-72 mb-96">
                 <div className="w-1/3 max-w-2xl rounded-lg shadow-xl bg-gray-50">
                     <div className="m-4">
                         <label className="inline-block mb-2 text-gray-500">CV Upload</label>

@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../../components/Header/Navbar'
-import Footer from '../../components/Footer/Footer'
 import PostAPI from '../../services/PostAPI'
 import { useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
@@ -18,7 +16,6 @@ const PostDetail = () => {
     }, [id]);
     return (
         <>
-            <Navbar />
             {loading ?
                 <div className='flex justify-center items-center h-screen'>
                     <HashLoader
@@ -30,28 +27,22 @@ const PostDetail = () => {
                 <div className="h-screen mt-10 flex font-sans container justify-center">
                     <div className="flex-none w-48 relative">
                     </div>
-                    <img className="mt-4 object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnail} alt="" />
+                    <img className="mt-4 object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
                     <form className="flex-auto p-6">
                         <div className="flex flex-wrap">
-                            <a href="/" className="text-4xl font-semibold text-gray-800 hover:underline dark:text-white ">
+                            <span className="text-4xl font-semibold text-gray-800 hover:underline dark:text-white ">
                                 {post?.title}
-                            </a>
+                            </span>
                             <span
                                 className="m-1 ml-2 text-center py-2 px-2 text-xs sm:text-sm bg-yellow-100 hover:bg-yellow-300 text-orange-400 font-semibold rounded-lg leading-loose cursor-pointe">
-                                {post?.tag}
+                                {post?.status ? "Available" : "Unvailable"}
                             </span>
                             <div className="w-full flex-none text-sm font-medium text-slate-700 mt-2">
                                 Ho Chi Minh City
                             </div>
                         </div>
                         <p className="text-lg mt-4 leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">
-                            {post?.description}
-                            <br />
-                            <br />
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis quam praesentium laudantium vitae tempora, consectetur nulla? Dignissimos harum recusandae, ea alias quo aspernatur error omnis atque est, exercitationem eveniet et aliquam nulla quasi. Ipsum quidem est molestias, omnis quisquam ipsam facere vitae saepe quod voluptas sunt itaque libero veritatis illum perspiciatis sit odio laborum laudantium accusamus! Praesentium explicabo animi iusto minima vitae! Quo consectetur vel unde, nisi molestiae esse expedita dolores numquam tempora soluta pariatur deleniti laborum commodi eius eaque! Dignissimos ab animi accusantium natus quis est consectetur iste placeat. Eaque veniam reprehenderit soluta vel quibusdam, temporibus nulla nam officia repudiandae eligendi suscipit ipsam voluptates reiciendis sit ut culpa modi debitis quo provident id impedit cum natus consectetur. Atque odit quas nihil dolor maiores obcaecati nemo alias molestias necessitatibus laboriosam ullam culpa rerum repellendus tempora ipsum quasi voluptate, voluptates ipsa optio quisquam? Inventore esse vero facere commodi pariatur, dolorum vitae placeat consequuntur nulla libero dicta ratione consequatur? Natus possimus soluta quis sequi atque? Repellendus omnis laborum nobis distinctio cumque soluta placeat animi quisquam? Minus aliquid exercitationem, ducimus facilis asperiores nulla ipsam fugiat aut unde. Dolorem placeat molestias architecto sit, maiores perspiciatis deleniti et quod corrupti cum! Expedita a voluptatibus dolor?
-                            <br />
-                            <br />
-                            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sit temporibus veniam, minus similique, facilis ab deleniti reprehenderit aspernatur voluptatem dolor mollitia ipsa consectetur possimus fugit sequi ipsum earum tempore quaerat. Lorem ipsum dolor sit amet consectetur adipisicing elit. Repellat quam voluptate reiciendis dolor consectetur non quia cum, ea aut ab sequi eveniet obcaecati soluta ut autem velit neque quisquam cumque!
+                            {post?.description.replace(/(?:\r\n|\r|\n)/g, '<br>')}
                         </p>
                         <br />
                         <div className="flex space-x-4 mb-6 text-sm font-medium">
@@ -70,9 +61,6 @@ const PostDetail = () => {
                     </form>
                 </div>
             }
-
-
-            <Footer />
         </>
     )
 }
