@@ -12,9 +12,17 @@ const Footer = () => {
                         </div>
 
                         <p className="mt-4 text-sm text-center text-gray-400 lg:text-right lg:mt-0">
-                            About &nbsp; Careers &nbsp; Contact &nbsp; Privacy & Policy
                             <Link to='/about' className="button">
                                 About
+                            </Link>
+                            <Link to='/career' className="button">
+                                &nbsp;Careers
+                            </Link>
+                            <Link to='/contact' className="button">
+                                &nbsp;Contact
+                            </Link>
+                            <Link to='/' className="button">
+                                &nbsp;Privacy & Policy
                             </Link>
                         </p>
                     </div>
