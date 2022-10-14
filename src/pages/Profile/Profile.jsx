@@ -7,6 +7,8 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
 import { HashLoader } from 'react-spinners'
 import LocalStorageKey from '../../constant/LocalStorageKey';
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
+const storage = getStorage();
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
@@ -22,6 +24,15 @@ const Profile = () => {
             }
         })()
     }, [account.id]);
+    let handleDownloadButton = () => {
+        const cvRef = ref(storage, 'assets/cv/resume.pdf');
+        console.log(cvRef);
+        getDownloadURL(cvRef).then((url) => {
+            let cvLink = document.getElementById('cvId');
+            cvLink.setAttribute('href', url)
+          })
+          
+    }
     let handleShowModal = () => {
         setUpdateModal(!updateModal)
     }
@@ -60,7 +71,6 @@ const Profile = () => {
     }
     return (
         <>
-            <Navbar />
             {loading ?
                 <div className='flex justify-center items-center w-screen h-screen'>
                     <HashLoader
@@ -70,7 +80,7 @@ const Profile = () => {
                 </div>
                 : (
                     <>
-                        <div className="overflow-hidden bg-white shadow sm:rounded-lg">
+                        <div className="overflow-hidden bg-white shadow sm:rounded-lg mb-96">
                             <div className="px-4 py-5 sm:px-6 flex items-end gap-4">
                                 <img className='w-[150px] rounded-lg' src={account?.urlImg} alt="" />
                                 <h3 className="inline-block text-lg font-medium leading-6 text-gray-900">{account?.username}</h3>
@@ -98,6 +108,7 @@ const Profile = () => {
                                             {account?.gender ? "Male" : "Female"}
                                         </dd>
                                     </div>
+                                    {(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") &&
                                     <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Attachments</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
@@ -105,17 +116,18 @@ const Profile = () => {
                                                 <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
                                                     <div className="flex w-0 flex-1 items-center">
                                                         <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                        <span className="ml-2 w-0 flex-1 truncate">resume_back_end_developer.pdf</span>
+                                                        <a id="cvId" href="https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fcv%2Fresume.pdf?alt=media&token=de330136-f3a2-4e44-9ad7-d047d3a429a0" className="ml-2 w-0 flex-1 truncate">resume.pdf</a>
                                                     </div>
                                                     <div className="ml-4 flex-shrink-0">
-                                                        <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                        <button onClick={handleDownloadButton} className="font-medium text-indigo-600 hover:text-indigo-500">
                                                             Download
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                 </li>
                                             </ul>
                                         </dd>
                                     </div>
+                                    }
                                 </dl>
                             </div>
                         </div>

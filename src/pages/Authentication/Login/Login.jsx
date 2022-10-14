@@ -8,10 +8,10 @@ const Login = () => {
   const dispatch = useDispatch();
   const handleFormSubmit = async (values) => {
     try {
-      // const action = login(values);
-      // const resultAction = await dispatch(action);
-      // unwrapResult(resultAction);
-      localStorageConfig()
+      const action = login(values);
+      const resultAction = await dispatch(action);
+      unwrapResult(resultAction);
+      // localStorageConfig()
       window.location.reload();
     } catch (error) {
       window.alert("Login Failed! Please check username, password again!");

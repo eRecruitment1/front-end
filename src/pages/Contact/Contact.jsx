@@ -4,9 +4,6 @@ import Footer from '../../components/Footer/Footer'
 const Contact = () => {
     return (
         <>
-            <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/styles/tailwind.css"></link>
-            <link rel="stylesheet" href="https://demos.creative-tim.com/notus-js/assets/vendor/@fortawesome/fontawesome-free/css/all.min.css"></link>
-            <Navbar />
             <section className="pb-20 relative block bg-blueGray-800">
                 <div className="container mx-auto px-4 lg:pt-24 lg:pb-64">
                     <div className="flex flex-wrap text-center justify-center">
@@ -126,7 +123,6 @@ const Contact = () => {
                     </div>
                 </div> */}
             </section>
-            <Footer />
         </>
     )
 }

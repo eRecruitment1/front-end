@@ -1,21 +1,37 @@
 import AxiosClient from './AxiosClient'
+import LocalStorageKey from '../constant/LocalStorageKey'
+
+const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
 
 const PostAPI = {
-    getPosts() {
-        const url = "https://633a54d8e02b9b64c60e8d4e.mockapi.io/Posts"
+    getLatestPosts() {
+        const url = "/api/post/getlastest"
+        return AxiosClient.get(url)
+    },
+    getPosts(pageNumber) {
+        const url = "/api/post/getAll?page="+pageNumber
         return AxiosClient.get(url)
     },
     getPostById(id) {
-        const url = "https://633a54d8e02b9b64c60e8d4e.mockapi.io/Posts/"+id;
+        const url = "/api/post/get/"+id;
         return AxiosClient.get(url)
     },
     updatePostById(data) {
-        const url = "https://633a54d8e02b9b64c60e8d4e.mockapi.io/Posts/"+data.id;
-        return AxiosClient.put(url, data)
+        console.log(data)
+        const url = "/api/post/update";
+        return AxiosClient.put(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
     },
     createPost(data) {
-        const url = "https://633a54d8e02b9b64c60e8d4e.mockapi.io/Posts";
-        return AxiosClient.post(url, data)
+        const url = "api/post/create"
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
     }
 }
 
