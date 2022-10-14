@@ -3,6 +3,7 @@ import Navbar from '../../components/Header/Navbar'
 import PostAPI from '../../services/PostAPI';
 import { HashLoader } from 'react-spinners'
 import { Link } from 'react-router-dom';
+import Footer from '../../components/Footer/Footer';
 const Career = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true)
@@ -64,7 +65,7 @@ const Career = () => {
 
                                         </div>
                                         <span className="text-sm text-gray-500 dark:text-gray-300">{post?.createdAt}</span>
-                                        <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button" data-modal-toggle="popup-modal">
+                                        <button className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                                             <Link to={'/post/' + post?.id}>Apply now</Link>
                                         </button>
                                     </div>
@@ -74,7 +75,7 @@ const Career = () => {
                 </div>
             }
 
-
+            <Footer/>
         </>
     )
 }
