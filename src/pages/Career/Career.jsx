@@ -1,21 +1,29 @@
 import React, { useState, useEffect } from 'react'
-import Navbar from '../../components/Header/Navbar'
 import PostAPI from '../../services/PostAPI';
 import { HashLoader } from 'react-spinners'
 import { Link } from 'react-router-dom';
-import Footer from '../../components/Footer/Footer';
+import { Pagination } from '@mui/material';
+
 const Career = () => {
     const [posts, setPosts] = useState([]);
+    const [page, setPage] = useState({});
     const [pageNumber, setPageNumber] = useState(0);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getPosts(pageNumber)
+            setPage(postsGetFromAPI.data)
             setPosts(postsGetFromAPI.data.content)
             setLoading(false)
         })()
     }, []);
-
+    let handlePageChange = (event, value) => {
+        (async () => {
+            const postsGetFromAPI = await PostAPI.getPosts(value-1);
+            setPage(postsGetFromAPI.data)
+            setPosts(postsGetFromAPI.data.content)
+        })()
+    }
     return (
         <>
             <div className="flex justify-center">
@@ -33,14 +41,14 @@ const Career = () => {
 
             {/* Post Lists */}
             {loading ?
-                <div className='flex justify-center items-center m-60'>
+                <div className='flex justify-center items-center m-60 mb-96'>
                     <HashLoader
                         color={"#3300ff"}
                         size={100}
                     />
                 </div>
                 :
-                <div className='w-full flex justify-center gap-7 mb-60'>
+                <div className='w-full flex justify-center gap-7 mb-40'>
                     <div className='w-1/6 flex justify-center items-start'>
                         <button type="button" className="px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
                             Filter
@@ -71,6 +79,7 @@ const Career = () => {
                                     </div>
                                 </div>)
                         })}
+                        <Pagination count={page?.totalPages} size="large" onChange={handlePageChange} />
                     </div>
                 </div>
             }
