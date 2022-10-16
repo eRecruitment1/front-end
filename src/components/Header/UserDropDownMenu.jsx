@@ -21,7 +21,7 @@ export default function UserDropDownMenu() {
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button>
-                    <img className='w-[30px]' src={JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg} alt="" />
+                    <img className='w-[30px] rounded-md' src={JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg} alt="" />
                 </Menu.Button>
             </div>
 
