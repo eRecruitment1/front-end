@@ -1,4 +1,5 @@
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import LocalStorageKey from "../constant/LocalStorageKey";
 
 const AxiosClient = axios.create({
@@ -22,6 +23,7 @@ AxiosClient.interceptors.response.use(
     return response;
   },
   function (error) {
+    const navigate = useNavigate()
     console.log("Error Response: ", error.response);
     if (error.response !== undefined) {
       const { config, status, data } = error.response;
@@ -38,9 +40,11 @@ AxiosClient.interceptors.response.use(
         localStorage.removeItem(LocalStorageKey.TOKEN)
         window.alert("Your Account is expired!!!");
       }
-      
+      if (status === 409 && config.url.includes("api/userCV/upload")){
+        window.alert("You have uploaded already!!!");
+        navigate('/cv-tracking')
+      }
     }
-
     return Promise.reject(error);
   }
 );

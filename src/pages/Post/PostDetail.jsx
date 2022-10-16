@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PostAPI from '../../services/PostAPI'
-import { useParams } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 const PostDetail = () => {
     const [post, setPost] = useState({});
@@ -48,7 +48,7 @@ const PostDetail = () => {
                         <div className="flex space-x-4 mb-6 text-sm font-medium">
                             <div className="flex-auto flex space-x-4">
                                 <button className="w-[150px] block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-                                    <a href="/upload">Upload CV</a>
+                                    <Link to={'/upload/' + post?.postId}>Upload CV</Link>
                                 </button>
                                 <button className="w-[150px] block text-black bg-white-700 hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-white-600 dark:hover:bg-white-700 dark:focus:ring-black-800" type="button">
                                     <a href='/'>Back to Home</a>

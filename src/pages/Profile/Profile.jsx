@@ -13,6 +13,8 @@ const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
     const [loading, setLoading] = useState(true);
+
+
     useEffect(() => {
         (async () => {
             try {
@@ -24,14 +26,15 @@ const Profile = () => {
             }
         })()
     }, [account.id]);
+
+    
     let handleDownloadButton = () => {
         const cvRef = ref(storage, 'assets/cv/resume.pdf');
         console.log(cvRef);
         getDownloadURL(cvRef).then((url) => {
             let cvLink = document.getElementById('cvId');
             cvLink.setAttribute('href', url)
-          })
-          
+        })
     }
     let handleShowModal = () => {
         setUpdateModal(!updateModal)
@@ -91,7 +94,7 @@ const Profile = () => {
                                         <dt className="text-sm font-medium text-gray-500">Full Name for</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.firstName + " " + account?.lastName}</dd>
                                     </div>
-                                    
+
                                     <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
                                         <dt className="text-sm font-medium text-gray-500">Email address</dt>
                                         <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">{account?.email}</dd>
@@ -106,25 +109,26 @@ const Profile = () => {
                                             {account?.gender ? "Male" : "Female"}
                                         </dd>
                                     </div>
-                                    {(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") &&
-                                    <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                        <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                                        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                            <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                                                <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                                    <div className="flex w-0 flex-1 items-center">
-                                                        <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                        <a id="cvId" href="https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fcv%2Fresume.pdf?alt=media&token=de330136-f3a2-4e44-9ad7-d047d3a429a0" className="ml-2 w-0 flex-1 truncate">resume.pdf</a>
-                                                    </div>
-                                                    <div className="ml-4 flex-shrink-0">
-                                                        <button onClick={handleDownloadButton} className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                            Download
-                                                        </button>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </dd>
-                                    </div>
+                                    {
+                                        (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "CANDIDATE") &&
+                                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+                                            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
+                                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
+                                                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                                                    <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                                        <div className="flex w-0 flex-1 items-center">
+                                                            <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                                                            <a id="cvId" href="https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fcv%2Fresume.pdf?alt=media&token=de330136-f3a2-4e44-9ad7-d047d3a429a0" className="ml-2 w-0 flex-1 truncate">resume.pdf</a>
+                                                        </div>
+                                                        <div className="ml-4 flex-shrink-0">
+                                                            <button onClick={handleDownloadButton} className="font-medium text-indigo-600 hover:text-indigo-500">
+                                                                Download
+                                                            </button>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </dd>
+                                        </div>
                                     }
                                 </dl>
                             </div>

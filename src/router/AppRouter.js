@@ -14,6 +14,7 @@ import ViewPosts from '../pages/Post/HR_Section/ViewPosts';
 import UploadCV from '../pages/UploadCV/UploadCV';
 import Navbar from '../components/Header/Navbar';
 import Footer from '../components/Footer/Footer';
+import CVTracking from '../pages/CVTracking/CVTracking';
 const AppRouter = () => {
     return (
         <div>
@@ -23,8 +24,9 @@ const AppRouter = () => {
                 <Route path="/about" element={<About />} />
                 <Route path='/post/:id' element={<Post />} />
                 <Route path='/career' element={<Career />} />
-                <Route path='/upload' element={<UploadCV />}/>
+                <Route path='/upload/:id' element={<UploadCV />}/>
                 <Route path='/blog' element={<Blog />} />
+                <Route path='/cv-tracking' element={<CVTracking />} />
                 <Route path='/hr/post/view' element={<ViewPosts />} />
                 <Route path='/hr/post/create' element={<CreatePost />} />
                 <Route path='/hr/post/:id' element={<HR_PostDetail />} />

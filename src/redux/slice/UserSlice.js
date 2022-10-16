@@ -13,6 +13,16 @@ export const login = createAsyncThunk(
   }
 );
 
+export const googleLogin = createAsyncThunk(
+  "/googlegLogin",
+  async (payload) => {
+    const responeData = await UserApi.googleLogin(payload);
+    const jwt = responeData.data.token;
+    localStorage.setItem(LocalStorageKey.TOKEN, jwt);
+    localStorage.setItem(LocalStorageKey.USER, JSON.stringify(responeData.data));
+    return responeData;
+  }
+);
 
 const userSlice = createSlice({
   name: "user",
