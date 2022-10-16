@@ -11,7 +11,7 @@ const CreatePost = () => {
   const navigate = useNavigate();
   const [fileUpload, setFileUpload] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState("");
-  
+
   const uploadAndGetUrl = () => {
     const metadata = {
       contentType: "image/jpg",
@@ -21,7 +21,7 @@ const CreatePost = () => {
 
     uploadTask.on(
       "state_changed",
-      () => {},
+      () => { },
       (error) => {
         console.log("Failed to upload img: ", error);
       },
@@ -32,23 +32,21 @@ const CreatePost = () => {
       }
     );
   };
-  
 
-  const handleCreateButton = () => {
+
+  const handleCreateButton = async () => {
     const title = document.getElementById('title').value;
     const status = document.getElementById('status').value == "Available" ? true : false;
     const description = document.getElementById('description').value;
     uploadAndGetUrl();
-    (async () => {
-      await PostAPI.createPost(
-        {
-          thumbnailUrl: thumbnailUrl,
-          title: title,
-          status: status,
-          description: description,
-        }
-      );
-    })()
+    await PostAPI.createPost(
+      {
+        thumbnailUrl: thumbnailUrl,
+        title: title,
+        status: status,
+        description: description,
+      }
+    );
     navigate('/hr/post/view')
   }
   return (

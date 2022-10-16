@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import PostAPI from '../../../services/PostAPI'
-import {  useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { HashLoader } from 'react-spinners'
 import { BsFillPencilFill } from 'react-icons/bs'
 import {
@@ -39,7 +39,7 @@ const HRPostDetail = () => {
 
         uploadTask.on(
             "state_changed",
-            () => {},
+            () => { },
             (error) => {
                 console.log("Failed to upload img: ", error);
             },
@@ -51,23 +51,21 @@ const HRPostDetail = () => {
             }
         );
     };
-    const handleUpdateButton = () => {
+    const handleUpdateButton = async () => {
         const title = document.getElementById('title').value;
         const status = document.getElementById('status').value == "Available" ? true : false;
         console.log(status)
         const description = document.getElementById('description').value;
         uploadAndGetUrl();
-        (async () => {
-            await PostAPI.updatePostById(
-                {
-                    postId: post.postId,
-                    thumbnailUrl: thumbnailUrl != "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
-                    title: title,
-                    status: status,
-                    description: description
-                }
-            );
-        })()
+        await PostAPI.updatePostById(
+            {
+                postId: post.postId,
+                thumbnailUrl: thumbnailUrl != "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
+                title: title,
+                status: status,
+                description: description
+            }
+        );
         setIsUpdate(false)
         window.location.reload()
     }
