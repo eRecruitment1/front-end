@@ -8,7 +8,6 @@ const NewestPosts = () => {
     useEffect(() => {
         (async () => {
             const postsGetFromAPI = await PostAPI.getLatestPosts()
-            // const arr = postsGetFromAPI.data.sort((prev, cur) => cur.id - prev.id).filter(post => post.status == "DISPLAYING")
             setPosts(postsGetFromAPI.data)
             setLoading(false)
         })()

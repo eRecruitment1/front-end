@@ -9,8 +9,9 @@ import { useNavigate } from 'react-router-dom';
 const UploadCV = () => {
     const navigate = useNavigate()
     const [fileUpload, setFileUpload] = useState(null);
+    const [fileUrl, setFileUrl] = useState("");
 
-    const uploadFile = () => {
+    const uploadFileAndGetUrl = () => {
         if (fileUpload == null) return;
         const fileRef = ref(storage, `assets/cv/${fileUpload.name}`);
         const uploadTask = uploadBytesResumable(fileRef, fileUpload);
@@ -31,7 +32,7 @@ const UploadCV = () => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log('File available at', downloadURL);
+                    setFileUrl(downloadURL)
                 });
             }
         );
@@ -51,7 +52,7 @@ const UploadCV = () => {
                                 }}
                             />
                             <div className="flex justify-center p-2">
-                                <button onClick={uploadFile} className="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload</button>
+                                <button onClick={uploadFileAndGetUrl} className="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload</button>
                             </div>
                         </div>
                     </div>

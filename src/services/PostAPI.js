@@ -32,6 +32,11 @@ const PostAPI = {
                 Authorization: accessToken,
             },
         })
+    },
+    filterPostByKeyword(keyword) {
+        console.log(keyword)
+        const url = "api/post/filter/get?keyword=" + keyword;
+        return AxiosClient.get(url)
     }
 }
 

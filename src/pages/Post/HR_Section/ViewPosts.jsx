@@ -1,4 +1,4 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { HashLoader } from 'react-spinners';
 import PostAPI from '../../../services/PostAPI';
@@ -17,12 +17,10 @@ const ViewPosts = () => {
             setLoading(false)
         })()
     }, []);
-    let handlePageChange = (event, value) => {
-        (async () => {
-            const postsGetFromAPI = await PostAPI.getPosts(value-1);
-            setPage(postsGetFromAPI.data)
-            setPosts(postsGetFromAPI.data.content)
-        })()
+    let handlePageChange = async (event, value) => {
+        const postsGetFromAPI = await PostAPI.getPosts(value - 1);
+        setPage(postsGetFromAPI.data)
+        setPosts(postsGetFromAPI.data.content)
     }
     return (
         <>

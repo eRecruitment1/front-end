@@ -39,24 +39,22 @@ const Profile = () => {
     let handleCloseModal = () => {
         setUpdateModal(false)
     }
-    let handleOnSubmit = () => {
+    let handleOnSubmit = async () => {
         let firstname = document.getElementById('first-name').value;
         let lastname = document.getElementById('last-name').value;
         let phone = document.getElementById('phone-number').value;
         let gender = (document.getElementById('gender').value === 'Male') ? true : false
         let avatarUrl = document.getElementById('avatar-url').value;
-        (async () => {
-            await CandidateProfileAPI.updateProfile(
-                {
-                    id: account.id,
-                    urlImg: avatarUrl,
-                    firstName: firstname,
-                    lastName: lastname,
-                    phone: phone,
-                    gender: gender
-                }
-            );
-        })()
+        await CandidateProfileAPI.updateProfile(
+            {
+                id: account.id,
+                urlImg: avatarUrl,
+                firstName: firstname,
+                lastName: lastname,
+                phone: phone,
+                gender: gender
+            }
+        );
         const localAccount = {
             ...JSON.parse(localStorage.getItem(LocalStorageKey.USER)),
             urlImg: avatarUrl,
