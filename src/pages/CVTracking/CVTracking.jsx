@@ -38,7 +38,6 @@ const CVTracking = () => {
                     :
                     <>
                         <div className='w-1/2 h-screen flex justify-center items-center'>
-                            
                             <Accordion expanded={expanded === 'cv'} onChange={handleChange('cv')}>
                                 <AccordionSummary
                                     expandIcon={<ExpandMoreIcon />}

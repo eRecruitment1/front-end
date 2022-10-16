@@ -1,18 +1,25 @@
 import { useEffect, useState } from 'react'
 import CandidateProfileAPI from '../../services/CandidateProfileAPI'
 import { PaperClipIcon } from '@heroicons/react/20/solid'
-import Navbar from '../../components/Header/Navbar';
 import { motion } from "framer-motion";
 import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
 import { HashLoader } from 'react-spinners'
 import LocalStorageKey from '../../constant/LocalStorageKey';
 import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { Accordion, AccordionDetails, AccordionSummary, Avatar, Link, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CvAPI from '../../services/CvAPI';
+import PostAPI from '../../services/PostAPI';
+
 const storage = getStorage();
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
     const [loading, setLoading] = useState(true);
+    const [expanded, setExpanded] = useState(false);
+    const [cv, setCv] = useState({});
+    const [post, setPost] = useState({});
 
 
     useEffect(() => {
@@ -20,6 +27,9 @@ const Profile = () => {
             try {
                 const accountGetFromAPI = await CandidateProfileAPI.getProfile();
                 setAccount(accountGetFromAPI.data)
+                const cvFromAPI = await CvAPI.getCV()
+                setCv(cvFromAPI.data[0])
+                console.log(cvFromAPI)
                 setLoading(false)
             } catch (e) {
                 console.log(e)
@@ -27,15 +37,12 @@ const Profile = () => {
         })()
     }, [account.id]);
 
-    
-    let handleDownloadButton = () => {
-        const cvRef = ref(storage, 'assets/cv/resume.pdf');
-        console.log(cvRef);
-        getDownloadURL(cvRef).then((url) => {
-            let cvLink = document.getElementById('cvId');
-            cvLink.setAttribute('href', url)
-        })
-    }
+    const handleChange = (panel) => async (event, isExpanded) => {
+        const postFromAPI = await PostAPI.getPostById(cv.postID)
+        setPost(postFromAPI.data)
+        setExpanded(isExpanded ? panel : false)
+    };
+
     let handleShowModal = () => {
         setUpdateModal(!updateModal)
     }
@@ -111,24 +118,36 @@ const Profile = () => {
                                     </div>
                                     {
                                         (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "CANDIDATE") &&
-                                        <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-                                            <dt className="text-sm font-medium text-gray-500">Attachments</dt>
-                                            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0">
-                                                <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
-                                                    <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
-                                                        <div className="flex w-0 flex-1 items-center">
-                                                            <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
-                                                            <a id="cvId" href="https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fcv%2Fresume.pdf?alt=media&token=de330136-f3a2-4e44-9ad7-d047d3a429a0" className="ml-2 w-0 flex-1 truncate">resume.pdf</a>
-                                                        </div>
-                                                        <div className="ml-4 flex-shrink-0">
-                                                            <button onClick={handleDownloadButton} className="font-medium text-indigo-600 hover:text-indigo-500">
-                                                                Download
-                                                            </button>
-                                                        </div>
-                                                    </li>
-                                                </ul>
-                                            </dd>
-                                        </div>
+                                        <Accordion expanded={expanded === 'cv'} onChange={handleChange('cv')}>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon />}
+                                                id="panel1bh-header"
+                                            >
+                                                <dt className="py-3 px-2 text-sm font-medium text-gray-500 md:mr-96">Attachments</dt>
+                                                <dd className="w-1/2 mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 md:ml-36">
+                                                    <ul className="divide-y divide-gray-200 rounded-md border border-gray-200">
+                                                        <li className="flex items-center justify-between py-3 pl-3 pr-4 text-sm">
+                                                            <div className="flex w-0 flex-1 items-center">
+                                                                <PaperClipIcon className="h-5 w-5 flex-shrink-0 text-gray-400" aria-hidden="true" />
+                                                                <a id="cvId" href={cv?.linkCV} className="ml-2 w-0 flex-1 truncate">your resume</a>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </dd>
+                                            </AccordionSummary>
+                                            <AccordionDetails>
+                                                <div className='flex justify-center items-center gap-8'>
+                                                    <Avatar
+                                                        alt="Post Thumbnail"
+                                                        src={post?.thumbnailUrl}
+                                                        sx={{ width: 56, height: 56 }}
+                                                    />
+                                                    <Link href={'/post/' + post?.postId} underline="hover">
+                                                        <Typography variant="h4" color="black">{post?.title}</Typography>
+                                                    </Link>
+                                                </div>
+                                            </AccordionDetails>
+                                        </Accordion>
                                     }
                                 </dl>
                             </div>
