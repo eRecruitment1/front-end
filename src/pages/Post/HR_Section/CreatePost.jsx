@@ -36,7 +36,7 @@ const CreatePost = () => {
 
   const handleCreateButton = async () => {
     const title = document.getElementById('title').value;
-    const status = document.getElementById('status').value == "Available" ? true : false;
+    const status = document.getElementById('status').value === "Available" ? true : false;
     const description = document.getElementById('description').value;
     uploadAndGetUrl();
     await PostAPI.createPost(

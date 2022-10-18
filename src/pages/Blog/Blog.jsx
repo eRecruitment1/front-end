@@ -1,6 +1,3 @@
-import React from 'react'
-import Navbar from '../../components/Header/Navbar'
-import Footer from '../../components/Footer/Footer'
 const Blog = () => {
   return (
     <>
@@ -10,7 +7,7 @@ const Blog = () => {
 
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1217701178-2048x935.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1217701178-2048x935.jpg" alt="Img" />
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Testing-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">Soft Skills for Testers</h1>
@@ -24,7 +21,7 @@ const Blog = () => {
 
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-violate bg-gradient-to-r from-pink-50 to-red-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/09/iStock-1027169822-2048x1365.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/09/iStock-1027169822-2048x1365.jpg" alt="Img"></img>
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Testing-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">9 Steps To Becoming a Great QA Lead</h1>
@@ -38,7 +35,7 @@ const Blog = () => {
 
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-pink bg-gradient-to-r from-fuchsia-50 to-pink-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/09/iStock-1199145131-2048x1365.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/09/iStock-1199145131-2048x1365.jpg" alt="Img"></img>
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Software Development-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">5 Challenges of Scrum Product Owners and How to Solve Them</h1>
@@ -51,7 +48,7 @@ const Blog = () => {
             </div>
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1274437411-2048x1038.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1274437411-2048x1038.jpg" alt="Img"></img>
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Testing-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">Cucumber Tool for Behavior-Driven Development in Testing</h1>
@@ -64,7 +61,7 @@ const Blog = () => {
             </div>
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1314089349-2048x1177.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1314089349-2048x1177.jpg" alt="Img"></img>
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Testing-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">The 8 Most Important KPIs for Software Quality Assurance</h1>
@@ -77,7 +74,7 @@ const Blog = () => {
             </div>
             <div className="p-4 md:w-1/3">
               <div className="h-full rounded-xl shadow-cla-blue bg-gradient-to-r from-indigo-50 to-blue-50 overflow-hidden">
-                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1223732386-2048x878.jpg"></img>
+                <img className="lg:h-48 md:h-36 w-full object-cover object-center scale-110 transition-all duration-400 hover:scale-100" src="https://kms-technology.com/wp-content/uploads/2022/08/iStock-1223732386-2048x878.jpg" alt="Img"></img>
                 <div className="p-6">
                   <h2 className="tracking-widest text-xs title-font font-medium text-gray-400 mb-1">Testing-1</h2>
                   <h1 className="title-font text-lg font-medium text-gray-600 mb-3">[Podcast] Test Automation for Software Quality</h1>

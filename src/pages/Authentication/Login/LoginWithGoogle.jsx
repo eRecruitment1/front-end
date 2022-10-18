@@ -1,4 +1,3 @@
-import React from 'react';
 import { GoogleButton } from 'react-google-button';
 import { UserAuth } from '../../../context/AuthContext';
 import { useDispatch } from "react-redux";
@@ -15,7 +14,6 @@ const LoginWithGoogle = () => {
       const action = googleLogin(user?.accessToken);
       const resultAction = await dispatch(action);
       unwrapResult(resultAction);
-      console.log(resultAction)
     } catch (error) {
       console.log(error);
     }

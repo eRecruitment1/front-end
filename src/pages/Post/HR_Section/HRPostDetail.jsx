@@ -53,14 +53,14 @@ const HRPostDetail = () => {
     };
     const handleUpdateButton = async () => {
         const title = document.getElementById('title').value;
-        const status = document.getElementById('status').value == "Available" ? true : false;
+        const status = document.getElementById('status').value === "Available" ? true : false;
         console.log(status)
         const description = document.getElementById('description').value;
         uploadAndGetUrl();
         await PostAPI.updatePostById(
             {
                 postId: post.postId,
-                thumbnailUrl: thumbnailUrl != "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
+                thumbnailUrl: thumbnailUrl !== "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
                 title: title,
                 status: status,
                 description: description
