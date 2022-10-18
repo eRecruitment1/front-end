@@ -9,7 +9,7 @@ import DashBoard from '../pages/Admin/DashBoard'
 import Profile from '../pages/Profile/Profile';
 import Career from '../pages/Career/Career';
 import CreatePost from '../pages/Post/HR_Section/CreatePost'
-import HR_PostDetail from '../pages/Post/HR_Section/HRPostDetail';
+import HRPostDetail from '../pages/Post/HR_Section/HRPostDetail';
 import ViewPosts from '../pages/Post/HR_Section/ViewPosts';
 import UploadCV from '../pages/UploadCV/UploadCV';
 import Navbar from '../components/Header/Navbar';
@@ -28,7 +28,7 @@ const AppRouter = () => {
                 <Route path='/blog' element={<Blog />} />
                 <Route path='/hr/post/view' element={<ViewPosts />} />
                 <Route path='/hr/post/create' element={<CreatePost />} />
-                <Route path='/hr/post/:id' element={<HR_PostDetail />} />
+                <Route path='/hr/post/:id' element={<HRPostDetail />} />
                 <Route path='/hr/cv/view' element={<ViewCV />} />
                 <Route path='/user/profile' element={<Profile />} />
                 <Route path='/admin/dashboard' element={<DashBoard />} />

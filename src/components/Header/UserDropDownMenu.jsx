@@ -50,7 +50,7 @@ export default function UserDropDownMenu() {
                             )}
                         </Menu.Item>
                         {
-                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") ?
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE") ?
                             <Menu.Item>
                                 {({ active }) => (
 
@@ -68,7 +68,7 @@ export default function UserDropDownMenu() {
                             :null
                         }
                         {
-                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "HREMPLOYEE") ?
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE") ?
                             <Menu.Item>
                                 {({ active }) => (
                                     (<a

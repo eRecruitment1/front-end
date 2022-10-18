@@ -114,7 +114,7 @@ const Profile = () => {
                                         </dd>
                                     </div>
                                     {
-                                        (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName == "CANDIDATE") &&
+                                        (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "CANDIDATE") &&
                                         <Accordion expanded={expanded === 'cv'} onChange={handleChange('cv')}>
                                             <AccordionSummary
                                                 expandIcon={<ExpandMoreIcon />}

@@ -37,7 +37,7 @@ const UploadCV = () => {
                 postID: id,
             }
         )
-        if(response.status == '200')
+        if(response.status === '200')
             window.alert('Upload Successfully')
         else
             window.alert('Upload Failed')
