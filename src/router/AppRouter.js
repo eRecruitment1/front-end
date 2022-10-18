@@ -14,6 +14,7 @@ import ViewPosts from '../pages/Post/HR_Section/ViewPosts';
 import UploadCV from '../pages/UploadCV/UploadCV';
 import Navbar from '../components/Header/Navbar';
 import Footer from '../components/Footer/Footer';
+import ViewCV from '../pages/CV/ViewCV';
 const AppRouter = () => {
     return (
         <div>
@@ -28,6 +29,7 @@ const AppRouter = () => {
                 <Route path='/hr/post/view' element={<ViewPosts />} />
                 <Route path='/hr/post/create' element={<CreatePost />} />
                 <Route path='/hr/post/:id' element={<HR_PostDetail />} />
+                <Route path='/hr/cv/view' element={<ViewCV />} />
                 <Route path='/user/profile' element={<Profile />} />
                 <Route path='/admin/dashboard' element={<DashBoard />} />
                 <Route path='/contact' element={<Contact />} />

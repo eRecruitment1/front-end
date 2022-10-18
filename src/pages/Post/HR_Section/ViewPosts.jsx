@@ -7,11 +7,10 @@ import { Pagination } from '@mui/material';
 const ViewPosts = () => {
     const [posts, setPosts] = useState([]);
     const [page, setPage] = useState({});
-    const [pageNumber, setPageNumber] = useState(0);
     const [loading, setLoading] = useState(true)
     useEffect(() => {
         (async () => {
-            const postsGetFromAPI = await PostAPI.getPosts(pageNumber)
+            const postsGetFromAPI = await PostAPI.getPosts(0)
             setPage(postsGetFromAPI.data)
             setPosts(postsGetFromAPI.data.content)
             setLoading(false)

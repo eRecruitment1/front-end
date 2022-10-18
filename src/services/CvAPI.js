@@ -3,6 +3,7 @@ import LocalStorageKey from '../constant/LocalStorageKey'
 const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
 const CvAPI = {
     createCV(data) {
+        console.log(data)
         const url = 'api/userCV/upload'
         return AxiosClient.post(url, data, {
             headers: {

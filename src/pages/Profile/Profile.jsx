@@ -6,13 +6,11 @@ import { AiOutlineClose } from 'react-icons/ai';
 import { BsFillPencilFill } from 'react-icons/bs'
 import { HashLoader } from 'react-spinners'
 import LocalStorageKey from '../../constant/LocalStorageKey';
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { Accordion, AccordionDetails, AccordionSummary, Avatar, Link, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CvAPI from '../../services/CvAPI';
 import PostAPI from '../../services/PostAPI';
 
-const storage = getStorage();
 const Profile = () => {
     const [account, setAccount] = useState({});
     const [updateModal, setUpdateModal] = useState(false)
@@ -28,8 +26,7 @@ const Profile = () => {
                 const accountGetFromAPI = await CandidateProfileAPI.getProfile();
                 setAccount(accountGetFromAPI.data)
                 const cvFromAPI = await CvAPI.getCV()
-                setCv(cvFromAPI.data[0])
-                console.log(cvFromAPI)
+                if (cvFromAPI.data != null)  setCv(cvFromAPI.data[0])
                 setLoading(false)
             } catch (e) {
                 console.log(e)
