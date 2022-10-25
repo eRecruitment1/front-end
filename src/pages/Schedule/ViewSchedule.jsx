@@ -1,5 +1,6 @@
-import { Badge, Calendar, Descriptions, List, Menu, Modal, Tag } from 'antd';
+import { Avatar, Badge, Calendar, Descriptions, List, Menu, Modal, Tag } from 'antd';
 import React, { useState, useEffect } from 'react';
+import AccountAPI from '../../services/AccountAPI';
 import ScheduleAPI from '../../services/ScheduleAPI';
 const ViewSchedule = () => {
     const [listSchedule, setListSchedule] = useState([]);
@@ -11,10 +12,22 @@ const ViewSchedule = () => {
     useEffect(() => {
         (async () => {
             const listScheduleFromAPI = await ScheduleAPI.viewSchedule();
-            setListSchedule(listScheduleFromAPI.data);
             console.log(listScheduleFromAPI.data)
+            setListSchedule(listScheduleFromAPI.data);
         })()
     }, []);
+
+    const loadDetailSchedule = (item) => {
+        let arrayAccounts = [];
+        item.interviewerID.forEach(async (accID) => {
+            const accountGetFromAPI = await AccountAPI.getAccountByID(accID)
+            arrayAccounts.push(accountGetFromAPI.data)
+            setDetailSchedule({
+                ...item,
+                accounts: arrayAccounts
+            })
+        })
+    }
 
     const handleOnClickDetail = (e, stateSub = true, stateMain = true) => {
         setListScheduleModal(stateMain)
@@ -74,8 +87,9 @@ const ViewSchedule = () => {
                                             key={item.scheduleID}
                                             onClick={
                                                 () => {
+                                                    console.log(item)
                                                     handleOnClickDetail();
-                                                    setDetailSchedule(item);
+                                                    loadDetailSchedule(item);
                                                 }
                                             }
                                             className="cursor-pointer">
@@ -89,7 +103,6 @@ const ViewSchedule = () => {
                                                 }
                                             />
                                         </List.Item>
-
                                     )}
                                 />
                             </Modal>
@@ -100,17 +113,21 @@ const ViewSchedule = () => {
                                 onOk={(e) => handleOnClickDetail(e, false)}
                                 onCancel={(e) => handleOnClickDetail(e, false)}
                             >
+                                {console.log(detailSchedule)}
                                 <Descriptions title={"Schedule Detail: " + detailSchedule?.scheduleID} bordered>
                                     <Descriptions.Item label="CVID" span={2}>{detailSchedule?.cvID}</Descriptions.Item>
                                     <Descriptions.Item label="Round">{detailSchedule?.roundNum}</Descriptions.Item>
-                                    <Descriptions.Item label="Interview Time" span={3}>{detailSchedule?.startTime.slice(0, 5)} - {detailSchedule?.endTime.slice(0, 5)}</Descriptions.Item>
-                                    {console.log(detailSchedule?.interviewerID)}
+                                    <Descriptions.Item label="Interview Time" span={3}>{detailSchedule?.startTime?.slice(0, 5)} - {detailSchedule?.endTime?.slice(0, 5)}</Descriptions.Item>
                                     <Descriptions.Item label="Interviewer" span={3}>
                                         <List
-                                            dataSource={detailSchedule.interviewID}
+                                            dataSource={detailSchedule.accounts}
                                             renderItem={item => (
                                                 <List.Item >
-                                                    <p>{item}</p>
+                                                    <List.Item.Meta
+                                                        avatar={<Avatar src={item.urlImg} />}
+                                                        title={<p>{item.firstName} {item.lastName}</p>}
+                                                        description={item.email}
+                                                    />
                                                 </List.Item>
                                             )}
                                         />
