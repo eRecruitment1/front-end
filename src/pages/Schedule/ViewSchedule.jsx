@@ -12,7 +12,6 @@ const ViewSchedule = () => {
     useEffect(() => {
         (async () => {
             const listScheduleFromAPI = await ScheduleAPI.viewSchedule();
-            console.log(listScheduleFromAPI.data)
             setListSchedule(listScheduleFromAPI.data);
         })()
     }, []);
@@ -41,7 +40,6 @@ const ViewSchedule = () => {
         }
         const newMonth = value.month() + 1
         let date = value.year() + "-" + newMonth + "-" + newDate
-        console.log(date, listSchedule);
         const arrayFilterByDate = listSchedule.filter((schedule) => schedule.date.localeCompare(date) === 0)
         setListScheduleByDate(arrayFilterByDate);
         setListScheduleModal(!listScheduleModal);
@@ -79,7 +77,6 @@ const ViewSchedule = () => {
                                 onOk={() => setListScheduleModal(false)}
                                 onCancel={handleCancel}
                             >
-                                {console.log(listScheduleByDate)}
                                 <List
                                     dataSource={listScheduleByDate}
                                     renderItem={(item) => (
@@ -87,7 +84,6 @@ const ViewSchedule = () => {
                                             key={item.scheduleID}
                                             onClick={
                                                 () => {
-                                                    console.log(item)
                                                     handleOnClickDetail();
                                                     loadDetailSchedule(item);
                                                 }
@@ -113,7 +109,6 @@ const ViewSchedule = () => {
                                 onOk={(e) => handleOnClickDetail(e, false)}
                                 onCancel={(e) => handleOnClickDetail(e, false)}
                             >
-                                {console.log(detailSchedule)}
                                 <Descriptions title={"Schedule Detail: " + detailSchedule?.scheduleID} bordered>
                                     <Descriptions.Item label="CVID" span={2}>{detailSchedule?.cvID}</Descriptions.Item>
                                     <Descriptions.Item label="Round">{detailSchedule?.roundNum}</Descriptions.Item>
