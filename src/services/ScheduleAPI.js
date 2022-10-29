@@ -10,6 +10,22 @@ const CvAPI = {
             },
         });
     },
+    createSchedule(data) {
+        const url = 'api/schedule/create'
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
+    },
+    updateStatus() {
+        const url = 'api/schedule/updateStatus'
+        return AxiosClient.post(url, {}, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
+    }
 }
 
 export default CvAPI
