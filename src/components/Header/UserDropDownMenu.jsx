@@ -84,6 +84,74 @@ export default function UserDropDownMenu() {
                             </Menu.Item>
                             : null
                         }
+                        {
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE") ?
+                            <Menu.Item>
+                                {({ active }) => (
+                                    (<a
+                                        href="/hr/schedule/view"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        View Schedule
+                                    </a>)
+                                )}
+                            </Menu.Item>
+                            : null
+                        }
+                        {
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE") ?
+                            <Menu.Item>
+                                {({ active }) => (
+                                    (<a
+                                        href="/hr/cv/view"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        View CV
+                                    </a>)
+                                )}
+                            </Menu.Item>
+                            : null
+                        }
+                        {
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HRMANAGER") ?
+                            <Menu.Item>
+                                {({ active }) => (
+                                    (<a
+                                        href="/hr/note/view"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        View Notes
+                                    </a>)
+                                )}
+                            </Menu.Item>
+                            : null
+                        }
+                        {
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "EMPLOYEE") ?
+                            <Menu.Item>
+                                {({ active }) => (
+                                    (<a
+                                        href="/hr/schedule/view"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        View Schedule
+                                    </a>)
+                                )}
+                            </Menu.Item>
+                            : null
+                        }
 
                         <Menu.Item>
                             {({ active }) => (

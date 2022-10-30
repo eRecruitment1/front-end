@@ -16,6 +16,7 @@ import Navbar from '../components/Header/Navbar';
 import Footer from '../components/Footer/Footer';
 import ViewCV from '../pages/CV/ViewCV';
 import ViewSchedule from '../pages/Schedule/ViewSchedule';
+import ViewNote from '../pages/Note/ViewNote';
 const AppRouter = () => {
     return (
         <div>
@@ -32,6 +33,7 @@ const AppRouter = () => {
                 <Route path='/hr/post/:id' element={<HRPostDetail />} />
                 <Route path='/hr/cv/view' element={<ViewCV />} />
                 <Route path='/hr/schedule/view' element={<ViewSchedule />} />
+                <Route path='/hr/note/view' element={<ViewNote />} />
                 <Route path='/user/profile' element={<Profile />} />
                 <Route path='/admin/dashboard' element={<DashBoard />} />
                 <Route path='/contact' element={<Contact />} />

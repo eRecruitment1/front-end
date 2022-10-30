@@ -10,6 +10,14 @@ const AccountAPI = {
             },
         });
     },
+    getEmpAccount(role) {
+        const url = '/api/account/getAccountByRole/'+role;
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: accessToken,
+            },
+        });
+    },
 }
 
 export default AccountAPI
