@@ -95,7 +95,7 @@ export default function UserDropDownMenu() {
                                             'block px-4 py-2 text-sm'
                                         )}
                                     >
-                                        View Schdule
+                                        View Schedule
                                     </a>)
                                 )}
                             </Menu.Item>

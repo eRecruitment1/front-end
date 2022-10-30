@@ -1,7 +1,7 @@
 import AxiosClient from "./AxiosClient";
 import LocalStorageKey from '../constant/LocalStorageKey'
 const accessToken = "Bearer " + localStorage.getItem(LocalStorageKey.TOKEN);
-const CvAPI = {
+const ScheduleAPI = {
     viewSchedule() {
         const url = 'api/schedule/view'
         return AxiosClient.get(url, {
@@ -25,7 +25,16 @@ const CvAPI = {
                 Authorization: accessToken,
             },
         })
+    },
+    deleteSchedule(data) {
+        console.log(data)
+        const url = 'api/schedule/delete'
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
     }
 }
 
-export default CvAPI
+export default ScheduleAPI

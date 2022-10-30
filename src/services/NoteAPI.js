@@ -28,6 +28,14 @@ const NoteAPI = {
             },
         })
     },
+    viewNotesByRound(data) {
+        const url = "/api/note/get/cvid";
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
+    },
 }
 
 export default NoteAPI

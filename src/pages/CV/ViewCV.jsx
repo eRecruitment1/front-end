@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import AddIcon from '@mui/icons-material/Add';
 import { Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import CvAPI from "../../services/CvAPI";
-import AddIcon from '@mui/icons-material/Add';
-import { DatePicker, Input, Modal, Form, Radio, Select, TimePicker, Tag } from "antd";
+import { DatePicker, Form, Input, Modal, Radio, Select, Tag, TimePicker } from "antd";
 import moment from "moment";
-import ScheduleAPI from '../../services/ScheduleAPI'
+import { useEffect, useState } from "react";
 import AccountAPI from "../../services/AccountAPI";
-import { Option } from "antd/lib/mentions";
-import { flexbox } from "@mui/system";
+import CvAPI from "../../services/CvAPI";
+import ScheduleAPI from '../../services/ScheduleAPI';
 const ViewCV = () => {
     const [cvArr, setCvArr] = useState([]);
     const [dateRange, setDateRange] = useState([moment(), moment()])
@@ -16,6 +14,8 @@ const ViewCV = () => {
     const [curCVID, setCurCVID] = useState("");
     const [form] = Form.useForm();
     const [checkRound, setCheckRound] = useState(false);
+    const [empAccounts, setEmpAccounts] = useState([]);
+    const [hrEmpAccounts, setHrEmpAccounts] = useState([]);
 
     useEffect(() => {
         (async () => {
@@ -23,6 +23,11 @@ const ViewCV = () => {
                 const cvFromAPI = await CvAPI.getCV();
                 console.log(cvFromAPI.data);
                 setCvArr(cvFromAPI.data)
+
+                const empAccountFromAPI = await AccountAPI.getEmpAccount("Employee");
+                setEmpAccounts(empAccountFromAPI.data)
+                const hrEmpAccountFromAPI = await AccountAPI.getEmpAccount("HrEmployee");
+                setHrEmpAccounts(hrEmpAccountFromAPI.data)
             } catch (error) {
                 console.log(error)
             }
@@ -37,7 +42,8 @@ const ViewCV = () => {
         }
     }
 
-    const handleAddButton = () => {
+    const handleAddButton = async () => {
+
         setScheduleAddModal(true)
     }
 
@@ -111,23 +117,23 @@ const ViewCV = () => {
     const tagRender = (props) => {
         const { label, value, closable, onClose } = props;
         const onPreventMouseDown = (event) => {
-          event.preventDefault();
-          event.stopPropagation();
+            event.preventDefault();
+            event.stopPropagation();
         };
         return (
-          <Tag
-            color="lime"
-            onMouseDown={onPreventMouseDown}
-            closable={closable}
-            onClose={onClose}
-            style={{
-              marginRight: 3,
-            }}
-          >
-            {label}
-          </Tag>
+            <Tag
+                color="lime"
+                onMouseDown={onPreventMouseDown}
+                closable={closable}
+                onClose={onClose}
+                style={{
+                    marginRight: 3,
+                }}
+            >
+                {label}
+            </Tag>
         );
-      };
+    };
 
 
     return (
@@ -166,44 +172,51 @@ const ViewCV = () => {
                         onFinish={handleFormSubmit}
                         size={'default'}
                     >
-                        <Form.Item label="Round" name="roundNum">
+                        <Form.Item label="Round" name="roundNum" rules={[{ required: true, message: "This field is required" }]}>
                             <Radio.Group>
                                 <Radio.Button value="ROUND1" onChange={handleRoundClick}>ROUND 1</Radio.Button>
                                 <Radio.Button value="ROUND2" onChange={handleRoundClick}>ROUND 2</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item label="URL" name="urlMeeting">
+                        <Form.Item label="URL" name="urlMeeting" rules={[{ required: true, message: "This field is required" }]}>
                             <Input />
                         </Form.Item>
-                        <Form.Item label="Interviewers" name="interview">
+                        <Form.Item label="Interviewers" name="interview" rules={[{ required: true, message: "This field is required" }]}>
                             <Select
                                 mode="multiple"
                                 showArrow
                                 tagRender={tagRender}
                                 style={{
+                                    
                                     width: '100%',
+                                    cursor:"pointer"
                                 }}
                             >
-                                
                                 {
-                                    checkRound ? 
+                                    checkRound ?
                                         <>
-                                            <Option value="68dd6051-6fa7-4ae6-88f3-438e92868af1">Tran Vu</Option>
-                                            <Option value="515ced5a-0c7f-4154-9e7f-321c18d7ed66">Han Nguyen</Option>
-                                            <Option value="fcc0d0df-a208-4bd6-8396-5ac560440e52">Dung Nguyen</Option>
-                                            <Option value="6b1992b1-026f-40ce-9bbb-90250d4de8b7">Binh Nguyen</Option>
-                                            <Option value="d2de166e-979a-40ab-9f8f-151ea42e99b9">Hieu Nguyen</Option>
+                                            {
+                                                empAccounts.map(e => {
+                                                    return (<Select.Option key={e.id} value={e.id}>{e.firstName} {e.lastName} - {e.username}</Select.Option>)
+                                                })
+                                            }
                                         </>
                                         :
-                                        <Option value="caef6317-571d-4c59-91ab-131531f50218">Nguyen Huy</Option>
+                                        <>
+                                            {
+                                                hrEmpAccounts.map(e => {
+                                                    return (<Select.Option key={e.id} value={e.id}>{e.firstName} {e.lastName} - {e.username}</Select.Option>)
+                                                })
+                                            }
+                                        </>
                                 }
-                                
+
                             </Select>
                         </Form.Item>
-                        <Form.Item label="DatePicker" name="date">
+                        <Form.Item label="DatePicker" name="date" rules={[{ required: true, message: "This field is required" }]}>
                             <DatePicker />
                         </Form.Item>
-                        <Form.Item label="Time">
+                        <Form.Item label="Time" rules={[{ required: true, message: "This field is required" }]}>
                             <TimePicker.RangePicker format="HH:mm" onChange={(x) => setDateRange(x)} value={dateRange} />
                         </Form.Item>
                     </Form>

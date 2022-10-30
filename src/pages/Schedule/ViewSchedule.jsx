@@ -1,12 +1,13 @@
-import { Avatar, Badge, Calendar, Descriptions, Form, Input, InputNumber, List, Modal, Tag } from 'antd';
-import React, { useState, useEffect } from 'react';
-import AccountAPI from '../../services/AccountAPI';
-import ScheduleAPI from '../../services/ScheduleAPI';
+import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import WysiwygIcon from '@mui/icons-material/Wysiwyg';
+import { Avatar, Badge, Calendar, Descriptions, Form, InputNumber, List, Modal, Popconfirm, Tag } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
-import NoteAPI from '../../services/NoteAPI';
+import React, { useEffect, useState } from 'react';
+import LocalStorageKey from '../../constant/LocalStorageKey';
+import AccountAPI from '../../services/AccountAPI';
 import CvAPI from '../../services/CvAPI';
+import NoteAPI from '../../services/NoteAPI';
+import ScheduleAPI from '../../services/ScheduleAPI';
 const ViewSchedule = () => {
     const [listSchedule, setListSchedule] = useState([]);
     const [listScheduleByDate, setListScheduleByDate] = useState([]);
@@ -16,6 +17,7 @@ const ViewSchedule = () => {
     const [noteModal, setNoteModal] = useState(false);
     const [viewNoteDetailModal, setViewNoteDetailModal] = useState(false);
     const [form] = Form.useForm();
+
     useEffect(() => {
         (async () => {
             const listScheduleFromAPI = await ScheduleAPI.viewSchedule();
@@ -31,7 +33,7 @@ const ViewSchedule = () => {
             point: values.point,
             message: values.description,
         });
-        if(values.point > 50){
+        if (values.point > 50) {
             (async () => {
                 await CvAPI.evaluateCV({
                     cvId: detailSchedule.cvID,
@@ -42,16 +44,26 @@ const ViewSchedule = () => {
         }
         setNoteModal(false);
     }
-    const handleViewNote = async () => {
-        const noteFromAPI = await NoteAPI.viewNote({
+    const handleDeleteClick = async () => {
+        const response = await ScheduleAPI.deleteSchedule({
             cvId: detailSchedule.cvID,
-            roundNum: detailSchedule.roundNum.slice(5,6)
-        })
-        console.log(noteFromAPI);
-        setViewNoteDetailModal(true)
+            scheduleId: detailSchedule.scheduleID,
+        });
     }
-    const handleEditClick = () => {
-        setNoteModal(true)
+    // const handleViewNote = async () => {
+    //     const noteFromAPI = await NoteAPI.viewNote({
+    //         cvId: detailSchedule.cvID,
+    //         roundNum: detailSchedule.roundNum.slice(5, 6)
+    //     })
+    //     console.log(noteFromAPI);
+    //     setViewNoteDetailModal(true)
+    // }
+    const handleEditClick = (e,a) => {
+        if(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).id !== detailSchedule.interviewerID[0]){
+            window.alert("You cant take note")
+        }else {
+            setNoteModal(true)
+        }
     }
 
     const loadDetailSchedule = (item) => {
@@ -64,6 +76,7 @@ const ViewSchedule = () => {
                 accounts: arrayAccounts
             })
         })
+        console.log(detailSchedule)
     }
 
     const handleOnClickDetail = (e, stateSub = true, stateMain = true) => {
@@ -97,9 +110,11 @@ const ViewSchedule = () => {
             if (schedule.date.localeCompare(date) === 0) count++;
         })
         if (count > 0) {
-            return (
-                <Badge status={"success"} text={`You have ${count} new messages`} />
-            )
+            if(count == 1) {
+                return <Badge status={"success"} text={`You have ${count} new message`} />
+            }else {
+                return <Badge status={"success"} text={`You have ${count} new messages`} />
+            }
         }
     };
     return (
@@ -127,7 +142,11 @@ const ViewSchedule = () => {
                                         }
                                         className="cursor-pointer">
                                         <List.Item.Meta
-                                            title={<p>{item.roundNum} - CVID: {item.cvID}</p>}
+
+                                            title={
+                                                <p>{item.roundNum} - CVID: {item.cvID}</p>
+
+                                            }
                                             description={
                                                 <>
                                                     <Tag color="lime">{item.startTime.slice(0, 5)} - {item.endTime.slice(0, 5)}</Tag>
@@ -147,7 +166,9 @@ const ViewSchedule = () => {
                             onCancel={(e) => handleOnClickDetail(e, false)}
                         >
                             <div className='flex justify-end gap-3'>
-                                <WysiwygIcon onClick={handleViewNote} className='cursor-pointer'/>
+                                <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick}>
+                                    <DeleteIcon />
+                                </Popconfirm>
                                 <EditIcon onClick={handleEditClick} className='cursor-pointer' />
                             </div>
                             <Descriptions title={"Schedule Detail: " + detailSchedule?.scheduleID} bordered>
@@ -185,10 +206,11 @@ const ViewSchedule = () => {
                                 onFinish={handleFormSubmit}
                                 size={'default'}
                             >
-                                <Form.Item label="Point" name="point">
+                                <Form.Item label="Point" name="point" rules={[{ required: true, message: "This field is required" }]}
+                                >
                                     <InputNumber min={0} max={100} defaultValue={0} />
                                 </Form.Item>
-                                <Form.Item name="description">
+                                <Form.Item name="description" rules={[{ required: true, message: "This field is required" }]}>
                                     <TextArea rows={4} placeholder="Description" maxLength={100} />
                                 </Form.Item>
                             </Form>
@@ -199,7 +221,7 @@ const ViewSchedule = () => {
                             onOk={() => setViewNoteDetailModal(false)}
                             onCancel={() => setViewNoteDetailModal(false)}
                         >
-                            
+
                         </Modal>
                     </>
                 }

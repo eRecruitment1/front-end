@@ -19,6 +19,14 @@ const CvAPI = {
             },
         });
     },
+    viewCompletedCV() {
+        const url = '/api/userCV/getAllCompletedCV'
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: accessToken,
+            },
+        });
+    },
     evaluateCV(data) {
         console.log(data)
         const url = 'api/userCV/evaluate'
