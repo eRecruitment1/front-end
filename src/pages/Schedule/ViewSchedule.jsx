@@ -59,24 +59,17 @@ const ViewSchedule = () => {
     //     setViewNoteDetailModal(true)
     // }
     const handleEditClick = (e,a) => {
-        if(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).id !== detailSchedule.interviewerID[0]){
+        let flag = false;
+        for (const i of detailSchedule.interviewerID) {
+            if(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).id === i){
+                flag = true
+            }
+        }
+        if(!flag){
             window.alert("You cant take note")
         }else {
             setNoteModal(true)
         }
-    }
-
-    const loadDetailSchedule = (item) => {
-        let arrayAccounts = [];
-        item.interviewerID.forEach(async (accID) => {
-            const accountGetFromAPI = await AccountAPI.getAccountByID(accID)
-            arrayAccounts.push(accountGetFromAPI.data)
-            setDetailSchedule({
-                ...item,
-                accounts: arrayAccounts
-            })
-        })
-        console.log(detailSchedule)
     }
 
     const handleOnClickDetail = (e, stateSub = true, stateMain = true) => {
@@ -85,6 +78,7 @@ const ViewSchedule = () => {
     }
 
     const onSelect = (value) => {
+        setListScheduleByDate(null)
         let newDate = value.date();
         if (value.date() < 10) {
             newDate = ('0' + value.date().toString().slice(-2));
@@ -93,6 +87,7 @@ const ViewSchedule = () => {
         let date = value.year() + "-" + newMonth + "-" + newDate
         const arrayFilterByDate = listSchedule.filter((schedule) => schedule.date.localeCompare(date) === 0)
         setListScheduleByDate(arrayFilterByDate);
+        console.log(listScheduleByDate)
         setListScheduleModal(!listScheduleModal);
     };
     const handleCancel = () => {
@@ -133,16 +128,15 @@ const ViewSchedule = () => {
                                 dataSource={listScheduleByDate}
                                 renderItem={(item) => (
                                     <List.Item
-                                        key={item.scheduleID}
+                                        // key={item.scheduleID}
                                         onClick={
                                             () => {
                                                 handleOnClickDetail();
-                                                loadDetailSchedule(item);
+                                                setDetailSchedule(item);
                                             }
                                         }
                                         className="cursor-pointer">
                                         <List.Item.Meta
-
                                             title={
                                                 <p>{item.roundNum} - CVID: {item.cvID}</p>
 
@@ -177,7 +171,7 @@ const ViewSchedule = () => {
                                 <Descriptions.Item label="Interview Time" span={3}>{detailSchedule?.startTime?.slice(0, 5)} - {detailSchedule?.endTime?.slice(0, 5)}</Descriptions.Item>
                                 <Descriptions.Item label="Interviewer" span={3}>
                                     <List
-                                        dataSource={detailSchedule.accounts}
+                                        dataSource={detailSchedule.accountResponses}
                                         renderItem={item => (
                                             <List.Item >
                                                 <List.Item.Meta

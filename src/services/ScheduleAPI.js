@@ -11,11 +11,14 @@ const ScheduleAPI = {
         });
     },
     createSchedule(data) {
+        console.log(data)
         const url = 'api/schedule/create'
         return AxiosClient.post(url, data, {
             headers: {
                 Authorization: accessToken,
             },
+        }).catch(e => {
+            window.alert("Create Schedule Failed")
         })
     },
     updateStatus() {
@@ -29,7 +32,7 @@ const ScheduleAPI = {
     deleteSchedule(data) {
         console.log(data)
         const url = 'api/schedule/delete'
-        return AxiosClient.post(url, data, {
+        return AxiosClient.delete(url, data, {
             headers: {
                 Authorization: accessToken,
             },

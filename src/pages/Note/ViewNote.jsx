@@ -1,8 +1,9 @@
-import { List, Modal, Table, Tabs, Tag } from 'antd';
-import { useEffect, useState } from 'react';
-import NoteAPI from '../../services/NoteAPI';
 import EventNoteIcon from '@mui/icons-material/EventNote';
+import { List, Modal, Popconfirm, Table, Tabs, Tag } from 'antd';
+import { useEffect, useState } from 'react';
 import CvAPI from '../../services/CvAPI';
+import NoteAPI from '../../services/NoteAPI';
+
 const ViewNote = () => {
   const [notes, setNotes] = useState([]);
   const [completedCV, setCompletedCV] = useState([]);
@@ -15,13 +16,20 @@ const ViewNote = () => {
     (async () => {
       const noteFromAPI = await NoteAPI.viewAllNote()
       setNotes(noteFromAPI.data)
-      console.log(noteFromAPI.data);
+      console.log(noteFromAPI.data)
     })()
   }, []);
 
+  const handleEvaluate = async () => {
+    console.log(chosenCV)
+    const response = await CvAPI.evaluateCV({
+      cvId: chosenCV.userCVID,
+      scheduleId: 12,
+      isPass: true
+    });
+  }
 
   const handleRoundNoteClick = async (e) => {
-    console.log(e);
     let notePerRoundFromAPI
     if (e == "round1") {
       notePerRoundFromAPI = await NoteAPI.viewNotesByRound({
@@ -34,8 +42,8 @@ const ViewNote = () => {
         "roundNum": 2
       })
     }
+    console.log(notePerRoundFromAPI.data)
     setRoundNoteDetail(notePerRoundFromAPI.data)
-    console.log(notePerRoundFromAPI)
   }
 
   const handleViewEvaluate = async () => {
@@ -47,19 +55,19 @@ const ViewNote = () => {
 
   const columns = [
     {
-      title: 'Interviewer',
-      dataIndex: 'accountId',
-      key: 'accountId',
-      render: (e, rec) => {
-        return <p>{rec.firstName} {rec.lastName}</p>
-      }
-    },
-    {
       title: 'Link CV',
       dataIndex: 'linkCV',
       key: 'linkCV',
       render: (text) => {
         return <a href="text">{text}</a>
+      }
+    },
+    {
+      title: 'Interviewer',
+      dataIndex: 'accountId',
+      key: 'accountId',
+      render: (e, rec) => {
+        return <p>{rec.firstName} {rec.lastName}</p>
       }
     },
     {
@@ -101,16 +109,19 @@ const ViewNote = () => {
               key={item.userCVID}
               onClick={() => {
                 setChosenCV(item)
-                console.log(item)
                 setNoteDetailModal(true)
               }}
               className="cursor-pointer">
               <List.Item.Meta
                 title={
-                  <p>{item.linkCV} - CVID: {item.userCVID}</p>
+                  <p>Candidate - {item.firstName} {item.lastName} | <Tag color="blue">{item.email}</Tag></p>
                 }
                 description={
-                  <Tag color="lime">{item.applyTime.split('T')[0]}</Tag>
+                  <>
+                    <Tag color="gold">apply time: {item.applyTime.split('T')[0]}</Tag>
+                    <Tag color="gold">{item.postTitle}</Tag>
+                    <Tag color="gold">{item.linkCV}</Tag>
+                  </>
                 }
               />
             </List.Item>
@@ -119,7 +130,9 @@ const ViewNote = () => {
       </Modal>
       <Modal
         title={
-          <EventNoteIcon className='cursor-pointer'/>
+          <Popconfirm title="Are you sure to evaluate this cv?" onConfirm={handleEvaluate}>
+            <EventNoteIcon className='cursor-pointer' />
+          </Popconfirm>
         }
         open={noteDetailModal}
         onOk={() => setNoteDetailModal(false)}
@@ -136,10 +149,13 @@ const ViewNote = () => {
                   className="cursor-pointer">
                   <List.Item.Meta
                     title={
-                      <p>{item.accountId} - CVID: {item.cvId}</p>
+                      <p>Interviewer - {item.firstName} {item.lastName} | <Tag color="blue">{item.email}</Tag></p>
                     }
                     description={
-                      <Tag color="gold">point: {item.point}</Tag>
+                      <>
+                        <Tag color="purple">point: {item.point}</Tag>
+                        <Tag color="gold">message: {item.message}</Tag>
+                      </>
                     }
                   />
                 </List.Item>
@@ -155,10 +171,13 @@ const ViewNote = () => {
                   className="cursor-pointer">
                   <List.Item.Meta
                     title={
-                      <p>{item.accountId} - CVID: {item.cvId}</p>
+                      <p>Interviewer - {item.firstName} {item.lastName} | <Tag color="blue">{item.email}</Tag></p>
                     }
                     description={
-                      <Tag color="gold">point: {item.point}</Tag>
+                      <>
+                        <Tag color="purple">point: {item.point}</Tag>
+                        <Tag color="gold">message: {item.message}</Tag>
+                      </>
                     }
                   />
                 </List.Item>

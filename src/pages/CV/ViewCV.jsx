@@ -43,12 +43,10 @@ const ViewCV = () => {
     }
 
     const handleAddButton = async () => {
-
         setScheduleAddModal(true)
     }
 
     const handleFormSubmit = async (values) => {
-        await ScheduleAPI.updateStatus();
         const response = await ScheduleAPI.createSchedule({
             cvID: curCVID,
             urlMeeting: values.urlMeeting,
@@ -58,19 +56,38 @@ const ViewCV = () => {
             startTime: dateRange[0].format("HH:mm:ss"),
             endTime: dateRange[1].format("HH:mm:ss")
         })
-        console.log(response)
+        setScheduleAddModal(false)
     }
 
     const columns = [
         {
-            field: 'accountID',
-            headerName: 'User ID',
-            width: 350
+            field: 'firstName',
+            headerName: 'First Name',
+            width: 70,
+            renderCell: (params) => {
+                <p>{params.value}</p>
+            }
+        },
+        {
+            field: 'lastName',
+            headerName: 'Last Name',
+            width: 190,
+            renderCell: (params) => {
+                <p>{params.value}</p>
+            }
+        },
+        {
+            field: 'email',
+            headerName: 'Email',
+            width: 240,
+            renderCell: (params) => {
+                <p>{params.value}</p>
+            }
         },
         {
             field: 'linkCV',
             headerName: 'Link CV',
-            width: 900,
+            width: 650,
             renderCell: (params) => (
                 <Link href={params.value}>{params.value}</Link>
             )
@@ -84,10 +101,12 @@ const ViewCV = () => {
             )
         },
         {
-            field: 'postID',
-            headerName: 'Post ID',
-            type: 'number',
-            width: 90
+            field: 'postTitle',
+            headerName: 'Post Title',
+            width: 270,
+            renderCell: (params) => (
+                <p>{params.value}</p>
+            )
         },
         {
             field: 'roundNum',
@@ -139,7 +158,7 @@ const ViewCV = () => {
     return (
         <>
             <div className="w-screen h-screen p-5 pt-10">
-                <div style={{ height: '60%', width: '100%' }}>
+                <div style={{ height: '62%', width: '100%' }}>
                     <DataGrid
                         rows={cvArr}
                         columns={columns}
