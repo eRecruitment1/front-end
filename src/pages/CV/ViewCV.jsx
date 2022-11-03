@@ -1,7 +1,7 @@
 import AddIcon from '@mui/icons-material/Add';
 import { Link } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { DatePicker, Form, Input, Modal, Radio, Select, Tag, TimePicker } from "antd";
+import { DatePicker, Form, Input, Modal, notification, Radio, Select, Tag, TimePicker } from "antd";
 import moment from "moment";
 import { useEffect, useState } from "react";
 import AccountAPI from "../../services/AccountAPI";
@@ -48,19 +48,33 @@ const ViewCV = () => {
 
     const handleFormSubmit = async (values) => {
         let minute = Math.floor((dateRange[1].toDate() - dateRange[0].toDate()) / 60000)
-        if(minute >= 45){
+        if (minute >= 45) {
             const response = await ScheduleAPI.createSchedule({
                 cvID: curCVID,
                 urlMeeting: values.urlMeeting,
                 round: values.roundNum,
-                interviewerIDs: values.interview,   
+                interviewerIDs: values.interview,
                 date: values.date.format("YYYY-MM-DD"),
                 startTime: dateRange[0].format("HH:mm:ss"),
                 endTime: dateRange[1].format("HH:mm:ss")
             })
+            if (response.status == '200') {
+                notification.success({
+                    message: 'Create Sucessfully',
+                    description: 'Please track schedule for more...',
+                });
+            }else{
+                notification.error({
+                    message: 'Create Failed',
+                    description: 'Oops! Something failed @@',
+                });
+            }
             setScheduleAddModal(false)
-        }else{
-            window.alert("Short time! Please change time > 45 min")
+        } else {
+            notification.warning({
+                message: 'Create Failed',
+                description: 'Short time! Please change time > 45 min',
+            });
         }
     }
 
@@ -118,11 +132,11 @@ const ViewCV = () => {
             headerName: 'Round',
             width: 90,
             renderCell: (params) => {
-                if(params.value === "PENDING"){
+                if (params.value === "PENDING") {
                     return <Tag color='lime'>{params.value}</Tag>
-                }else if(params.value === "ROUND1"){
+                } else if (params.value === "ROUND1") {
                     return <Tag color='red'>{params.value}</Tag>
-                }else{
+                } else {
                     return <Tag color='cyan'>{params.value}</Tag>
                 }
             }
@@ -219,9 +233,9 @@ const ViewCV = () => {
                                 showArrow
                                 tagRender={tagRender}
                                 style={{
-                                    
+
                                     width: '100%',
-                                    cursor:"pointer"
+                                    cursor: "pointer"
                                 }}
                             >
                                 {
@@ -249,7 +263,7 @@ const ViewCV = () => {
                             <DatePicker />
                         </Form.Item>
                         <Form.Item label="Time" rules={[{ required: true, message: "This field is required" }]}>
-                            <TimePicker.RangePicker minuteStep={30} format="HH:mm" onChange={(x) => setDateRange(x)} value={dateRange} />
+                            <TimePicker.RangePicker format="HH:mm" onChange={(x) => setDateRange(x)} value={dateRange} />
                         </Form.Item>
                     </Form>
                 </Modal>

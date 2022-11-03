@@ -1,5 +1,5 @@
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import { List, Modal, Popconfirm, Table, Tabs, Tag } from 'antd';
+import { List, Modal, notification, Popconfirm, Table, Tabs, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 import CvAPI from '../../services/CvAPI';
 import NoteAPI from '../../services/NoteAPI';
@@ -16,7 +16,6 @@ const ViewNote = () => {
     (async () => {
       const noteFromAPI = await NoteAPI.viewAllNote()
       setNotes(noteFromAPI.data)
-      console.log(noteFromAPI.data)
     })()
   }, []);
 
@@ -26,6 +25,11 @@ const ViewNote = () => {
       scheduleId: roundNoteDetail[0].scheduleId,
       isPass: true
     });
+    if(response.status == '200'){
+      notification.success({
+        message: 'Evaluate Sucessfully',
+    });
+    }
   }
 
   const handleRoundNoteClick = async (e) => {
@@ -41,14 +45,12 @@ const ViewNote = () => {
         "roundNum": 2
       })
     }
-    console.log(notePerRoundFromAPI.data)
     setRoundNoteDetail(notePerRoundFromAPI.data)
   }
 
   const handleViewEvaluate = async () => {
     const completedCVFromAPI = await CvAPI.viewCompletedCV();
     setCompletedCV(completedCVFromAPI.data)
-    console.log(completedCVFromAPI.data)
     setViewCompletedCvModal(true)
   }
 

@@ -1,6 +1,6 @@
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Avatar, Badge, Calendar, Descriptions, Form, InputNumber, List, Modal, Popconfirm, Tag } from 'antd';
+import { Avatar, Badge, Calendar, Descriptions, Form, InputNumber, List, Modal, notification, Popconfirm, Tag } from 'antd';
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react';
 import LocalStorageKey from '../../constant/LocalStorageKey';
@@ -33,14 +33,29 @@ const ViewSchedule = () => {
             point: values.point,
             message: values.description,
         });
+        if(noteFromAPI.status == '200'){
+            notification.success({
+                message: 'Take Note Sucessfully',
+            });
+        }
         if (values.point > 50) {
             (async () => {
-                await CvAPI.evaluateCV({
+                const response = await CvAPI.evaluateCV({
                     cvId: detailSchedule.cvID,
                     scheduleId: detailSchedule.scheduleID,
                     isPass: true,
                 })
+                if(response.status == '200'){
+                    notification.success({
+                        message: 'Evaluate Round 1 Sucessfully',
+                    });
+                }
             })()
+        }else{
+            notification.warning({
+                message: 'Point is at least 50',
+                description: 'point is less than 50, so can not evaluate'
+            });
         }
         setNoteModal(false);
     }
