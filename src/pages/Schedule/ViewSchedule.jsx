@@ -128,7 +128,6 @@ const ViewSchedule = () => {
                                 dataSource={listScheduleByDate}
                                 renderItem={(item) => (
                                     <List.Item
-                                        // key={item.scheduleID}
                                         onClick={
                                             () => {
                                                 handleOnClickDetail();
@@ -202,7 +201,7 @@ const ViewSchedule = () => {
                             >
                                 <Form.Item label="Point" name="point" rules={[{ required: true, message: "This field is required" }]}
                                 >
-                                    <InputNumber min={0} max={100} defaultValue={0} />
+                                    <InputNumber min={0} max={100} initialValues={0} />
                                 </Form.Item>
                                 <Form.Item name="description" rules={[{ required: true, message: "This field is required" }]}>
                                     <TextArea rows={4} placeholder="Description" maxLength={100} />
