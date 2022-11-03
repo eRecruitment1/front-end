@@ -21,10 +21,9 @@ const ViewNote = () => {
   }, []);
 
   const handleEvaluate = async () => {
-    console.log(chosenCV)
     const response = await CvAPI.evaluateCV({
       cvId: chosenCV.userCVID,
-      scheduleId: 12,
+      scheduleId: roundNoteDetail[0].scheduleId,
       isPass: true
     });
   }
@@ -114,7 +113,7 @@ const ViewNote = () => {
               className="cursor-pointer">
               <List.Item.Meta
                 title={
-                  <p>Candidate - {item.firstName} {item.lastName} | <Tag color="blue">{item.email}</Tag></p>
+                  <p>Candidate - {item.firstName} {item.lastName} | <Tag color="blue">{item.email}</Tag> | <Tag color="green">{item.roundNum}</Tag></p>
                 }
                 description={
                   <>

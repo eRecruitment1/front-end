@@ -47,16 +47,21 @@ const ViewCV = () => {
     }
 
     const handleFormSubmit = async (values) => {
-        const response = await ScheduleAPI.createSchedule({
-            cvID: curCVID,
-            urlMeeting: values.urlMeeting,
-            round: values.roundNum,
-            interviewerIDs: values.interview,
-            date: values.date.format("YYYY-MM-DD"),
-            startTime: dateRange[0].format("HH:mm:ss"),
-            endTime: dateRange[1].format("HH:mm:ss")
-        })
-        setScheduleAddModal(false)
+        let minute = Math.floor((dateRange[1].toDate() - dateRange[0].toDate()) / 60000)
+        if(minute >= 45){
+            const response = await ScheduleAPI.createSchedule({
+                cvID: curCVID,
+                urlMeeting: values.urlMeeting,
+                round: values.roundNum,
+                interviewerIDs: values.interview,   
+                date: values.date.format("YYYY-MM-DD"),
+                startTime: dateRange[0].format("HH:mm:ss"),
+                endTime: dateRange[1].format("HH:mm:ss")
+            })
+            setScheduleAddModal(false)
+        }else{
+            window.alert("Short time! Please change time > 45 min")
+        }
     }
 
     const columns = [
@@ -71,7 +76,7 @@ const ViewCV = () => {
         {
             field: 'lastName',
             headerName: 'Last Name',
-            width: 190,
+            width: 250,
             renderCell: (params) => {
                 <p>{params.value}</p>
             }
@@ -79,7 +84,7 @@ const ViewCV = () => {
         {
             field: 'email',
             headerName: 'Email',
-            width: 240,
+            width: 300,
             renderCell: (params) => {
                 <p>{params.value}</p>
             }
@@ -87,9 +92,9 @@ const ViewCV = () => {
         {
             field: 'linkCV',
             headerName: 'Link CV',
-            width: 650,
+            width: 150,
             renderCell: (params) => (
-                <Link href={params.value}>{params.value}</Link>
+                <Link href={params.value}>Link CV</Link>
             )
         },
         {
@@ -111,7 +116,16 @@ const ViewCV = () => {
         {
             field: 'roundNum',
             headerName: 'Round',
-            width: 90
+            width: 90,
+            renderCell: (params) => {
+                if(params.value === "PENDING"){
+                    return <Tag color='lime'>{params.value}</Tag>
+                }else if(params.value === "ROUND1"){
+                    return <Tag color='red'>{params.value}</Tag>
+                }else{
+                    return <Tag color='cyan'>{params.value}</Tag>
+                }
+            }
         },
         {
             field: 'userCVID',
@@ -186,7 +200,6 @@ const ViewCV = () => {
                         initialValues={{
                             size: "default",
                         }}
-                        // onValuesChange={onFormLayoutChange}
                         form={form}
                         onFinish={handleFormSubmit}
                         size={'default'}
@@ -236,7 +249,7 @@ const ViewCV = () => {
                             <DatePicker />
                         </Form.Item>
                         <Form.Item label="Time" rules={[{ required: true, message: "This field is required" }]}>
-                            <TimePicker.RangePicker format="HH:mm" onChange={(x) => setDateRange(x)} value={dateRange} />
+                            <TimePicker.RangePicker minuteStep={30} format="HH:mm" onChange={(x) => setDateRange(x)} value={dateRange} />
                         </Form.Item>
                     </Form>
                 </Modal>

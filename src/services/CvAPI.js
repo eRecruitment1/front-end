@@ -29,12 +29,12 @@ const CvAPI = {
     },
     evaluateCV(data) {
         console.log(data)
-        // const url = 'api/userCV/evaluate'
-        // return AxiosClient.post(url, data, {
-        //     headers: {
-        //         Authorization: accessToken,
-        //     },
-        // });
+        const url = 'api/userCV/evaluate'
+        return AxiosClient.post(url, data, {
+            headers: {
+                Authorization: accessToken,
+            },
+        });
     },
 }
 
