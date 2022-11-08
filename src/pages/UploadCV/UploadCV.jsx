@@ -7,6 +7,7 @@ import {
 import { storage } from "../../services/FirebaseConfig";
 import { useParams } from 'react-router-dom';
 import CvAPI from '../../services/CvAPI';
+import { notification } from 'antd';
 
 const UploadCV = () => {
     const { id } = useParams();
@@ -38,9 +39,13 @@ const UploadCV = () => {
             }
         )
         if(response.status === '200')
-            window.alert('Upload Successfully')
+            notification.success({
+                message: 'Upload Sucessfully',
+            });
         else
-            window.alert('Upload Failed')
+            notification.success({
+                message: 'Upload Failed',
+            });
     }
     return (
         <>
@@ -60,7 +65,7 @@ const UploadCV = () => {
                                 <button
                                     type='button'
                                     disabled={isUploading}
-                                    onClick={e => handleCVUpload()}
+                                    onClick={handleCVUpload}
                                     className="w-full px-4 py-2 text-white bg-blue-500 rounded shadow-xl">Upload</button>
                             </div>
                         </div>

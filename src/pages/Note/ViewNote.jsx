@@ -1,5 +1,5 @@
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import { List, Modal, Popconfirm, Table, Tabs, Tag } from 'antd';
+import { List, Modal, notification, Popconfirm, Table, Tabs, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 import CvAPI from '../../services/CvAPI';
 import NoteAPI from '../../services/NoteAPI';
@@ -16,7 +16,6 @@ const ViewNote = () => {
     (async () => {
       const noteFromAPI = await NoteAPI.viewAllNote()
       setNotes(noteFromAPI.data)
-      console.log(noteFromAPI.data)
     })()
   }, []);
 
@@ -26,6 +25,11 @@ const ViewNote = () => {
       scheduleId: roundNoteDetail[0].scheduleId,
       isPass: true
     });
+    if (response.status == '200') {
+      notification.success({
+        message: 'Evaluate Sucessfully',
+      });
+    }
   }
 
   const handleRoundNoteClick = async (e) => {
@@ -41,14 +45,12 @@ const ViewNote = () => {
         "roundNum": 2
       })
     }
-    console.log(notePerRoundFromAPI.data)
     setRoundNoteDetail(notePerRoundFromAPI.data)
   }
 
   const handleViewEvaluate = async () => {
     const completedCVFromAPI = await CvAPI.viewCompletedCV();
     setCompletedCV(completedCVFromAPI.data)
-    console.log(completedCVFromAPI.data)
     setViewCompletedCvModal(true)
   }
 
@@ -58,7 +60,7 @@ const ViewNote = () => {
       dataIndex: 'linkCV',
       key: 'linkCV',
       render: (text) => {
-        return <a href="text">{text}</a>
+        return <a href={text}>Link CV</a>
       }
     },
     {
@@ -100,6 +102,7 @@ const ViewNote = () => {
         onOk={() => setViewCompletedCvModal(false)}
         onCancel={() => setViewCompletedCvModal(false)}
         width="1000px"
+        footer={null}
       >
         <List
           dataSource={completedCV}
@@ -134,9 +137,15 @@ const ViewNote = () => {
           </Popconfirm>
         }
         open={noteDetailModal}
-        onOk={() => setNoteDetailModal(false)}
-        onCancel={() => setNoteDetailModal(false)}
         width="1000px"
+        footer={
+          <button
+            type="submit" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            onClick={() => setNoteDetailModal(false)}
+          >
+            Close
+          </button>
+        }
       >
         <Tabs defaultActiveKey='round1' onTabClick={handleRoundNoteClick}>
           <Tabs.TabPane tab="ROUND 1" key="round1">

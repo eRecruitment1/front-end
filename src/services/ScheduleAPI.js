@@ -17,8 +17,6 @@ const ScheduleAPI = {
             headers: {
                 Authorization: accessToken,
             },
-        }).catch(e => {
-            window.alert("Create Schedule Failed")
         })
     },
     updateStatus() {
