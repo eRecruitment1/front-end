@@ -16,6 +16,7 @@ const ViewCV = () => {
     const [checkRound, setCheckRound] = useState(false);
     const [empAccounts, setEmpAccounts] = useState([]);
     const [hrEmpAccounts, setHrEmpAccounts] = useState([]);
+    const [options, setOpstions] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -47,11 +48,13 @@ const ViewCV = () => {
     }
 
     const handleFormSubmit = async (values) => {
+        console.log(values)
         let minute = Math.floor((dateRange[1].toDate() - dateRange[0].toDate()) / 60000)
         if (minute >= 45) {
             const response = await ScheduleAPI.createSchedule({
                 cvID: curCVID,
-                urlMeeting: values.urlMeeting,
+                urlMeeting: values.urlMeeting ? values.urlMeeting : "",
+                roomName: values.roomName ? values.roomName : "",
                 round: values.roundNum,
                 interviewerIDs: values.interview,
                 date: values.date.format("YYYY-MM-DD"),
@@ -63,7 +66,7 @@ const ViewCV = () => {
                     message: 'Create Sucessfully',
                     description: 'Please track schedule for more...',
                 });
-            }else{
+            } else {
                 notification.error({
                     message: 'Create Failed',
                     description: 'Oops! Something failed @@',
@@ -202,6 +205,14 @@ const ViewCV = () => {
                     onOk={form.submit}
                     onCancel={() => setScheduleAddModal(false)}
                     width="1000px"
+                    footer={
+                        <button
+                            type="submit" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                            onClick={form.submit}
+                        >
+                            Create
+                        </button>
+                    }
                 >
                     <Form
                         labelCol={{
@@ -224,9 +235,22 @@ const ViewCV = () => {
                                 <Radio.Button value="ROUND2" onChange={handleRoundClick}>ROUND 2</Radio.Button>
                             </Radio.Group>
                         </Form.Item>
-                        <Form.Item label="URL" name="urlMeeting" rules={[{ required: true, message: "This field is required" }]}>
-                            <Input />
+                        <Form.Item label="Options" name="options" rules={[{ required: true, message: "This field is required" }]}>
+                            <Radio.Group>
+                                <Radio.Button value="Offline" onChange={() => setOpstions(false)}>Offline</Radio.Button>
+                                <Radio.Button value="Online" onChange={() => setOpstions(true)}>Online</Radio.Button>
+                            </Radio.Group>
                         </Form.Item>
+                        {
+                            options ?
+                                <Form.Item label="URL" name="urlMeeting" rules={[{ required: true, message: "This field is required" }]}>
+                                    <Input />
+                                </Form.Item>
+                                :
+                                <Form.Item label="Room Name" name="roomName" rules={[{ required: true, message: "This field is required" }]}>
+                                    <Input />
+                                </Form.Item>
+                        }
                         <Form.Item label="Interviewers" name="interview" rules={[{ required: true, message: "This field is required" }]}>
                             <Select
                                 mode="multiple"

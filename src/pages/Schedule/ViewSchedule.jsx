@@ -4,10 +4,10 @@ import { Avatar, Badge, Calendar, Descriptions, Form, InputNumber, List, Modal, 
 import TextArea from 'antd/lib/input/TextArea';
 import React, { useEffect, useState } from 'react';
 import LocalStorageKey from '../../constant/LocalStorageKey';
-import AccountAPI from '../../services/AccountAPI';
 import CvAPI from '../../services/CvAPI';
 import NoteAPI from '../../services/NoteAPI';
 import ScheduleAPI from '../../services/ScheduleAPI';
+
 const ViewSchedule = () => {
     const [listSchedule, setListSchedule] = useState([]);
     const [listScheduleByDate, setListScheduleByDate] = useState([]);
@@ -15,7 +15,6 @@ const ViewSchedule = () => {
     const [detailModal, setDetailModal] = useState(false);
     const [detailSchedule, setDetailSchedule] = useState({});
     const [noteModal, setNoteModal] = useState(false);
-    const [viewNoteDetailModal, setViewNoteDetailModal] = useState(false);
     const [form] = Form.useForm();
 
     useEffect(() => {
@@ -38,7 +37,7 @@ const ViewSchedule = () => {
                 message: 'Take Note Sucessfully',
             });
         }
-        if (values.point > 50) {
+        if (values.point > 50 && (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")) {
             (async () => {
                 const response = await CvAPI.evaluateCV({
                     cvId: detailSchedule.cvID,
@@ -51,7 +50,7 @@ const ViewSchedule = () => {
                     });
                 }
             })()
-        }else{
+        }else if((JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")){
             notification.warning({
                 message: 'Point is at least 50',
                 description: 'point is less than 50, so can not evaluate'
@@ -65,14 +64,7 @@ const ViewSchedule = () => {
             scheduleId: detailSchedule.scheduleID,
         });
     }
-    // const handleViewNote = async () => {
-    //     const noteFromAPI = await NoteAPI.viewNote({
-    //         cvId: detailSchedule.cvID,
-    //         roundNum: detailSchedule.roundNum.slice(5, 6)
-    //     })
-    //     console.log(noteFromAPI);
-    //     setViewNoteDetailModal(true)
-    // }
+
     const handleEditClick = (e,a) => {
         let flag = false;
         for (const i of detailSchedule.interviewerID) {
@@ -105,9 +97,7 @@ const ViewSchedule = () => {
         console.log(listScheduleByDate)
         setListScheduleModal(!listScheduleModal);
     };
-    const handleCancel = () => {
-        setListScheduleModal(!listScheduleModal);
-    };
+    
     const dateCellRender = (value) => {
         let count = 0;
         let newDate = value.date();
@@ -136,8 +126,15 @@ const ViewSchedule = () => {
                         <Modal
                             title="Schedule List"
                             open={listScheduleModal}
-                            onOk={() => setListScheduleModal(false)}
-                            onCancel={handleCancel}
+                            onCancel={() => setNoteModal(false)}
+                            footer={
+                                <button
+                                    type="button" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    onClick={() => setListScheduleModal(false)}
+                                >
+                                    Close
+                                </button>
+                            }
                         >
                             <List
                                 dataSource={listScheduleByDate}
@@ -158,7 +155,8 @@ const ViewSchedule = () => {
                                             description={
                                                 <>
                                                     <Tag color="lime">{item.startTime.slice(0, 5)} - {item.endTime.slice(0, 5)}</Tag>
-                                                    <Tag color="gold">{item.urlMeeting}</Tag>
+                                                    <Tag color="gold">{item?.urlMeeting}</Tag>
+                                                    <Tag color="gold">{item?.roomName} </Tag>
                                                 </>
                                             }
                                         />
@@ -170,8 +168,15 @@ const ViewSchedule = () => {
                             title="Shedule Detail"
                             width={1000}
                             open={detailModal}
-                            onOk={(e) => handleOnClickDetail(e, false)}
-                            onCancel={(e) => handleOnClickDetail(e, false)}
+                            onCancel={() => setNoteModal(false)}
+                            footer={
+                                <button
+                                    type="button" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    onClick={(e) => handleOnClickDetail(e, false)}
+                                >
+                                    Close
+                                </button>
+                            }
                         >
                             <div className='flex justify-end gap-3'>
                                 <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick}>
@@ -198,6 +203,7 @@ const ViewSchedule = () => {
                                     />
                                 </Descriptions.Item>
                                 <Descriptions.Item label="URL Meeting" span={3}>{detailSchedule?.urlMeeting}</Descriptions.Item>
+                                <Descriptions.Item label="Room Name" span={3}>{detailSchedule?.roomName}</Descriptions.Item>
                             </Descriptions>
                         </Modal>
                         <Modal
@@ -205,6 +211,14 @@ const ViewSchedule = () => {
                             open={noteModal}
                             onOk={form.submit}
                             onCancel={() => setNoteModal(false)}
+                            footer={
+                                <button
+                                    type="submit" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                                    onClick={form.submit}
+                                >
+                                    Note
+                                </button>
+                            }
                         >
                             <Form
                                 initialValues={{
@@ -222,14 +236,6 @@ const ViewSchedule = () => {
                                     <TextArea rows={4} placeholder="Description" maxLength={100} />
                                 </Form.Item>
                             </Form>
-                        </Modal>
-                        <Modal
-                            title="View Note Detail"
-                            open={viewNoteDetailModal}
-                            onOk={() => setViewNoteDetailModal(false)}
-                            onCancel={() => setViewNoteDetailModal(false)}
-                        >
-
                         </Modal>
                     </>
                 }
