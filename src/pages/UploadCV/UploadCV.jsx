@@ -32,20 +32,17 @@ const UploadCV = () => {
         );
     };
     const handleCVUpload = async () => {
-        const response = await CvAPI.createCV(
-            {
-                linkCV: fileUrl,
-                postID: id,
-            }
-        )
-        if(response.status === '200')
-            notification.success({
-                message: 'Upload Sucessfully',
-            });
-        else
-            notification.success({
-                message: 'Upload Failed',
-            });
+        if (fileUrl) {
+            const response = await CvAPI.createCV(
+                {
+                    linkCV: fileUrl,
+                    postID: id,
+                }
+            )
+        }
+        notification.success({
+            message: 'Upload Sucessfully',
+        });
     }
     return (
         <>

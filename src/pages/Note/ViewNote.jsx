@@ -27,7 +27,7 @@ const ViewNote = () => {
     });
     if (response.status == '200') {
       notification.success({
-        message: 'Evaluate Sucessfully',
+        message: 'Evaluate Successfully',
       });
     }
   }
@@ -101,7 +101,7 @@ const ViewNote = () => {
         open={viewCompletedCvModal}
         onOk={() => setViewCompletedCvModal(false)}
         onCancel={() => setViewCompletedCvModal(false)}
-        width="1000px"
+        width="1500px"
         footer={null}
       >
         <List

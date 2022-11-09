@@ -32,11 +32,9 @@ const ViewSchedule = () => {
             point: values.point,
             message: values.description,
         });
-        if(noteFromAPI.status == '200'){
-            notification.success({
-                message: 'Take Note Sucessfully',
-            });
-        }
+        notification.success({
+            message: 'Take Note Successfully',
+        });
         if (values.point > 50 && (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")) {
             (async () => {
                 const response = await CvAPI.evaluateCV({
@@ -46,7 +44,7 @@ const ViewSchedule = () => {
                 })
                 if(response.status == '200'){
                     notification.success({
-                        message: 'Evaluate Round 1 Sucessfully',
+                        message: 'Evaluate Round 1 Successfully',
                     });
                 }
             })()
