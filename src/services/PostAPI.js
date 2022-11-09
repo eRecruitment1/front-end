@@ -26,7 +26,6 @@ const PostAPI = {
         })
     },
     createPost(data) {
-        console.log(data)
         const url = "api/post/create"
         return AxiosClient.post(url, data, {
             headers: {

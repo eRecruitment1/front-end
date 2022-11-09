@@ -9,12 +9,12 @@ import {
     getDownloadURL,
 } from "firebase/storage";
 import { storage } from "../../../services/FirebaseConfig";
-import { notification } from 'antd'
 const HRPostDetail = () => {
     const [post, setPost] = useState({});
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [isUpdate, setIsUpdate] = useState(false)
+    const [fileUpload, setFileUpload] = useState(null);
     const [thumbnailUrl, setThumbnailUrl] = useState("");
     useEffect(() => {
         (async () => {
@@ -29,7 +29,7 @@ const HRPostDetail = () => {
     const handleCancleButton = () => {
         setIsUpdate(false)
     }
-    const uploadAndGetUrl = (fileUpload) => {
+    const uploadAndGetUrl = () => {
         if (fileUpload == null) return
         const metadata = {
             contentType: "image/jpg",
@@ -54,26 +54,20 @@ const HRPostDetail = () => {
     const handleUpdateButton = async () => {
         const title = document.getElementById('title').value;
         const status = document.getElementById('status').value === "Available" ? true : false;
+        console.log(status)
         const description = document.getElementById('description').value;
-        try {
-            const response = await PostAPI.updatePostById(
-                {
-                    postId: post.postId,
-                    thumbnailUrl: thumbnailUrl !== "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
-                    title: title,
-                    status: status,
-                    description: description
-                }
-            );
-            setIsUpdate(false)
-            window.alert("Update Successfully")
-            window.location.reload();
-        } catch {
-            notification.error({
-                message: 'Update Failed',
-                description: 'Please try again....'
-            });
-        }
+        uploadAndGetUrl();
+        await PostAPI.updatePostById(
+            {
+                postId: post.postId,
+                thumbnailUrl: thumbnailUrl !== "" ? thumbnailUrl : "https://firebasestorage.googleapis.com/v0/b/erecruitment-71104.appspot.com/o/assets%2Fthumbnail_img%2Fthumbnail%231.jpg?alt=media&token=cf437632-8322-4aab-a468-ae15bb900e63",
+                title: title,
+                status: status,
+                description: description
+            }
+        );
+        setIsUpdate(false)
+        window.location.reload()
     }
     return (
         <>
@@ -95,12 +89,12 @@ const HRPostDetail = () => {
                             <div className='w-[224px] h-56 relative inline-block cursor-pointer'>
                                 <img className="object-cover w-full h-full rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
                                 <label className='flex justify-center items-center rounded-lg absolute top-0 right-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
-                                    <BsFillPencilFill className='text-3xl cursor-pointer' />
+                                    <BsFillPencilFill className='text-3xl' />
                                     <input
                                         type='file'
                                         className="hidden"
                                         onChange={(event) => {
-                                            uploadAndGetUrl(event.target.files[0]);
+                                            setFileUpload(event.target.files[0]);
                                         }}
                                     />
                                 </label>
