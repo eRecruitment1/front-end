@@ -133,7 +133,20 @@ const HRPostDetail = () => {
                             {
                                 !isUpdate ?
                                     <span className="text-lg mt-4 leading-6 col-start-1 sm:col-span-2 lg:mt-6 lg:row-start-4 lg:col-span-1 dark:text-slate-400">
-                                        {post?.description.replace(/(?:\r\n|\r|\n)/g, '</br>')}
+                                        <br />
+                                        <strong>
+                                            {post?.description.split("\n")[0]}
+                                        </strong>
+                                        <br />
+                                        <br />
+                                        {post?.description.split("\n").map(e => {
+                                            return (
+                                                <>
+                                                    {e}
+                                                    <br />
+                                                </>
+                                            )
+                                        })}
                                     </span>
                                     :
                                     <textarea id="description" rows="25" defaultValue={post?.description} className="block p-2.5 w-full text-lg text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"></textarea>

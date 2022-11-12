@@ -36,6 +36,14 @@ const CvAPI = {
             },
         });
     },
+    getAllCV(){
+        const url = 'api/userCV/getAllCV'
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: accessToken,
+            },
+        });
+    }
 }
 
 export default CvAPI
