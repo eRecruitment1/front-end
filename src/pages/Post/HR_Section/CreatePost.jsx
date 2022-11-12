@@ -9,10 +9,9 @@ import {
 import { storage } from "../../../services/FirebaseConfig";
 const CreatePost = () => {
   const navigate = useNavigate();
-  const [fileUpload, setFileUpload] = useState(null);
   const [thumbnailUrl, setThumbnailUrl] = useState("");
 
-  const uploadAndGetUrl = () => {
+  const uploadAndGetUrl = (fileUpload) => {
     const metadata = {
       contentType: "image/jpg",
     };
@@ -38,7 +37,6 @@ const CreatePost = () => {
     const title = document.getElementById('title').value;
     const status = document.getElementById('status').value === "Available" ? true : false;
     const description = document.getElementById('description').value;
-    uploadAndGetUrl();
     await PostAPI.createPost(
       {
         thumbnailUrl: thumbnailUrl,
@@ -63,7 +61,7 @@ const CreatePost = () => {
             id="thumbnail-url"
             className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             onChange={(event) => {
-              setFileUpload(event.target.files[0]);
+              uploadAndGetUrl(event.target.files[0]);
             }}
           />
 

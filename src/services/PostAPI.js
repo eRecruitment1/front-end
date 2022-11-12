@@ -17,7 +17,6 @@ const PostAPI = {
         return AxiosClient.get(url)
     },
     updatePostById(data) {
-        console.log(data)
         const url = "/api/post/update";
         return AxiosClient.put(url, data, {
             headers: {
@@ -26,6 +25,7 @@ const PostAPI = {
         })
     },
     createPost(data) {
+        console.log(data)
         const url = "api/post/create"
         return AxiosClient.post(url, data, {
             headers: {
@@ -34,9 +34,17 @@ const PostAPI = {
         })
     },
     filterPostByKeyword(keyword) {
-        console.log(keyword)
         const url = "api/post/filter/get?keyword=" + keyword;
         return AxiosClient.get(url)
+    },
+    getAllPosts(){
+        const url = "api/post/getAllPost";
+        console.log(url)
+        return AxiosClient.get(url, {
+            headers: {
+                Authorization: accessToken,
+            },
+        })
     }
 }
 

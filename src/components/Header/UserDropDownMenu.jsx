@@ -152,6 +152,23 @@ export default function UserDropDownMenu() {
                             </Menu.Item>
                             : null
                         }
+                        {
+                            (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "ADMIN") ?
+                            <Menu.Item>
+                                {({ active }) => (
+                                    (<a
+                                        href="/admin/dashboard"
+                                        className={classNames(
+                                            active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
+                                            'block px-4 py-2 text-sm'
+                                        )}
+                                    >
+                                        Dashboard
+                                    </a>)
+                                )}
+                            </Menu.Item>
+                            : null
+                        }
 
                         <Menu.Item>
                             {({ active }) => (

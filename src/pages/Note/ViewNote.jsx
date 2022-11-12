@@ -101,7 +101,7 @@ const ViewNote = () => {
         open={viewCompletedCvModal}
         onOk={() => setViewCompletedCvModal(false)}
         onCancel={() => setViewCompletedCvModal(false)}
-        width="1000px"
+        width="1500px"
         footer={null}
       >
         <List
@@ -122,7 +122,6 @@ const ViewNote = () => {
                   <>
                     <Tag color="gold">apply time: {item.applyTime.split('T')[0]}</Tag>
                     <Tag color="gold">{item.postTitle}</Tag>
-                    <Tag color="gold">{item.linkCV}</Tag>
                   </>
                 }
               />
