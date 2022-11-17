@@ -326,18 +326,21 @@ const DashBoard = () => {
       {
         (key == 3) &&
         <div className='w-full p-10'>
-          <Row gutter={16} className="mb-54 flex justify-center">
-            <Col span={6}>
+          <Row gutter={24} className="mb-54 flex justify-center">
+            <Col span={4}>
               <Statistic title="Total CV" value={cvs.length} />
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <Statistic title="PENDING" value={pendingCV.length} suffix={"/ " + cvs.length} />
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <Statistic title="ROUND 1" value={0} suffix={"/ " + cvs.length} />
             </Col>
-            <Col span={6}>
+            <Col span={4}>
               <Statistic title="PASSED" value={passCV.length} suffix={"/ " + cvs.length} />
+            </Col>
+            <Col span={4}>
+              <Statistic title="NOT PASSED" value={cvs.length - pendingCV.length - passCV.length} suffix={"/ " + cvs.length} />
             </Col>
           </Row>
           <Table dataSource={cvs} columns={cvColumns} />

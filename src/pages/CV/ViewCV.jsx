@@ -137,9 +137,9 @@ const ViewCV = () => {
             renderCell: (params) => {
                 if (params.value === "PENDING") {
                     return <Tag color='lime'>{params.value}</Tag>
-                } else if (params.value === "ROUND1") {
+                } else if (params.value === "ROUND1" || params.value === "NOT_PASS") {
                     return <Tag color='red'>{params.value}</Tag>
-                } else {
+                } else if (params.value === "PASS"){
                     return <Tag color='cyan'>{params.value}</Tag>
                 }
             }
