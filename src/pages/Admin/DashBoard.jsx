@@ -43,8 +43,8 @@ const handleUpdateStatus = (id) => {
   })()
 }
 
-const handleChangeRoleClick = (value) => {
-  console.log(value);
+const handleChangeRoleClick = (e, value) => {
+  console.log(e, value)
 }
 
 const postColumns = [
@@ -117,15 +117,18 @@ const accountColumns = [
     dataIndex: 'roleName',
     width: '10%',
     key: 'roleName',
-    render: (e) => (
-        e !== "CANDIDATE"
-        ?
-        <Select defaultValue={e} onChange={handleChangeRoleClick}>
-          <Select.Option value="HRMANAGER">HRMANAGER</Select.Option>
-          <Select.Option value="HREMPLOYEE">HREMPLOYEE</Select.Option>
-          <Select.Option value="EMPLOYEE">EMPLOYEE</Select.Option>
-        </Select>
-        :
+    render: (e, rec) => (
+      // e !== "CANDIDATE"
+      //   ?
+      //   <Select
+      //     defaultValue={e}
+      //     onChange={handleChangeRoleClick}
+      //   >
+      //     <Select.Option value="HRMANAGER">HRMANAGER</Select.Option>
+      //     <Select.Option value="HREMPLOYEE">HREMPLOYEE</Select.Option>
+      //     <Select.Option value="EMPLOYEE">EMPLOYEE</Select.Option>
+      //   </Select>
+      //   :
         <Tag color='lime'>{e}</Tag>
     )
   },
@@ -195,6 +198,7 @@ const cvColumns = [
     title: 'Apply Time',
     dataIndex: 'applyTime',
     key: 'applyTime',
+    sorter: (a, b) => new Date(a.applyTime) - new Date(b.applyTime),
     render: (e) => {
       return <p>{e.split("T")[0]}</p>
     }
@@ -211,6 +215,17 @@ const cvColumns = [
     title: 'Status',
     dataIndex: 'roundNum',
     key: 'roundNum',
+    filters: [
+      {
+        text: 'PASS',
+        value: 'PASS',
+      },
+      {
+        text: 'PENDING',
+        value: 'PENDING',
+      },
+    ],
+    onFilter: (value, record) => record.roundNum.indexOf(value) === 0,
     render: (params) => {
       if (params === "PENDING") {
         return <Tag color='lime'>{params}</Tag>
@@ -280,10 +295,10 @@ const DashBoard = () => {
               <Statistic title="Total Accounts" value={accounts.length} />
             </Col>
             <Col span={6}>
-              <Statistic title="Available Accounts" value={availableAccounts.length} suffix={"/ " + accounts.length} />
+              <Statistic title="Available Accounts" value={availableAccounts.length - 1} suffix={"/ " + accounts.length} />
             </Col>
             <Col span={6}>
-              <Statistic title="Unvailable Accounts" value={accounts.length - availableAccounts.length} suffix={"/ " + accounts.length} />
+              <Statistic title="Unvailable Accounts" value={accounts.length - availableAccounts.length + 1} suffix={"/ " + accounts.length} />
             </Col>
           </Row>
           <Table dataSource={accounts} columns={accountColumns} />
@@ -322,7 +337,7 @@ const DashBoard = () => {
               <Statistic title="ROUND 1" value={0} suffix={"/ " + cvs.length} />
             </Col>
             <Col span={6}>
-              <Statistic title="PASS" value={passCV.length} suffix={"/ " + cvs.length} />
+              <Statistic title="PASSED" value={passCV.length} suffix={"/ " + cvs.length} />
             </Col>
           </Row>
           <Table dataSource={cvs} columns={cvColumns} />
