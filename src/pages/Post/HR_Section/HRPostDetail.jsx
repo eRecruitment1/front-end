@@ -29,7 +29,7 @@ const HRPostDetail = () => {
     const handleCancleButton = () => {
         setIsUpdate(false)
     }
-    const uploadAndGetUrl = () => {
+    const uploadAndGetUrl = (fileUpload) => {
         if (fileUpload == null) return
         const metadata = {
             contentType: "image/jpg",
@@ -45,7 +45,6 @@ const HRPostDetail = () => {
             },
             () => {
                 getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                    console.log(downloadURL)
                     setThumbnailUrl(downloadURL);
                 });
             }
@@ -84,21 +83,21 @@ const HRPostDetail = () => {
                     </div>
                     {
                         !isUpdate ?
-                            <img className="mt-4 object-cover w-full h-56 rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
-                            :
-                            <div className='w-[224px] h-56 relative inline-block cursor-pointer'>
-                                <img className="object-cover w-full h-full rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
-                                <label className='flex justify-center items-center rounded-lg absolute top-0 right-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
-                                    <BsFillPencilFill className='text-3xl' />
-                                    <input
-                                        type='file'
-                                        className="hidden"
-                                        onChange={(event) => {
-                                            setFileUpload(event.target.files[0]);
-                                        }}
-                                    />
-                                </label>
-                            </div>
+                            <img className="mt-4 object-cover w-full h-56 rounded-lg lg:w-56" src={thumbnailUrl ? thumbnailUrl : post?.thumbnailUrl} alt="" />
+                    :
+                    <div className='w-[224px] h-56 relative inline-block cursor-pointer'>
+                        <img className="object-cover w-full h-full rounded-lg lg:w-56" src={post?.thumbnailUrl} alt="" />
+                        <label className='flex justify-center items-center rounded-lg absolute top-0 right-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white'>
+                            <BsFillPencilFill className='text-3xl' />
+                            <input
+                                type='file'
+                                className="hidden"
+                                onChange={(event) => {
+                                    uploadAndGetUrl(event.target.files[0]);
+                                }}
+                            />
+                        </label>
+                    </div>
 
                     }
                     <div className='flex-auto p-6'>

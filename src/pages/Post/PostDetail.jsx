@@ -48,10 +48,11 @@ const PostDetail = () => {
                 });
                 setUploadModal(false)
             }
-        }catch{
+        }catch (e){
+            console.log(e)
             notification.error({
                 message: 'Upload Failed',
-                description: "Please Try Again..."
+                description: "You have uploaded 1 CV!!"
             });
         }
     }

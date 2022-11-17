@@ -1,8 +1,9 @@
 import EventNoteIcon from '@mui/icons-material/EventNote';
-import { List, Modal, notification, Popconfirm, Table, Tabs, Tag } from 'antd';
+import { List, Modal, notification, Popconfirm, Space, Table, Tabs, Tag } from 'antd';
 import { useEffect, useState } from 'react';
 import CvAPI from '../../services/CvAPI';
 import NoteAPI from '../../services/NoteAPI';
+import EventBusyIcon from '@mui/icons-material/EventBusy';
 
 const ViewNote = () => {
   const [notes, setNotes] = useState([]);
@@ -27,12 +28,24 @@ const ViewNote = () => {
     });
     if (response.status == '200') {
       notification.success({
-        message: 'Evaluate Sucessfully',
+        message: 'Evaluate Successfully',
       });
     }
   }
-
+  const handleReject = async () => {
+    const response = await CvAPI.evaluateCV({
+      cvId: chosenCV.userCVID,
+      scheduleId: roundNoteDetail[0].scheduleId,
+      isPass: false
+    });
+    if (response.status == '200') {
+      notification.success({
+        message: 'Rejected Successfully',
+      });
+    }
+  }
   const handleRoundNoteClick = async (e) => {
+    console.log(e)
     let notePerRoundFromAPI
     if (e == "round1") {
       notePerRoundFromAPI = await NoteAPI.viewNotesByRound({
@@ -46,6 +59,7 @@ const ViewNote = () => {
       })
     }
     setRoundNoteDetail(notePerRoundFromAPI.data)
+    console.log(roundNoteDetail)
   }
 
   const handleViewEvaluate = async () => {
@@ -53,6 +67,7 @@ const ViewNote = () => {
     setCompletedCV(completedCVFromAPI.data)
     setViewCompletedCvModal(true)
   }
+
 
   const columns = [
     {
@@ -131,9 +146,14 @@ const ViewNote = () => {
       </Modal>
       <Modal
         title={
-          <Popconfirm title="Are you sure to evaluate this cv?" onConfirm={handleEvaluate}>
-            <EventNoteIcon className='cursor-pointer' />
-          </Popconfirm>
+          <Space>
+            <Popconfirm title="Are you sure to evaluate this cv?" onConfirm={handleEvaluate}>
+              <EventNoteIcon className='cursor-pointer' />
+            </Popconfirm>
+            <Popconfirm title="Are you sure to reject this cv?" onConfirm={handleReject}>
+              <EventBusyIcon className='cursor-pointer' />
+            </Popconfirm>
+          </Space>
         }
         open={noteDetailModal}
         width="1000px"
@@ -160,7 +180,13 @@ const ViewNote = () => {
                     }
                     description={
                       <>
-                        <Tag color="purple">point: {item.point}</Tag>
+                        { 
+                          item.point < 50 
+                          ?
+                          <Tag color="red">point: {item.point}</Tag>
+                          :
+                          <Tag color="purple">point: {item.point}</Tag>
+                        }
                         <Tag color="gold">message: {item.message}</Tag>
                       </>
                     }

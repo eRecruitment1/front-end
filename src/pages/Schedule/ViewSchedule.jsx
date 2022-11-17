@@ -26,15 +26,20 @@ const ViewSchedule = () => {
     }, []);
 
     const handleFormSubmit = async (values) => {
-        const noteFromAPI = await NoteAPI.createNote({
-            cvId: detailSchedule.cvID,
-            scheduleId: detailSchedule.scheduleID,
-            point: values.point,
-            message: values.description,
-        });
-        if(noteFromAPI.status == '200'){
+        try {
+            await NoteAPI.createNote({
+                cvId: detailSchedule.cvID,
+                scheduleId: detailSchedule.scheduleID,
+                point: values.point,
+                message: values.description,
+            });
             notification.success({
                 message: 'Take Note Sucessfully',
+            });
+        } catch {
+            notification.error({
+                message: 'Take Note Failed',
+                description: 'Please try again...'
             });
         }
         if (values.point > 50 && (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")) {
@@ -44,13 +49,14 @@ const ViewSchedule = () => {
                     scheduleId: detailSchedule.scheduleID,
                     isPass: true,
                 })
-                if(response.status == '200'){
+                if (response.status == '200') {
                     notification.success({
                         message: 'Evaluate Round 1 Sucessfully',
+                        description: 'Please track CV for more ....'
                     });
                 }
             })()
-        }else if((JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")){
+        } else if ((JSON.parse(localStorage.getItem(LocalStorageKey.USER)).roleName === "HREMPLOYEE")) {
             notification.warning({
                 message: 'Point is at least 50',
                 description: 'point is less than 50, so can not evaluate'
@@ -65,16 +71,16 @@ const ViewSchedule = () => {
         });
     }
 
-    const handleEditClick = (e,a) => {
+    const handleEditClick = (e, a) => {
         let flag = false;
         for (const i of detailSchedule.interviewerID) {
-            if(JSON.parse(localStorage.getItem(LocalStorageKey.USER)).id === i){
+            if (JSON.parse(localStorage.getItem(LocalStorageKey.USER)).id === i) {
                 flag = true
             }
         }
-        if(!flag){
+        if (!flag) {
             window.alert("You cant take note")
-        }else {
+        } else {
             setNoteModal(true)
         }
     }
@@ -94,10 +100,9 @@ const ViewSchedule = () => {
         let date = value.year() + "-" + newMonth + "-" + newDate
         const arrayFilterByDate = listSchedule.filter((schedule) => schedule.date.localeCompare(date) === 0)
         setListScheduleByDate(arrayFilterByDate);
-        console.log(listScheduleByDate)
         setListScheduleModal(!listScheduleModal);
     };
-    
+
     const dateCellRender = (value) => {
         let count = 0;
         let newDate = value.date();
@@ -110,9 +115,9 @@ const ViewSchedule = () => {
             if (schedule.date.localeCompare(date) === 0) count++;
         })
         if (count > 0) {
-            if(count == 1) {
+            if (count == 1) {
                 return <Badge status={"success"} text={`You have ${count} new message`} />
-            }else {
+            } else {
                 return <Badge status={"success"} text={`You have ${count} new messages`} />
             }
         }
@@ -179,7 +184,7 @@ const ViewSchedule = () => {
                             }
                         >
                             <div className='flex justify-end gap-3'>
-                                <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick}>
+                                <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick} okButtonProps={{ type: "ghost" }}>
                                     <DeleteIcon />
                                 </Popconfirm>
                                 <EditIcon onClick={handleEditClick} className='cursor-pointer' />

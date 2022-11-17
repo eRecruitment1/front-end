@@ -68,7 +68,7 @@ function LoginForm({ onSubmit }) {
         </button>
       </div>
       <p className="text-gray-800 text-center">
-        Not a member? <a href="/"
+        Don't have any account? <a href="/signup"
         className="text-blue-600 hover:text-blue-700 focus:text-blue-700 transition duration-200 ease-in-out">Register</a>
       </p>
     </form>
