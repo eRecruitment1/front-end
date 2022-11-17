@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import { logout } from '../../redux/slice/UserSlice'
 import { UserAuth } from '../../context/AuthContext'
 import LocalStorageKey from '../../constant/LocalStorageKey';
+import PersonIcon from '@mui/icons-material/Person';
+
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
 }
@@ -21,7 +23,12 @@ export default function UserDropDownMenu() {
         <Menu as="div" className="relative inline-block text-left">
             <div>
                 <Menu.Button>
-                    <img className='w-[30px] rounded-md' src={JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg} alt="" />
+                    {
+                        JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg 
+                        ? 
+                            <img className='w-[30px] rounded-md' src={JSON.parse(localStorage.getItem(LocalStorageKey.USER))?.urlImg} alt="" />
+                        : <PersonIcon />
+                    }
                 </Menu.Button>
             </div>
 

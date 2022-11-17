@@ -94,7 +94,6 @@ const ViewSchedule = () => {
         let date = value.year() + "-" + newMonth + "-" + newDate
         const arrayFilterByDate = listSchedule.filter((schedule) => schedule.date.localeCompare(date) === 0)
         setListScheduleByDate(arrayFilterByDate);
-        console.log(listScheduleByDate)
         setListScheduleModal(!listScheduleModal);
     };
     
@@ -179,7 +178,7 @@ const ViewSchedule = () => {
                             }
                         >
                             <div className='flex justify-end gap-3'>
-                                <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick}>
+                                <Popconfirm title="Do You Want To Delete This Schedule" onConfirm={handleDeleteClick} okButtonProps={{type: "ghost"}}>
                                     <DeleteIcon />
                                 </Popconfirm>
                                 <EditIcon onClick={handleEditClick} className='cursor-pointer' />

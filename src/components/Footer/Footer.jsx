@@ -8,7 +8,7 @@ const Footer = () => {
                 <div className="max-w-screen-xl px-4 pt-5 mx-auto sm:px-6 lg:px-8">
                     <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="flex justify-center text-white sm:justify-start">
-                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span className='text-blue-500'>WeHr</span>Company</span>
+                            <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span style={{color: "#3300ff"}}>WeHr</span>Company</span>
                         </div>
 
                         <p className="mt-4 text-sm text-center text-gray-400 lg:text-right lg:mt-0">
@@ -16,7 +16,7 @@ const Footer = () => {
                                 About
                             </Link>
                             <Link to='/career' className="button">
-                                &nbsp;Careers
+                                &nbsp;Career
                             </Link>
                             <Link to='/contact' className="button">
                                 &nbsp;Contact

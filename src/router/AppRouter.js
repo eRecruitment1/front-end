@@ -17,12 +17,14 @@ import Footer from '../components/Footer/Footer';
 import ViewCV from '../pages/CV/ViewCV';
 import ViewSchedule from '../pages/Schedule/ViewSchedule';
 import ViewNote from '../pages/Note/ViewNote';
+import Signup from '../pages/Authentication/Login/Signup';
 const AppRouter = () => {
     return (
         <div>
             <Navbar />
             <Routes>
                 <Route path="/" element={<Home />} />
+                <Route path="/signup" element={<Signup />} />
                 <Route path="/about" element={<About />} />
                 <Route path='/post/:id' element={<Post />} />
                 <Route path='/career' element={<Career />} />

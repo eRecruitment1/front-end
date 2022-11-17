@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Col, Menu, notification, Row, Select, Statistic, Table, Tag } from 'antd';
+import { Col, Menu, notification, Popconfirm, Row, Select, Space, Statistic, Table, Tag } from 'antd';
 import AccountAPI from '../../services/AccountAPI';
 import PostAPI from '../../services/PostAPI';
 import CvAPI from '../../services/CvAPI';
+import EditIcon from '@mui/icons-material/Edit';
+import LocalStorageKey from '../../constant/LocalStorageKey';
 function getItem(label, key, icon, children, type) {
   return {
     key,
@@ -18,9 +20,34 @@ const items = [
   getItem('Post', 'g2', null, [getItem('View Post Dashboard', '2')], 'group'),
   getItem('CV', 'g3', null, [getItem('View CV Dashboard', '3')], 'group'),
 ];
+const handleUpdateStatus = (id) => {
+  (async () => {
+    try {
+      await AccountAPI.updateStatus(id);
+      notification.success({
+        top: 48,
+        message: 'Update Sucessfully',
+        description: 'Click to reload to see updates....',
+        className: 'cursor-pointer',
+        onClick: () => {
+          window.location.reload()
+        }
+      });
+    } catch {
+      notification.error({
+        top: 48,
+        message: 'Update Failed',
+        description: 'Please try again....',
+      });
+    }
+  })()
+}
+
+const handleChangeRoleClick = (value) => {
+  console.log(value);
+}
 
 const postColumns = [
-
   {
     title: 'Title',
     dataIndex: 'title',
@@ -46,10 +73,10 @@ const postColumns = [
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    render: (e) =>{
+    render: (e) => {
       if (e) {
         return <Tag color='green'>Available</Tag>
-      }else{
+      } else {
         return <Tag color='red'>Unavailable</Tag>
       }
     }
@@ -86,36 +113,48 @@ const accountColumns = [
     key: 'phone',
   },
   {
+    title: 'Role',
+    dataIndex: 'roleName',
+    width: '10%',
+    key: 'roleName',
+    render: (e) => (
+        e !== "CANDIDATE"
+        ?
+        <Select defaultValue={e} onChange={handleChangeRoleClick}>
+          <Select.Option value="HRMANAGER">HRMANAGER</Select.Option>
+          <Select.Option value="HREMPLOYEE">HREMPLOYEE</Select.Option>
+          <Select.Option value="EMPLOYEE">EMPLOYEE</Select.Option>
+        </Select>
+        :
+        <Tag color='lime'>{e}</Tag>
+    )
+  },
+  {
     title: 'Status',
     dataIndex: 'status',
     key: 'status',
-    render: (e) =>{
+    render: (e) => {
       if (e) {
         return <Tag color='green'>Available</Tag>
-      }else{
+      } else {
         return <Tag color='red'>Unavailable</Tag>
       }
     }
   },
   {
-    title: "Action",
     key: 'id',
     dataIndex: 'id',
-    render: (id) => (
-      <button
-        type="submit" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        onClick={async () => {
-          const res = await AccountAPI.updateStatus(id);
-          console.log(res)
-          notification.success({
-            top: 48,
-            message: 'Update Sucessfully',
-            description: 'Reload to see updates....',
-        });
-        }}
-      >
-        Update Status
-      </button>
+    render: (id, rec) => (
+      <Space size="middle">
+
+        <Popconfirm placement="topLeft" onConfirm={() => handleUpdateStatus(id)} okText="Yes" cancelText="No" okButtonProps={{ type: "ghost" }}>
+          <button
+            type="button" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 text-white bg-blue-700 hover:bg-blue-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-3 md:mr-0 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Update Status
+          </button>
+        </Popconfirm>
+      </Space>
     )
   },
 ];
@@ -175,11 +214,11 @@ const cvColumns = [
     render: (params) => {
       if (params === "PENDING") {
         return <Tag color='lime'>{params}</Tag>
-    } else if (params === "ROUND1") {
+      } else if (params === "ROUND1") {
         return <Tag color='red'>{params}</Tag>
-    } else {
+      } else {
         return <Tag color='cyan'>{params}</Tag>
-    }
+      }
     }
   },
 ];
@@ -201,13 +240,15 @@ const DashBoard = () => {
     (async () => {
       const accountsFromAPI = await AccountAPI.getListAccount();
       console.log(accountsFromAPI.data)
-      setAccounts(accountsFromAPI.data)
       const postsFromAPI = await PostAPI.getAllPosts();
       console.log(postsFromAPI.data)
       setPosts(postsFromAPI.data)
       const cvFromAPI = await CvAPI.getAllCV();
       console.log(cvFromAPI.data)
       setCvs(cvFromAPI.data)
+
+      let removeADMINArr = accountsFromAPI.data.filter(e => e.roleName != "ADMIN")
+      setAccounts(removeADMINArr)
 
       let a = accountsFromAPI.data.filter(e => e.status == true)
       setAvailableAccounts(a)

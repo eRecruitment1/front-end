@@ -6,6 +6,7 @@ import UserDropDownMenu from './UserDropDownMenu'
 import { AiOutlineClose } from 'react-icons/ai';
 import { IoMdNotificationsOutline } from 'react-icons/io'
 import { useSelector } from 'react-redux';
+import { color } from '@mui/system';
 
 const Navbar = () => {  
   const loggedUser = useSelector((state)=>state.user.current)
@@ -20,10 +21,9 @@ const Navbar = () => {
 
   return (
     <nav className="bg-slate-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900 w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
-
       <div className="container flex flex-wrap justify-between items-center mx-auto">
         <a href="/" className="flex items-center">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span className='text-blue-500'>WeHr</span>Company</span>
+          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white"><span style={{color : "#3300ff"}}>WeHr</span>Company</span>
         </a>
 
         <div className="hidden justify-between items-center w-full md:flex md:w-auto md:order-1">
@@ -40,7 +40,7 @@ const Navbar = () => {
             </li>
             <li>
               <a href="/career" className="transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 duration-300 block py-2 pr-4 pl-3 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-white dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
-                Careers
+                Career
               </a>
             </li>
             <li>
